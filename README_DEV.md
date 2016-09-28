@@ -1,4 +1,4 @@
-# [Setup](../) | [Development](README_DEV.md) | [Git Guide](README_GIT.md)
+# [Setup](../../) | [Development](README_DEV.md) | [Git Guide](README_GIT.md)
 
 ## Running development server
 You can start a devserver by this command:

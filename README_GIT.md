@@ -1,4 +1,4 @@
-# [Setup](README.md) | [Development](README_DEV.md) | [Git Guide](README_GIT.md)
+# [Setup]() | [Development](README_DEV.md) | [Git Guide](README_GIT.md)
 
 ## Coding a new feature
 

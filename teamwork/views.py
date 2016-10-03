@@ -1,4 +1,8 @@
 from django.shortcuts import render
 
-def index(request):
-    return render(request, 'index.html')
+def project_details(request):
+    return render(request, 'project_details.html')
+
+
+def dashboard(request):
+    return render(request, 'dashboard.html')

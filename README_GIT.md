@@ -1,7 +1,7 @@
 # [Setup](../../) | [Development](README_DEV.md) | [Git Guide](README_GIT.md)
 
 ## Coding a new feature
-If you use your git GUI client to do these steps then you can ignore the commands written
+If you use your git GUI client to do these steps, then you can ignore the commands written
 in here. 
 
 1. First pull latest changes from `master` branch.
@@ -32,6 +32,14 @@ branch would also be called `time-log-button`.
 merge conflicts. Commit and push your fixed branch to remote repo.
 
         git merge master
+    
+   If the merge failed, you have to fix merge conflicts and commit your changes.
+
+        git add -A
+        git commit -m "Your commit message"
+
+   Push your final code to the repository. 
+
         git push
 
 7. Finally got to <https://github.com/ilmaria/design_www> and click "New pull request".

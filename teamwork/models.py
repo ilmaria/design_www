@@ -4,6 +4,7 @@ class Project(models.Model):
     """Has all information related to one project."""
 
     name = models.CharField(max_length=255)
+    course_name = models.CharField(max_length=255)
 
     def __str__(self):
         return "\"{0}\"".format(self.name)

@@ -1,5 +1,9 @@
 # [Setup](../../) | [Development](README_DEV.md) | [Git Guide](README_GIT.md)
 
+## Code editor
+Any text editor can be used to edit code but I recommend
+[Visual Studio Code](https://code.visualstudio.com/) or [Atom](https://atom.io/).
+
 ## Running development server
 You can start a devserver by this command:
 

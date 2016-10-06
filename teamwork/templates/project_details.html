@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>
-    Project details
-</h1>
-<p>
-    {{ user.username }}
-</p>
-<p>
-    {{ project.name }}
-</p>
+
+<h1>{{ project.name }}</h1>
+
+<ul>
+{% for member in project.members.all %}
+    <li>{{ member.user.username }}</li>
+{% endfor %}
+</ul>
+
+<h2>Next Event</h2>
+<ul>
+{% for event in project.event_set.all|dictsort:'date' %}
+    <li>
+        <p>{{ event.name }}</p>
+        <p>{{ event.date }}</p>
+    </li>
+{% endfor %}
+</ul>
+
 {% endblock %}

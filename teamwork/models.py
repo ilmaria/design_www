@@ -7,6 +7,9 @@ class Student(models.Model):
     # `user` field references to User model that holds the login information
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.user.username
+
 
 class Project(models.Model):
     """Has all information related to one project."""
@@ -17,7 +20,7 @@ class Project(models.Model):
     description = models.CharField(max_length=1000, blank=True)
 
     def __str__(self):
-        return "\"{0}\"".format(self.name)
+        return '"{0}"'.format(self.name)
 
 
 class Event(models.Model):
@@ -25,7 +28,7 @@ class Event(models.Model):
     TODO: Should deadlines be different model than events?
     """
 
-    name = models.CharField(max_length=255, default="New Event")
+    name = models.CharField(max_length=255, default='New Event')
     date = models.DateTimeField()
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     location = models.CharField(max_length=255, blank=True)

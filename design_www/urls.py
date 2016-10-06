@@ -20,6 +20,10 @@ from teamwork import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.project_details),
-    url(r'^dashboard/$', views.dashboard),
+
+    url(r'^(?P<username>\w+)/dashboard/$',
+        views.dashboard, name='dashboard'),
+
+    url(r'^(?P<username>\w+)/(?P<project_name>.+?)/$',
+        views.project_details, name='project_details'),
 ]

@@ -14,7 +14,7 @@ class Student(models.Model):
 class Project(models.Model):
     """Has all information related to one project."""
 
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255, default="My project")
     course = models.CharField(max_length=255, blank=True)
     members = models.ManyToManyField(Student, related_name='projects')
     description = models.CharField(max_length=1000, blank=True)
@@ -28,7 +28,7 @@ class Event(models.Model):
     TODO: Should deadlines be different model than events?
     """
 
-    name = models.CharField(max_length=255, default='New Event')
+    name = models.CharField(max_length=255, default='My event')
     date = models.DateTimeField()
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     location = models.CharField(max_length=255, blank=True)

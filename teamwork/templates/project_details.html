@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -19,5 +20,8 @@
     </li>
 {% endfor %}
 </ul>
+<button onclick="openEventCreator()">Add event</button>
+{{own}}
+<script src="{% static 'js/project_details.js' %}"></script>
 
 {% endblock %}

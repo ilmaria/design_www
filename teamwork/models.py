@@ -16,6 +16,7 @@ class Project(models.Model):
 
     name = models.CharField(max_length=255, default="My project")
     members = models.ManyToManyField(Student, related_name='projects')
+    owner = models.ForeignKey(Student, on_delete=models.CASCADE)
     description = models.CharField(max_length=1000, blank=True)
 
     def __str__(self):

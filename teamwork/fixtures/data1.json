@@ -4,7 +4,6 @@
   "pk": 1,
   "fields": {
     "name": "Design of WWW-services",
-    "course": "",
     "description": "Awesome course",
     "members": [
       1,
@@ -18,7 +17,6 @@
   "pk": 2,
   "fields": {
     "name": "C Programming",
-    "course": "",
     "description": "Awesome course",
     "members": [
       1,
@@ -31,7 +29,6 @@
   "pk": 3,
   "fields": {
     "name": "Web services",
-    "course": "",
     "description": "Awesome course",
     "members": [
       1,
@@ -44,9 +41,40 @@
   "pk": 1,
   "fields": {
     "name": "Group meeting",
-    "date": "2016-12-23T12:50:37Z",
+    "date": "2016-12-23T12:50:00Z",
     "project": 1,
     "location": ""
+  }
+},
+{
+  "model": "teamwork.event",
+  "pk": 2,
+  "fields": {
+    "name": "Assignment 2",
+    "date": "2016-11-03T11:00:00Z",
+    "project": 2,
+    "location": ""
+  }
+},
+{
+  "model": "teamwork.event",
+  "pk": 3,
+  "fields": {
+    "name": "Final report",
+    "date": "2016-12-29T10:00:00Z",
+    "project": 1,
+    "location": ""
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 1,
+  "fields": {
+    "date": "2016-10-07",
+    "hours": "00:03:00",
+    "student": 2,
+    "project": 2,
+    "event": 1
   }
 },
 {
@@ -119,6 +147,30 @@
   "fields": {
     "app_label": "sessions",
     "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "teamwork",
+    "model": "loggedtime"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "teamwork",
+    "model": "task"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "6qgyq5aj53qiz3azji00sd7tquderya7",
+  "fields": {
+    "session_data": "YWIwZDQ2MjUxYWU0MTRhYzQyYzU5MDQ3ZmMxMmIwYzcyMjY1Mzc1NTp7Il9hdXRoX3VzZXJfaGFzaCI6IjEwYmQ3OWRiNWEzNzEzZDFhMmNiZmYzNmYyZGUxNGNjMmU1Yjc3N2UiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+    "expire_date": "2016-10-21T17:44:42.195Z"
   }
 },
 {
@@ -365,11 +417,65 @@
   }
 },
 {
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can add logged time",
+    "content_type": 10,
+    "codename": "add_loggedtime"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can change logged time",
+    "content_type": 10,
+    "codename": "change_loggedtime"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can delete logged time",
+    "content_type": 10,
+    "codename": "delete_loggedtime"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can add task",
+    "content_type": 11,
+    "codename": "add_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can change task",
+    "content_type": 11,
+    "codename": "change_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can delete task",
+    "content_type": 11,
+    "codename": "delete_task"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$30000$mhwtRG3rICaS$OVWE/2lmQmkG7lw72Vf/YPrBIYIajIWKQSo0cpDNwTM=",
-    "last_login": "2016-10-06T11:44:48.164Z",
+    "last_login": "2016-10-07T17:44:42.130Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -634,6 +740,58 @@
     "object_repr": "admin",
     "action_flag": 2,
     "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2016-10-06T21:18:28.204Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "2",
+    "object_repr": "\"C Programming\", 2016-11-03 13:00:00+02:00",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2016-10-06T21:18:57.329Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "3",
+    "object_repr": "\"Design of WWW-services\", 2016-12-29 12:00:00+02:00",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2016-10-06T21:19:20.768Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "1",
+    "object_repr": "\"Design of WWW-services\", 2016-12-23 14:50:00+02:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"date\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2016-10-07T17:45:46.019Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "LoggedTime object",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
   }
 },
 {

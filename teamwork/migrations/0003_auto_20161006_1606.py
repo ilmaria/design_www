@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('teamwork', '0002_load_data1'),
+        ('teamwork', '0001_initial'),
     ]
 
     operations = [

@@ -43,7 +43,7 @@ class LoggedTime(models.Model):
     hours = models.DurationField()
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, blank=True)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return 'LoggedTime: {0} - {1} - {2}'.format(self.date, self.student, self.hours)

@@ -1,42 +1,60 @@
+{% extends 'base.html' %}
 {% load static %}
 
 {% block styles %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css">
+<link href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
 {% endblock %}
 
-<section id="calendar"></section>
-
+{% block content %}
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-			  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-			  crossorigin="anonymous"></script>
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
 <script src="{% static 'clndr/clndr.min.js' %}"></script>
+<script src="{% static 'lodash/lodash.custom.min.js' %}"></script>
 
 <script src="{% static 'js/calendar.js' %}"></script>
 
-<script id="calendar-template" type="text/template">
-    <div class="clndr-controls">
-        <div class="clndr-previous-button">&lsaquo;</div>
-        <div class="month"><%= intervalStart.format('M/DD') + ' &mdash; ' + intervalEnd.format('M/DD') %></div>
-        <div class="clndr-next-button">&rsaquo;</div>
-    </div>
-    <div class="clndr-grid">
-        <div class="days-of-the-week">
-        <% foreach(daysOfTheWeek, function(day) { %>
-            <div class="header-day"><%= day %></div>
-        <% }); %>
-            <div class="days">
-            <% foreach(days, function(day) { %>
-                <div class="<%= day.classes %>"><%= day.day %></div>
-            <% }); %>
+<section id="calendar">
+    <script id="calendar-template" type="text/template">
+        <div class="clndr-controls">
+            <span class="clndr-previous-button">&lt;</span>
+            <span class="current-month"><%= month %> <%= year %></span>
+            <span class="clndr-next-button">&gt;</span>
+        </div>
+
+        <div class="clndr-grid">
+            <div class="days-of-the-week flex">
+            <% daysOfTheWeek.map(function(weekday) { %>
+                <div class="header-day"><%= weekday %></div>
+            <% }) %>
+            </div>
+            <div class="days flex flex-wrap">
+            <% days.map(function(day) { %>
+                <div class="<%= day.classes %>" id="<%= day.id %>">
+                    <span class="day-number"><%= day.day %></span>
+                </div>
+            <% }) %>
             </div>
         </div>
-    </div>
-    <div class="clndr-today-button">Today</div>
-</script>
+
+        <div class="event-listing">
+            <div class="event-listing-title">EVENTS THIS MONTH</div>
+            <% eventsThisMonth.map(function(event) { %>
+                <div class="event-item">
+                <div class="event-item-name"><%= event.title %></div>
+                <div class="event-item-location"><%= event.location %></div>
+                </div>
+            <% }) %>
+        </div>
+    </script>
+</section>
 
 <script>
-    var events = {{ events|safe }}
-    initCalendar($('#calendar'), events)
+    var events = {{ events|safe|default:'[]' }}
+    var template = $('#calendar-template').html()
+
+    initCalendar('#calendar', template, events)
 </script>
+{% endblock %}

@@ -11,10 +11,32 @@
 			  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 			  crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
+<script src="{% static 'clndr/clndr.min.js' %}"></script>
 
 <script src="{% static 'js/calendar.js' %}"></script>
+
+<script id="calendar-template" type="text/template">
+    <div class="clndr-controls">
+        <div class="clndr-previous-button">&lsaquo;</div>
+        <div class="month"><%= intervalStart.format('M/DD') + ' &mdash; ' + intervalEnd.format('M/DD') %></div>
+        <div class="clndr-next-button">&rsaquo;</div>
+    </div>
+    <div class="clndr-grid">
+        <div class="days-of-the-week">
+        <% foreach(daysOfTheWeek, function(day) { %>
+            <div class="header-day"><%= day %></div>
+        <% }); %>
+            <div class="days">
+            <% foreach(days, function(day) { %>
+                <div class="<%= day.classes %>"><%= day.day %></div>
+            <% }); %>
+            </div>
+        </div>
+    </div>
+    <div class="clndr-today-button">Today</div>
+</script>
+
 <script>
-  var events = {{ events|safe }}
-  initCalendar($('#calendar'), events)
+    var events = {{ events|safe }}
+    initCalendar($('#calendar'), events)
 </script>

@@ -1,44 +1,49 @@
-{% load static %}
+  {% load static %}
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>
-    {% block title %}
-        MyProjects
-    {% endblock %}
-    </title>
-    <meta name="description" content="Website for managing multiple projects in one place.">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+      <title>
+      {% block title %}
+          MyProjects
+      {% endblock %}
+      </title>
+      <meta name="description" content="Website for managing multiple projects in one place.">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-  </head>
-  <body>
-    <!-- Navigation bar -->
-    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-                    <div class="container">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="">{{ project.name }}</a>
-                        </div>
-                        <div class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav">
-                                <li class="active"><a href="{% url 'dashboard' user.username %}">Dashboard</a>
-                                </li>
-                                <li><a href="calendar">Calendar</a>
-                                </li>
+      <!-- Custom CSS -->
+      <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    </head>
+    <body>
+      <!-- Navigation bar -->
+      <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+                      <div class="container">
+                          <div class="navbar-header">
+                              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                  <span class="sr-only">Toggle navigation</span>
+                                  <span class="icon-bar"></span>
+                                  <span class="icon-bar"></span>
+                                  <span class="icon-bar"></span>
+                              </button>
+                              <p class="navbar-brand">{{ project.name }}</p>
+                          </div>
+                          <div class="navbar-collapse collapse">
+                              <ul class="nav navbar-nav">
+                                  <li class="active"><a href="{% url 'dashboard' user.username %}">Dashboard <span class="sr-only">(current)</span></a>
+                                  </li>
+                                  <li><a href="calendar">Calendar</a>
+                                  </li>
+                                  <li><button type="button" class="btn btn btn-default btn-success navbar-btn"> <span class="glyphicon glyphicon-plus"></span> Add new project </button>
+                                  </li>
+                              </ul>
+
+                              <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Profile <b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Settings</a>
                                         </li>
@@ -46,18 +51,16 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><button type="button" class="btn btn btn-lg btn-success navbar-btn">Add new project </button></li>
-                            </ul>
-                        </div>
-
-                        <!--/.nav-collapse -->
-                    </div>
-      </nav>
-    {% block content %}
-    {% endblock %}
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-  </body>
-</html>
+                              </ul>
+                          </div>
+                          <!--/.nav-collapse -->
+                      </div>
+        </nav>
+      {% block content %}
+      {% endblock %}
+      <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+          integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+          crossorigin="anonymous"></script>
+      <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    </body>
+  </html>

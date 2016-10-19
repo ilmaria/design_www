@@ -7,7 +7,7 @@
     <li>
       <div class="container">
       <div class="jumbotron">
-        <h1><a href="{% url 'project_details' user.username project.name|urlencode_plus %}">{{ project.name }}</a></h1>
+        <h2><a href="{% url 'project_details' user.username project.name|urlencode_plus %}">{{ project.name }}</a></h2>
         <p>Some important information...</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Log time</a></p>
       </div>

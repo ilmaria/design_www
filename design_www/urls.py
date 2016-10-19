@@ -23,6 +23,9 @@ urlpatterns = [
 
     url(r'^(?P<username>\w+)/dashboard/$',
         views.dashboard, name='dashboard'),
+    
+    url(r'^(?P<username>\w+)/calendar/$',
+        views.calendar, name='calendar'),
 
     url(r'^(?P<username>\w+)/(?P<project_name>.+?)/$',
         views.project_details, name='project_details'),

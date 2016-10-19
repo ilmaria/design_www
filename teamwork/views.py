@@ -35,3 +35,17 @@ def dashboard(request, username):
     }
 
     return render(request, 'dashboard.html', context)
+
+
+def calendar(request, username):
+    """Calendar that shows all events."""
+
+    user = get_object_or_404(User, username=username)
+    projects = Project.objects.filter(members__user__username=username)
+
+    context = {
+        'user': user,
+        'projects': projects
+    }
+
+    return render(request, 'calendar.html', context)

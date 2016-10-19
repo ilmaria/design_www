@@ -2,26 +2,64 @@
 {% load static %}
 
 {% block content %}
+<div id="page-wrapper">
+  <div class="container">
+    <!-- Project details -->
+    <h1>
+      {{ project.name }} <br />
+      <small>{{ project.description }}</small></h1>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><i class="glyphicon glyphicon-user"></i> Group member</h3>
+      </div>
+<div class="panel-body">
+      <ul class="list-group">
+        {% for member in project.members.all %}
+        <li class="list-group-item">{{ member.user.username }}</li>
+        {% endfor %}
+      </ul>
+        <button type="button" class="btn btn-default" onclick="openEventCreator()">Add member</button>
+    </div>
+  </div>
 
-<h1>{{ project.name }}</h1>
+      <!-- Time Spent -->
+      <h3>Time Spent</h3>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+                                <h3 class="panel-title"><i class="glyphicon glyphicon-time"></i> Log history</h3>
+                            </div>
+        <div class="panel-body">
+          <div class="list-group">
+            {% for loggedtime in project.loggedtime_set.all|dictsort:'date' %}
+                <p class="list-group-item">{{ loggedtime.date }} - {{ loggedtime.student.user.username }} logged {{ loggedtime.hours }}</p>
+              {% endfor %}
+            </div>
+        </div>
+      </div>
 
-<ul>
-{% for member in project.members.all %}
-    <li>{{ member.user.username }}</li>
-{% endfor %}
-</ul>
+      <!-- events -->
+      <h3>Next Event</h3>
+      <ul class="list-group">
+        {% for event in project.event_set.all|dictsort:'date' %}
+        <li class="list-group-item">
+          <p>{{ event.name }}</p>
+          <p>{{ event.date }}</p>
+          <p>{{ event.location }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+      <button type="button" class="btn btn-default" onclick="openEventCreator()">Add event</button>
+      {{own}}
+    </div>
 
-<h2>Next Event</h2>
-<ul>
-{% for event in project.event_set.all|dictsort:'date' %}
-    <li>
-        <p>{{ event.name }}</p>
-        <p>{{ event.date }}</p>
-    </li>
-{% endfor %}
-</ul>
-<button onclick="openEventCreator()">Add event</button>
-{{own}}
-<script src="{% static 'js/project_details.js' %}"></script>
+  </div>
 
-{% endblock %}
+  <!-- Customize JavaScript -->
+  <script src="{% static 'js/project_details.js' %}"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+  <!-- Flot Charts JavaScript -->
+  <script src="{% static 'bootstrap/js/jquery.flot.pie.js' %}"></script>
+  {% endblock %}

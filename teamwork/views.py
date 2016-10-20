@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
 from urllib.parse import unquote_plus
+from datetime import timedelta
 
 def project_details(request, username, project_name):
     """Project detail page for viewing all details related to one project.
@@ -8,14 +9,22 @@ def project_details(request, username, project_name):
     """
     
     user = get_object_or_404(User, username=username)
+    
     project_name = unquote_plus(project_name)
     project = get_object_or_404(Project,
         name=project_name,
         members__user__username=username)
-
+    
+    loggedtimes = project.loggedtime_set.filter(student__user=user)
+    loggedtime_total = timedelta()
+    
+    for loggedtime in loggedtimes:
+        loggedtime_total += loggedtime.hours
+    
     context = {
         'user': user,
-        'project': project
+        'project': project,
+        'loggedtime_total': loggedtime_total
     }
     
     return render(request, 'project_details.html', context)

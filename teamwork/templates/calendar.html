@@ -16,7 +16,7 @@
 
 <script src="{% static 'js/calendar.js' %}"></script>
 
-<section id="calendar">
+<section id="calendar" style="width: 600px">
     <script id="calendar-template" type="text/template">
         <div class="clndr-controls">
             <span class="clndr-previous-button">&lt;</span>
@@ -27,7 +27,9 @@
         <div class="clndr-grid">
             <div class="days-of-the-week flex">
             <% daysOfTheWeek.map(function(weekday) { %>
-                <div class="header-day"><%= weekday %></div>
+                <div class="header-day">
+                    <%= weekday %>
+                </div>
             <% }) %>
             </div>
             <div class="days flex flex-wrap">

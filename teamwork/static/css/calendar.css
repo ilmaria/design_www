@@ -1,4 +1,49 @@
+.clndr-controls {
+    display: flex;
+    justify-content: space-between;
+    font-size: 2.2em;
+}
+
+.clndr-next-button,
+.clndr-previous-button {
+    cursor: pointer;
+}
+
+.header-day {
+    font-size: 1.5em;
+    text-align: center;
+}
+
 .day,
 .header-day {
     width: 14.286%;
+}
+
+.day {
+    border-right: 1px solid #2e2e35;
+    border-bottom: 1px solid #2e2e35; 
+}
+
+.day:after,
+.header-day:after {
+    display: block;
+    content: '';
+}
+
+.day:after {
+    padding-bottom: 50%;
+}
+
+.header-day:after {
+    padding-bottom: 20%;
+}
+
+.clndr-grid {
+    border-left: 1px solid #2e2e35; 
+}
+
+.days-of-the-week {
+    background-color: #3883a3;
+    border: 1px solid #2e2e35;
+    border-left: none;
 }

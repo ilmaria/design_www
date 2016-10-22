@@ -29,7 +29,7 @@
                             </div>
         <div class="panel-body">
           <div class="list-group">
-            {% for loggedtime in project.loggedtime_set.all|dictsort:'date' %}
+            {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
                 <p class="list-group-item">{{ loggedtime.date }} - {{ loggedtime.student.user.username }} logged {{ loggedtime.hours }}</p>
               {% endfor %}
             </div>
@@ -52,10 +52,4 @@
     </div>
 
   </div>
-
-  <!-- Customize JavaScript -->
-  <script src="{% static 'js/project_details.js' %}"></script>
-
-  <!-- Bootstrap Core JavaScript -->
-  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
   {% endblock %}

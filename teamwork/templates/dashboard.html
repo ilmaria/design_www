@@ -3,16 +3,19 @@
 
 {% block content %}
 <div id="page-wrapper">
+  <!-- Next Event from all project -->
   <div class="container">
     <h3>Next Event</h3>
-    
-  </div>
 
+  </div>
+  <!-- List of ongoing pojects -->
   <div class="container">
     <h3>Ongoing Projects</h3>
     {% for project in projects %}
     <div class="jumbotron">
-      <h2><a href="{% url 'project_details' user.username project.name|urlencode_plus %}">{{ project.name }}</a></h2>
+      <h2>
+        <a href="{% url 'project_details' user.username project.name|urlencode_plus %}">{{ project.name }}</a>
+      </h2>
       {% for event in project.event_set.all|dictsort:'date' %}
       {% if forloop.first %}
       <p><b>Next event:</b>

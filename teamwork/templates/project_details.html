@@ -6,33 +6,33 @@
   <div class="container">
     <!-- Project details -->
     <h1>{{ project.name }} <br />
-       <small>{{ project.description }}</small></h1>
+      <small>{{ project.description }}</small></h1>
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title"><i class="glyphicon glyphicon-user"></i> Group member</h3>
+        </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            {% for member in project.members.all %}
+            <li class="list-group-item">{{ member.user.username }}</li>
+            {% endfor %}
+          </ul>
+          <button type="button" class="btn btn-default" onclick="openEventCreator()">Add member</button>
+        </div>
       </div>
-<div class="panel-body">
-      <ul class="list-group">
-        {% for member in project.members.all %}
-        <li class="list-group-item">{{ member.user.username }}</li>
-        {% endfor %}
-      </ul>
-        <button type="button" class="btn btn-default" onclick="openEventCreator()">Add member</button>
-    </div>
-  </div>
 
       <!-- Time Spent -->
       <h3>Time Spent</h3>
       <div class="panel panel-default">
         <div class="panel-heading">
-                                <h3 class="panel-title"><i class="glyphicon glyphicon-time"></i> Log history</h3>
-                            </div>
+          <h3 class="panel-title"><i class="glyphicon glyphicon-time"></i> Log history</h3>
+        </div>
         <div class="panel-body">
           <div class="list-group">
             {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
-                <p class="list-group-item">{{ loggedtime.date }} - {{ loggedtime.student.user.username }} logged {{ loggedtime.hours }}</p>
-              {% endfor %}
-            </div>
+            <p class="list-group-item">{{ loggedtime.date }} - {{ loggedtime.student.user.username }} logged {{ loggedtime.hours }}</p>
+            {% endfor %}
+          </div>
         </div>
       </div>
 

@@ -2,33 +2,28 @@
 {% load extra_tags %}
 
 {% block content %}
-<div id="page-wrapper">
-  <!-- Next Event from all project -->
-  <div class="container">
-    <h3>Next Event</h3>
-
-  </div>
-  <!-- List of ongoing pojects -->
-  <div class="container">
-    <h3>Ongoing Projects</h3>
-    {% for project in projects %}
-    <div class="jumbotron">
-      <h2>
-        <a href="{% url 'project_details' user.username project.name|urlencode_plus %}">{{ project.name }}</a>
-      </h2>
-      {% for event in project.event_set.all|dictsort:'date' %}
-      {% if forloop.first %}
-      <p><b>Next event:</b>
-        {{ event.name }} - {{ event.date }}
-      </p>
-      {% endif %}
-      {% endfor %}
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Log time</a></p>
-    </div>
-    {% endfor %}
-  </div>
+<!-- Next Event from all project -->
+<div class="container">
+  <h3>Next Event</h3>
 
 </div>
+<!-- List of ongoing pojects -->
+<div class="container">
+  <h3>Ongoing Projects</h3>
+  {% for project in projects %}
+  <div class="jumbotron">
+    <h2>
+      <a href="{% url 'project_details' user.username project.name|urlencode_plus %}">{{ project.name }}</a>
+    </h2>
+    {% with project.event_set.all|dictsort:'date' as events %}
+    <p><b>Next event:</b>
+      {{ events.0.name }} - {{ events.0.date }}
+    </p>
+    {% endwith %}
+    <p><button type="button" class="btn btn-primary btn-lg" onclick="openEventCreator()">Log time</button></p>
+  </div>
+  {% endfor %}
+
 </div>
 
 {% endblock %}

@@ -8,30 +8,14 @@ html {
 }
 
 body {
+  margin-top: 0px;
+  background-color: #fff;
+}
+
+@media(min-width:768px) {
+  body {
     margin-top: 0px;
-    background-color: #fff;
-}
-
-@media(min-width:768px) {
-    body {
-        margin-top: 0px;
-    }
-}
-
-#page-wrapper {
-    width: 100%;
-    padding: 0;
-    background-color: #fff;
-}
-
-@media(min-width:768px) {
-    #wrapper {
-        padding-left: 225px;
-    }
-
-    #page-wrapper {
-        padding: 10px;
-    }
+  }
 }
 
 .jumbotron {

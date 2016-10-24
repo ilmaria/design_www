@@ -1,6 +1,27 @@
+/* Global Styles */
+
 html {
   box-sizing: border-box;
 }
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+body {
+  margin-top: 0px;
+  background-color: #fff;
+}
+
+@media(min-width:768px) {
+  body {
+    margin-top: 0px;
+  }
+}
+
+.jumbotron {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  color: inherit;
+  background-color: #eee;
 }

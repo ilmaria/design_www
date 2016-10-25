@@ -19,12 +19,13 @@
 <div class="calendar-container">
   <script id="calendar-template" type="text/template">
 
+    <div class="clndr-controls">
+      <span class="clndr-previous-button">&lt;</span>
+      <span class="current-month"><%= month %> <%= year %></span>
+      <span class="clndr-next-button">&gt;</span>
+    </div>
+
     <section class="calendar">
-      <div class="clndr-controls">
-        <span class="clndr-previous-button">&lt;</span>
-        <span class="current-month"><%= month %> <%= year %></span>
-        <span class="clndr-next-button">&gt;</span>
-      </div>
 
       <div class="clndr-grid">
         <div class="days-of-the-week flex">
@@ -42,24 +43,24 @@
         <% }) %>
         </div>
       </div>
-    </section>
-    
 
-    <section class="event-listing">
-      <h2 class="event-listing-title">Events</h2>
-      <% eventsThisMonth.map(function(event) { %>
-        <div class="event-item">
-          <div class="event-item-name"><%= event.title %></div>
-          <div class="event-item-location"><%= event.location %></div>
-        </div>
-      <% }) %>
+      <section class="event-listing">
+        <h2 class="event-listing-title">Events</h2>
+        <% eventsThisMonth.map(function(event) { %>
+          <div class="event-item">
+            <div class="event-item-name"><%= event.name %></div>
+            <div class="event-item-location"><%= event.location %></div>
+          </div>
+        <% }) %>
+      </section>
+
     </section>
 
   </script>
 </div>
 
 <script>
-  var events = {{ events|safe|default:'[]' }}
+  var events = JSON.parse(`{{ events|escapejs|default:'[]' }}`)
   var template = $('#calendar-template').html()
 
   initCalendar('.calendar-container', template, events)

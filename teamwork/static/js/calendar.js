@@ -12,7 +12,8 @@ function initCalendar(element, template, events) {
       template: template,
       events: events,
       daysOfTheWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      weekOffset: 1   // week starts with Monday as it should
+      weekOffset: 1,   // week starts with Monday as it should
+      forceSixRows: true
     })
   })
 }

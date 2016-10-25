@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import *
 from urllib.parse import unquote_plus
 from datetime import timedelta
+from .utils import json_serialize
+import json
 
 def project_details(request, username, project_name):
     """Project detail page for viewing all details related to one project.
@@ -52,9 +54,16 @@ def calendar(request, username):
     user = get_object_or_404(User, username=username)
     projects = Project.objects.filter(members__user__username=username)
 
+    event_set = Event.objects.filter(project__in=projects)\
+        .values('date', 'name', 'location')
+
+    # turn QuerySet into a native python list of dictionaries
+    events = [event for event in event_set]
+
     context = {
         'user': user,
-        'projects': projects
+        'projects': projects,
+        'events': json.dumps(events, default=json_serialize)
     }
 
     return render(request, 'calendar.html', context)

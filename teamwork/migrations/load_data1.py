@@ -11,7 +11,7 @@ def load_fixture(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('teamwork', '0007_project_owner'),
+        ('teamwork', '0008_auto_20161019_2349'),
     ]
 
     operations = [

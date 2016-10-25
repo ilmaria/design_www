@@ -16,47 +16,52 @@
 
 <script src="{% static 'js/calendar.js' %}"></script>
 
-<section id="calendar" style="width: 600px">
-    <script id="calendar-template" type="text/template">
-        <div class="clndr-controls">
-            <span class="clndr-previous-button">&lt;</span>
-            <span class="current-month"><%= month %> <%= year %></span>
-            <span class="clndr-next-button">&gt;</span>
-        </div>
+<div class="calendar-container">
+  <script id="calendar-template" type="text/template">
 
-        <div class="clndr-grid">
-            <div class="days-of-the-week flex">
-            <% daysOfTheWeek.map(function(weekday) { %>
-                <div class="header-day">
-                    <%= weekday %>
-                </div>
-            <% }) %>
-            </div>
-            <div class="days flex flex-wrap">
-            <% days.map(function(day) { %>
-                <div class="<%= day.classes %>" id="<%= day.id %>">
-                    <span class="day-number"><%= day.day %></span>
-                </div>
-            <% }) %>
-            </div>
-        </div>
+    <section class="calendar">
+      <div class="clndr-controls">
+        <span class="clndr-previous-button">&lt;</span>
+        <span class="current-month"><%= month %> <%= year %></span>
+        <span class="clndr-next-button">&gt;</span>
+      </div>
 
-        <div class="event-listing">
-            <div class="event-listing-title">EVENTS THIS MONTH</div>
-            <% eventsThisMonth.map(function(event) { %>
-                <div class="event-item">
-                <div class="event-item-name"><%= event.title %></div>
-                <div class="event-item-location"><%= event.location %></div>
-                </div>
-            <% }) %>
+      <div class="clndr-grid">
+        <div class="days-of-the-week flex">
+        <% daysOfTheWeek.map(function(weekday) { %>
+          <div class="header-day">
+            <%= weekday %>
+          </div>
+        <% }) %>
         </div>
-    </script>
-</section>
+        <div class="days flex flex-wrap">
+        <% days.map(function(day) { %>
+          <div class="<%= day.classes %>" id="<%= day.id %>">
+            <span class="day-number"><%= day.day %></span>
+          </div>
+        <% }) %>
+        </div>
+      </div>
+    </section>
+    
+
+    <section class="event-listing">
+      <h2 class="event-listing-title">Events</h2>
+      <% eventsThisMonth.map(function(event) { %>
+        <div class="event-item">
+          <div class="event-item-name"><%= event.title %></div>
+          <div class="event-item-location"><%= event.location %></div>
+        </div>
+      <% }) %>
+    </section>
+
+  </script>
+</div>
 
 <script>
-    var events = {{ events|safe|default:'[]' }}
-    var template = $('#calendar-template').html()
+  var events = {{ events|safe|default:'[]' }}
+  var template = $('#calendar-template').html()
 
-    initCalendar('#calendar', template, events)
+  initCalendar('.calendar-container', template, events)
 </script>
 {% endblock %}

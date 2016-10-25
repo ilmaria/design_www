@@ -7,9 +7,12 @@
  * @param {Object[]} events - List of event objects for calendar events.
  */
 function initCalendar(element, template, events) {
-  var calendar = $(element).clndr({
-    template: template,
-    events: events,
-    weekOffset: 1   // week starts with Monday as it should
+  $(element).each(function() {
+    var calendar = $(this).clndr({
+      template: template,
+      events: events,
+      daysOfTheWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      weekOffset: 1   // week starts with Monday as it should
+    })
   })
 }

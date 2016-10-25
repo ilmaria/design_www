@@ -1,49 +1,63 @@
 .clndr-controls {
-    display: flex;
-    justify-content: space-between;
-    font-size: 2.2em;
+  display: flex;
+  justify-content: space-between;
+  font-size: 2.2em;
 }
 
 .clndr-next-button,
 .clndr-previous-button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.header-day {
-    font-size: 1.5em;
-    text-align: center;
+.clndr {
+  display: flex;
+  justify-content: center;
+}
+
+.calendar {
+  width: 764px;
 }
 
 .day,
 .header-day {
-    width: 14.286%;
+  width: 109px;
+}
+
+.header-day {
+  height: 40px;
+  font-size: 1.5em;
+  text-align: center;
+  color: #000;    
 }
 
 .day {
-    border-right: 1px solid #2e2e35;
-    border-bottom: 1px solid #2e2e35; 
-}
-
-.day:after,
-.header-day:after {
-    display: block;
-    content: '';
-}
-
-.day:after {
-    padding-bottom: 50%;
-}
-
-.header-day:after {
-    padding-bottom: 20%;
+  border-right: 1px solid #2e2e35;
+  border-bottom: 1px solid #2e2e35;
+  height: 75px; 
 }
 
 .clndr-grid {
-    border-left: 1px solid #2e2e35; 
+  border-left: 1px solid #2e2e35; 
 }
 
 .days-of-the-week {
-    background-color: #3883a3;
-    border: 1px solid #2e2e35;
-    border-left: none;
+  background-color: #3883a3;
+  border: 1px solid #2e2e35;
+  border-left: none;
+}
+
+
+/* Small */
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/* Medium */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/* Large */
+@media (min-width: 1200px) {
+
 }

@@ -2,86 +2,101 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>
-    {% block title %}
-    MyProjects
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      {% block title %}
+        MyProjects
+      {% endblock %}
+    </title>
+    <meta name="description" content="Website for managing multiple projects in one place.">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    {% block styles %}
+    {% endblock%}
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle"
+              data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <p class="navbar-brand">{{ project.name }}</p>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="{% url 'dashboard' user.username %}">Dashboard</a>
+            </li>
+            <li>
+              <a href="{% url 'calendar' user.username %}">Calendar</a>
+            </li>
+            <li>
+              <button type="button" class="btn btn-success navbar-btn">
+                <span class="glyphicon glyphicon-plus"></span>
+                Add new project
+              </button>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+                {{ user.username }}
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#"><span class="glyphicon glyphicon-cog"></span>
+                    Settings
+                  </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="#">Log out</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <!-- Content -->
+    {% block content %}
     {% endblock %}
-  </title>
-  <meta name="description" content="Website for managing multiple projects in one place.">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <!--Footer -->
+    <footer class="container text-center">
+      <p>
+        <a href="https://mycourses.aalto.fi/" title="MyCourse" >My Courses</a>
+        |
+        <a href="#" title="Description" >Service Description</a>
+      </p>
+    </footer>
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="{% static 'css/main.css' %}">
-</head>
-<body>
-  <!-- Navigation bar -->
-  <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <p class="navbar-brand">{{ project.name }}</p>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li class="active">
-            <a href="{% url 'dashboard' user.username %}">Dashboard</a>
-          </li>
-          <li>
-            <a href="calendar">Calendar</a>
-          </li>
-          <li>
-            <button type="button" class="btn btn-success navbar-btn"> <span class="glyphicon glyphicon-plus"></span> Add new project </button>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ user.username }} <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <a href="#">Log out</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <!--/.nav-collapse -->
-    </div>
-  </nav>
+    <!-- add jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
 
-  <!-- Content -->
-  {% block content %}
-  {% endblock %}
-
-  <!--Footer -->
-  <footer class="container text-center">
-    <p>
-      <a href="https://mycourses.aalto.fi/" title="MyCourse" >My Courses</a>  |  <a href="#" title="Description" >Service Description</a>
-    </p>
-  </footer>
-
-  <!-- add jQuery -->
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-
-  <!-- add Bootstrap JavaScript -->
-  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-
-  <!-- add customized JavaScript -->
-  <script src="{% static 'js/navbar.js' %}"></script>
-</body>
+    <!-- add Bootstrap JavaScript -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    
+    <!-- add customized JavaScript -->
+    <script src="{% static 'js/navbar.js' %}"></script>
+  </body>
 </html>

@@ -1,0 +1,75 @@
+.clndr-controls {
+  display: flex;
+  justify-content: space-between;
+  font-size: 2.2em;
+}
+
+.clndr-next-button,
+.clndr-previous-button {
+  cursor: pointer;
+}
+
+.calendar,
+.calendar-container {
+  display: flex;
+  justify-content: center;
+}
+
+.clndr-grid {
+  width: 764px;
+  border-left: 1px solid #2e2e35; 
+}
+
+.day,
+.header-day {
+  width: 109px;
+}
+
+.header-day {
+  height: 40px;
+  font-size: 1.5em;
+  text-align: center;
+  color: #000;    
+}
+
+.day {
+  height: 75px;
+  font-size: 1.1em;
+}
+
+.days-of-the-week {
+  background-color: #3883a3;
+  border: 1px solid #2e2e35;
+  border-left: none;
+}
+
+.day,
+.event-listing {
+  border-right: 1px solid #2e2e35;
+  border-bottom: 1px solid #2e2e35;
+}
+
+.event-listing {
+  border-top: 1px solid #2e2e35;
+  width: 300px;
+}
+
+.event-listing-title {
+  border-bottom: 1px solid #2e2e35;
+}
+
+
+/* Small */
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/* Medium */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/* Large */
+@media (min-width: 1200px) {
+
+}

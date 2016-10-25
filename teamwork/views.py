@@ -15,16 +15,22 @@ def project_details(request, username, project_name):
         name=project_name,
         members__user__username=username)
 
-    loggedtimes = project.loggedtime_set.filter(student__user=user)
-    loggedtime_total = timedelta()
+    total_times_per_user = []
+    members = project.members.all()
 
-    for loggedtime in loggedtimes:
-        loggedtime_total += loggedtime.hours
+    for student in members:
+        loggedtimes = project.loggedtime_set.filter(student=student)
+        loggedtime_total = timedelta()
+
+        for loggedtime in loggedtimes:
+            loggedtime_total += loggedtime.hours
+        
+        total_times_per_user.append((student.user.username, loggedtime_total))
 
     context = {
         'user': user,
         'project': project,
-        'loggedtime_total': loggedtime_total
+        'total_times_per_user': total_times_per_user
     }
 
     return render(request, 'project_details.html', context)

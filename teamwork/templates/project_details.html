@@ -21,7 +21,7 @@
     {% for task in project.task_set.all %}
     <li class="list-group-item">
       <input type="checkbox" 
-        {% if task.done is True %}
+        {% if task.done %}
           checked 
         {% endif %}> {{ task.name }}</input>
     </li>

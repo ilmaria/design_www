@@ -54,7 +54,7 @@
           <ul class="list-group">
             {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
             <li class="list-group-item">{{ loggedtime.date }} - {{ loggedtime.student.user.username }} logged {{ loggedtime.hours }}</li>
-              {% endfor %}
+            {% endfor %}
           </ul>
         </div>
       </div>

@@ -54,3 +54,7 @@ class Task(models.Model):
 
     name = models.CharField(max_length=255, default='My task')
     done = models.BooleanField()
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return 'Task: "{0}" - {1}'.format(self.name, self.done)

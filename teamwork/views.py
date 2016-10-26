@@ -7,7 +7,7 @@ import json
 
 def project_details(request, username, project_name):
     """Project detail page for viewing all details related to one project.
-    View all events, deadlines, time used for one project.
+    View all tasks, events, deadlines, time used for one project.
     """
 
     user = get_object_or_404(User, username=username)

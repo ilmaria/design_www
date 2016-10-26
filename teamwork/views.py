@@ -7,7 +7,7 @@ import json
 
 def project_details(request, username, project_name):
     """Project detail page for viewing all details related to one project.
-    View all events, deadlines, time used for one project.
+    View all tasks, events, deadlines, time used for one project.
     """
 
     user = get_object_or_404(User, username=username)
@@ -16,6 +16,8 @@ def project_details(request, username, project_name):
     project = get_object_or_404(Project,
         name=project_name,
         members__user__username=username)
+
+    task = project.task.all()
 
     total_times_per_user = []
     members = project.members.all()
@@ -32,6 +34,7 @@ def project_details(request, username, project_name):
     context = {
         'user': user,
         'project': project,
+        'task': task,
         'total_times_per_user': total_times_per_user
     }
 

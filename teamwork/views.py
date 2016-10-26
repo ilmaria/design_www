@@ -17,8 +17,6 @@ def project_details(request, username, project_name):
         name=project_name,
         members__user__username=username)
 
-    task = project.task.all()
-
     total_times_per_user = []
     members = project.members.all()
 
@@ -34,7 +32,6 @@ def project_details(request, username, project_name):
     context = {
         'user': user,
         'project': project,
-        'task': task,
         'total_times_per_user': total_times_per_user
     }
 

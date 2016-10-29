@@ -85,23 +85,6 @@
   var events = JSON.parse(`{{ events|escapejs|default:'[]' }}`)
   var template = $('#calendar-template').html()
   
-  events.push({
-    name: 'Event 1',
-    date: '2016-09-29'
-  })
-  events.push({
-    name: 'Event a2',
-    date: '2016-09-29'
-  })
-  events.push({
-    name: 'Event c3',
-    date: '2016-09-29'
-  })
-  events.push({
-    name: 'Event 4b',
-    date: '2016-09-29'
-  })
-  
   initCalendar('.calendar-container', template, events)
 </script>
 {% endblock %}

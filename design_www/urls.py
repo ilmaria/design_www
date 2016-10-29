@@ -20,6 +20,8 @@ from teamwork import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    
+    url(r'^$', views.login, name='login'),
 
     url(r'^(?P<username>\w+)/dashboard/$',
         views.dashboard, name='dashboard'),

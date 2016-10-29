@@ -21,6 +21,10 @@ body {
   background-color: #eee;
 }
 
+.navbar-brand {
+  margin: 0;
+}
+
 li {
   list-style: none;
 }

@@ -13,7 +13,35 @@ function initCalendar(element, template, events) {
       events: events,
       daysOfTheWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       weekOffset: 1,   // week starts with Monday as it should
-      forceSixRows: true
+      forceSixRows: true,
+      clickEvents: {
+        click: onClickDay
+      }
     })
   })
+}
+
+function onClickDay(day) {
+  if (day.events.length) {
+    var eventListModal = $('#event-list-modal')
+    var eventList = eventListModal.find('.modal-body .event-list')
+    var template = eventList.find('.event-item').first().clone()
+    eventList.empty()
+    
+    day.events.forEach(function(event) {
+      var eventHtml = template.clone()
+      eventHtml.find('.event-name').text(
+        moment(event.date).format('hh:mm')  + ' - ' + event.name)
+        
+      if (event.location) {
+        eventHtml.find('.event-location').text(event.location)
+      } else {
+        eventHtml.find('.event-location').remove()
+      }
+      
+      eventHtml.appendTo(eventList)
+    })
+    
+    eventListModal.modal('show')
+  }
 }

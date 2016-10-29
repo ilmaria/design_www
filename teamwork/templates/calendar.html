@@ -15,50 +15,93 @@
 <div class="calendar-container">
   <script id="calendar-template" type="text/template">
 
+    <!-- Calendar controls -->
     <div class="clndr-controls">
       <span class="clndr-previous-button">&lt;</span>
       <span class="current-month"><%= month %> <%= year %></span>
       <span class="clndr-next-button">&gt;</span>
     </div>
 
-    <section class="calendar">
-
-      <div class="clndr-grid">
-        <div class="days-of-the-week">
-        <% daysOfTheWeek.map(function(weekday) { %>
-          <div class="header-day">
-            <%= weekday %>
-          </div>
-        <% }) %>
+    <!-- Calendar -->
+    <div class="clndr-grid">
+      <div class="days-of-the-week">
+      <% daysOfTheWeek.map(function(weekday) { %>
+        <div class="header-day">
+          <%= weekday %>
         </div>
-        <div class="days">
-        <% days.map(function(day) { %>
-          <div class="<%= day.classes %>" id="<%= day.id %>">
-            <span class="day-number"><%= day.day %></span>
-          </div>
-        <% }) %>
-        </div>
+      <% }) %>
       </div>
-
-      <section class="event-listing">
-        <h2 class="event-listing-title">Events</h2>
-        <% eventsThisMonth.map(function(event) { %>
-          <div class="event-item">
-            <div class="event-item-name"><%= event.name %></div>
-            <div class="event-item-location"><%= event.location %></div>
-          </div>
-        <% }) %>
-      </section>
-
-    </section>
-
+      <div class="days">
+      <% days.map(function(day) { %>
+        <div class="<%= day.classes %>" id="<%= day.id %>">
+          <span class="day-number"><%= day.day %></span>
+          <% if (day.events.length) { %>
+            <div class="event-name"><%= day.events[0].name %></div>
+          <% } %>
+          <% if (day.events.length > 1) { %>
+            <div>+ <%= day.events.length - 1 %> more</div>
+          <% } %>
+        </div>
+      <% }) %>
+      </div>
+    </div>
+    
   </script>
+</div>
+
+<!-- Event list modal -->
+<div class="modal fade" id="event-list-modal" tabindex="-1"
+    role="dialog" aria-labelledby="modal-title">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close"
+            data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="modal-title">Events</h4>
+      </div>
+      <div class="modal-body">
+        <ul class="event-list">
+          <li class="event-item">
+            <div class="event-name"></div>
+            <div class="event-location">
+              <i class="glyphicon glyphicon-map-marker"></i>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"
+            data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary"
+            data-dismiss="modal">Add event</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
   var events = JSON.parse(`{{ events|escapejs|default:'[]' }}`)
   var template = $('#calendar-template').html()
-
+  
+  events.push({
+    name: 'Event 1',
+    date: '2016-09-29'
+  })
+  events.push({
+    name: 'Event a2',
+    date: '2016-09-29'
+  })
+  events.push({
+    name: 'Event c3',
+    date: '2016-09-29'
+  })
+  events.push({
+    name: 'Event 4b',
+    date: '2016-09-29'
+  })
+  
   initCalendar('.calendar-container', template, events)
 </script>
 {% endblock %}

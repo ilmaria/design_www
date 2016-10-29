@@ -73,3 +73,14 @@ def calendar(request, username):
     }
 
     return render(request, 'calendar.html', context)
+
+
+def login(request):
+    
+    users = User.objects.all()
+    
+    context = {
+        'users': users
+    }
+    
+    return render(request, 'login.html', context)

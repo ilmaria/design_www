@@ -9,7 +9,6 @@
   cursor: pointer;
 }
 
-.calendar,
 .calendar-container {
   display: flex;
   justify-content: center;
@@ -34,11 +33,28 @@
   height: 40px;
   font-size: 1.5em;
   text-align: center;
-  color: #000;    
+  color: black;    
 }
 
 .day {
   height: 75px;
+}
+
+.day:hover {
+  cursor: pointer;
+  background-color: #e8e8e8;
+}
+
+.days .event-name {
+  padding: 0 0.5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #3883a3;
+  color: white;
+}
+
+.day-number {
   font-size: 1.1em;
 }
 

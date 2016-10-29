@@ -20,6 +20,11 @@
   border-left: 1px solid #2e2e35; 
 }
 
+.days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .day,
 .header-day {
   width: 109px;
@@ -41,6 +46,7 @@
   background-color: #3883a3;
   border: 1px solid #2e2e35;
   border-left: none;
+  display: flex;
 }
 
 .day,

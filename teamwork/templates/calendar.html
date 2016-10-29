@@ -2,15 +2,11 @@
 {% load static %}
 
 {% block styles %}
-<link href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
 {% endblock %}
 
 {% block content %}
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+<script src="{% static 'moment/moment.min.js' %}"></script>
 <script src="{% static 'clndr/clndr.min.js' %}"></script>
 <script src="{% static 'lodash/lodash.custom.min.js' %}"></script>
 
@@ -28,14 +24,14 @@
     <section class="calendar">
 
       <div class="clndr-grid">
-        <div class="days-of-the-week flex">
+        <div class="days-of-the-week">
         <% daysOfTheWeek.map(function(weekday) { %>
           <div class="header-day">
             <%= weekday %>
           </div>
         <% }) %>
         </div>
-        <div class="days flex flex-wrap">
+        <div class="days">
         <% days.map(function(day) { %>
           <div class="<%= day.classes %>" id="<%= day.id %>">
             <span class="day-number"><%= day.day %></span>

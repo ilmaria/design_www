@@ -20,6 +20,12 @@
 
     {% block styles %}
     {% endblock%}
+    
+    <!-- add jQuery -->
+    <script src="{% static 'jquery/jquery-3.1.1.min.js' %}"></script>
+
+    <!-- add Bootstrap JavaScript -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
   </head>
   <body>
     <!-- Navigation bar -->
@@ -87,14 +93,6 @@
         <a href="#" title="Description" >Service Description</a>
       </p>
     </footer>
-
-    <!-- add jQuery -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
-
-    <!-- add Bootstrap JavaScript -->
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     
     <!-- add customized JavaScript -->
     <script src="{% static 'js/navbar.js' %}"></script>

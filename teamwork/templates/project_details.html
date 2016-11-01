@@ -47,6 +47,10 @@
             <i class="glyphicon glyphicon-map-marker"></i> {{ deadline.location }}            {% endif %})
           </p>
         </li>
+        {% empty %}
+          <li class="list-group-item">
+            <p>There is no deadline coming up</p>
+          </li>
         {% endfor %}
       </ul>
     </div>

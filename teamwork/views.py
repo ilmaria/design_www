@@ -29,7 +29,7 @@ def project_details(request, username, project_name):
 
         total_times_per_user.append((student.user.username, loggedtime_total))
 
-    events = Event.objects.all()
+    events = Event.objects.filter(project=project)
     deadlines = [event for event in events if event.type.lower()=='deadline']
 
     context = {

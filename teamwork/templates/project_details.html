@@ -40,9 +40,12 @@
       <!-- Deadline -->
       <h3>Time till deadlines</h3>
       <ul class="list-group">
-        {% for deadline in deadlines %}
+        {% for deadline in deadlines|dictsort:'date' %}
         <li class="list-group-item">
-        <p><span class="badge">{{ deadline.date|timeuntil }} left</span> {{ deadline.name }} ({{ deadline.date|date:"D, d M Y" }}, {{ deadline.date|time:"H:i" }}, <i class="glyphicon glyphicon-map-marker"></i> {{ deadline.location }})</p>
+          <p><span class="badge">{{ deadline.date|timeuntil }} left</span> {{ deadline.name }} ({{ deadline.date|date:"D, d M Y" }}, {{ deadline.date|time:"H:i" }}
+            {% if deadline.location != "" %}, 
+            <i class="glyphicon glyphicon-map-marker"></i> {{ deadline.location }}            {% endif %})
+          </p>
         </li>
         {% endfor %}
       </ul>
@@ -86,9 +89,11 @@
   <ul class="list-group">
     {% for event in project.event_set.all|dictsort:'date' %}
     <li class="list-group-item">
-      <p>{{ event.name }}</p>
+      <strong>{{ event.name }}</strong>
       <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}</p>
+      {% if event.location != "" %}
       <p><i class="glyphicon glyphicon-map-marker"></i> {{ event.location }}</p>
+      {% endif %}
     </li>
     {% endfor %}
   </ul>

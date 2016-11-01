@@ -26,13 +26,17 @@ def project_details(request, username, project_name):
 
         for loggedtime in loggedtimes:
             loggedtime_total += loggedtime.hours
-        
+
         total_times_per_user.append((student.user.username, loggedtime_total))
 
+    events = Event.objects.all()
+    deadlines = [event for event in events if event.type.lower()=='deadline']
+
     context = {
-        'user': user,
-        'project': project,
-        'total_times_per_user': total_times_per_user
+    'user': user,
+    'project': project,
+    'total_times_per_user': total_times_per_user,
+    'deadlines': deadlines
     }
 
     return render(request, 'project_details.html', context)
@@ -47,8 +51,8 @@ def dashboard(request, username):
     projects = Project.objects.filter(members__user__username=username)
 
     context = {
-        'user': user,
-        'projects': projects
+    'user': user,
+    'projects': projects
     }
 
     return render(request, 'dashboard.html', context)
@@ -61,26 +65,26 @@ def calendar(request, username):
     projects = Project.objects.filter(members__user__username=username)
 
     event_set = Event.objects.filter(project__in=projects)\
-        .values('date', 'name', 'location')
+    .values('date', 'name', 'location')
 
     # turn QuerySet into a native python list of dictionaries
     events = [event for event in event_set]
 
     context = {
-        'user': user,
-        'projects': projects,
-        'events': json.dumps(events, default=json_serialize)
+    'user': user,
+    'projects': projects,
+    'events': json.dumps(events, default=json_serialize)
     }
 
     return render(request, 'calendar.html', context)
 
 
 def login(request):
-    
+
     users = User.objects.all()
-    
+
     context = {
-        'users': users
+    'users': users
     }
-    
+
     return render(request, 'login.html', context)

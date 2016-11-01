@@ -42,7 +42,7 @@
       <ul class="list-group">
         {% for deadline in deadlines|dictsort:'date' %}
         <li class="list-group-item">
-          <p><span class="badge">{{ deadline.date|timeuntil }} left</span> {{ deadline.name }} ({{ deadline.date|date:"D, d M Y" }}, {{ deadline.date|time:"H:i" }}
+          <p><span class="timeUntil">{{ deadline.date|timeuntil }} left</span> {{ deadline.name }} ({{ deadline.date|date:"D, d M Y" }}, {{ deadline.date|time:"H:i" }}
             {% if deadline.location != "" %}, 
             <i class="glyphicon glyphicon-map-marker"></i> {{ deadline.location }}            {% endif %})
           </p>

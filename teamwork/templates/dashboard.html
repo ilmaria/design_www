@@ -13,7 +13,8 @@
   {% for project in projects %}
   <div class="jumbotron">
     <h2>
-      <a href="{% url 'project_details' user.username project.name|urlencode_plus %}">{{ project.name }}</a>
+      <a href="{% url 'project_details' user.username project.name|urlencode_plus %}">
+      {{ project.name }}</a>
     </h2>
     {% with project.event_set.all|dictsort:'date' as events %}
     <p><b>Next event:</b>

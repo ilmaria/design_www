@@ -32,3 +32,22 @@ li {
 main.content {
   flex: 1;
 }
+
+.timeUntil {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #d9534f;
+  border-radius: 10px;
+}
+
+.timeUntil:empty {
+  display: none;
+}

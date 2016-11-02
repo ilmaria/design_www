@@ -30,9 +30,10 @@ class Event(models.Model):
     date = models.DateTimeField()
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     location = models.CharField(max_length=255, blank=True)
+    type = models.CharField(max_length=255, default='event')
 
     def __str__(self):
-        return 'Event: "{0}" - {1} - {2}'.format(self.name, self.project, self.date)
+        return 'Event: "{0}" - {1} - {2} - {3}'.format(self.name, self.project, self.date, self.type)
 
 
 class LoggedTime(models.Model):

@@ -26,13 +26,17 @@ def project_details(request, username, project_name):
 
         for loggedtime in loggedtimes:
             loggedtime_total += loggedtime.hours
-        
+
         total_times_per_user.append((student.user.username, loggedtime_total))
+
+    events = Event.objects.filter(project=project)
+    deadlines = events.filter(type='deadline')
 
     context = {
         'user': user,
         'project': project,
-        'total_times_per_user': total_times_per_user
+        'total_times_per_user': total_times_per_user,
+        'deadlines': deadlines
     }
 
     return render(request, 'project_details.html', context)
@@ -76,11 +80,11 @@ def calendar(request, username):
 
 
 def login(request):
-    
+
     users = User.objects.all()
-    
+
     context = {
         'users': users
     }
-    
+
     return render(request, 'login.html', context)

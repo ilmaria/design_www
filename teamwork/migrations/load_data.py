@@ -3,7 +3,7 @@ from django.core.management import call_command
 
 
 def load_fixture(apps, schema_editor):
-    fixture = 'data1'
+    fixture = 'data'
 
     call_command('loaddata', fixture, app_label='teamwork') 
 
@@ -11,7 +11,7 @@ def load_fixture(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('teamwork', '0008_auto_20161019_2349'),
+        ('teamwork', '0001_initial'),
     ]
 
     operations = [

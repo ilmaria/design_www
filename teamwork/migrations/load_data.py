@@ -3,7 +3,7 @@ from django.core.management import call_command
 
 
 def load_fixture(apps, schema_editor):
-    fixture = 'data'
+    fixture = 'data2'
 
     call_command('loaddata', fixture, app_label='teamwork') 
 

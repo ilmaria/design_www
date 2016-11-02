@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/project_details.css' %}">
+{% endblock %}
+
 {% block content %}
 
 <div class="container">
@@ -13,10 +17,15 @@
   <p><i class="glyphicon glyphicon-user"></i>
     Group member: 
     {% for member in project.members.all %}
-    {{ member.user.username }}, 
+      <span class="badge">
+        {{ member.user.username }}
+        <a href="javascript:void(0)" onclick="removeMember('{{member.user.username}}')" class="remove-member">x</a>
+      </span>
     {% endfor %}
   </p>
-  <button type="button" class="btn btn-default" onclick="openEventCreator()">Add member</button>
+  {% if user == project.owner.user %}
+    <button type="button" class="btn btn-default" onclick="editMembers()">Edit members</button>
+  {% endif %}
 
   <div class="row">
     <div class="col-md-6">
@@ -28,7 +37,7 @@
         <li class="list-group-item">
           <input type="checkbox" 
           {% if task.done %}
-          checked 
+            checked
           {% endif %}> {{ task.name }}</input>
         </li>
         {% endfor %}
@@ -105,4 +114,8 @@
   <button type="button" class="btn btn-default" onclick="openEventCreator()">Add event</button>
 </div>
 
+<script>
+  var CSRF_TOKEN = '{{ csrf_token }}'
+</script>
+<script src="{% static 'js/project_details.js' %}"></script>
 {% endblock %}

@@ -31,4 +31,7 @@ urlpatterns = [
 
     url(r'^(?P<username>\w+)/(?P<project_name>.+?)/$',
         views.project_details, name='project_details'),
+    
+    url(r'^(?P<username>\w+)/(?P<project_name>.+?)/edit_project_members$',
+        views.edit_project_members, name='edit_project_members'),
 ]

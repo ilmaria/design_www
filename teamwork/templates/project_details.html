@@ -19,13 +19,23 @@
     {% for member in project.members.all %}
       <span class="badge">
         {{ member.user.username }}
-        <a href="javascript:void(0)" onclick="removeMember('{{member.user.username}}')" class="remove-member">x</a>
+        <!--allow removing members only if they are not the project owner-->
+        {% if user != member.user %}
+        <a class="remove-member"
+          href="javascript:void(0)"
+          onclick="removeMember('{{member.user.username}}')">x</a>
+        {% endif %}
       </span>
     {% endfor %}
   </p>
   {% if user == project.owner.user %}
-    <button type="button" class="btn btn-default" onclick="editMembers()">Edit members</button>
+    <button id="add-member" type="button" class="btn btn-success"
+      data-toggle="modal" data-target="#add-member-modal">
+      Add member
+    </button>
   {% endif %}
+
+  {% include 'modals/add_member.html' %}
 
   <div class="row">
     <div class="col-md-6">

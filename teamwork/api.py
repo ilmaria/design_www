@@ -17,13 +17,18 @@ def edit_project_members(request, username, project_name):
         name=project_name,
         owner__user__username=username)
     
+    # ok
+    status_code = 200
+
     # POST['remove[]'] contains a list of usernames that
     # should be removed from the project
     for member_name in request.POST.getlist('remove[]'):
         try:
-            member = User.objects.get(username=member_name)
+            member = User.objects.exclude(pk=user.id).get(username=member_name)
             project.members.remove(member.student)
         except:
+            # bad request, user tried to remove a non-existing project member
+            status_code = 400
             continue
     
     # POST['add[]'] contains a list of usernames that
@@ -33,6 +38,8 @@ def edit_project_members(request, username, project_name):
             member = User.objects.get(username=member_name)
             project.members.add(member.student)
         except:
+            # bad request, user tried to add a non-existing project member
+            status_code = 400
             continue
     
     # get usernames in a list and send them as a response
@@ -42,4 +49,7 @@ def edit_project_members(request, username, project_name):
         user = User.objects.get(pk=member['user'])
         members_list.append(user.username)
 
-    return JsonResponse(members_list, safe=False)
+    response = JsonResponse(members_list, safe=False)
+    response.status_code = status_code
+
+    return response

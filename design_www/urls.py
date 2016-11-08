@@ -35,4 +35,7 @@ urlpatterns = [
     
     url(r'^(?P<username>\w+)/(?P<project_name>.+?)/edit_project_members$',
         api.edit_project_members, name='edit_project_members'),
+
+    url(r'^search_users$',
+        api.search_users, name='search_users'),
 ]

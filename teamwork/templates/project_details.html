@@ -17,13 +17,13 @@
   <p><i class="glyphicon glyphicon-user"></i>
     Group member: 
     {% for member in project.members.all %}
-      <span class="badge">
+      <span class="badge" data-member="{{ member.user.username }}">
         {{ member.user.username }}
         <!--allow removing members only if they are not the project owner-->
         {% if user != member.user %}
         <a class="remove-member"
           href="javascript:void(0)"
-          onclick="removeMember('{{member.user.username}}')">x</a>
+          onclick="removeMember('{{ member.user.username }}')">x</a>
         {% endif %}
       </span>
     {% endfor %}
@@ -127,5 +127,6 @@
 <script>
   var CSRF_TOKEN = '{{ csrf_token }}'
 </script>
+<script src="{% static 'libs/typeahead/typeahead.min.js' %}"></script>
 <script src="{% static 'js/project_details.js' %}"></script>
 {% endblock %}

@@ -4,11 +4,19 @@
 id="add-member-modal"
 {% endblock %}
 
-{% block header %}
+{% block title %}
+Add member
 {% endblock %}
 
 {% block body %}
+<section role="search"class="form-group">
+  <label for="user-search">Search user</label>
+  <input id="user-search" type="text" class="form-control"
+    placeholder="Username" autocomplete="off">
+</section>
 {% endblock %}
 
 {% block footer %}
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<button type="button" class="btn btn-primary">Add member</button>
 {% endblock %}

@@ -14,9 +14,14 @@ Add member
   <input id="user-search" type="text" class="form-control"
     placeholder="Username" autocomplete="off">
 </section>
+<form action="edit_project_members" method="post" id="add-user-form">
+  {% csrf_token %}
+  <div class="user-to-add"></div>
+  <input id="users-to-add" name="add[]" type="hidden">
+</form>
 {% endblock %}
 
 {% block footer %}
 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-<button type="button" class="btn btn-primary">Add member</button>
+<button type="button" class="btn btn-primary" onclick="addMember()">Add member</button>
 {% endblock %}

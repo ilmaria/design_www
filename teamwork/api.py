@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_POST
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
+from django.urls import reverse
 from .models import *
 from urllib.parse import unquote_plus
 import json
@@ -15,9 +16,6 @@ def edit_project_members(request, username, project_name):
     project = get_object_or_404(Project,
         name=project_name,
         owner__user__username=username)
-    
-    # ok
-    status_code = 200
 
     # POST['remove[]'] contains a list of usernames that
     # should be removed from the project
@@ -27,8 +25,7 @@ def edit_project_members(request, username, project_name):
             project.members.remove(member.student)
         except:
             # bad request: user tried to remove a non-existing project member
-            status_code = 400
-            break
+            return HttpResponse(status=400)
     
     # POST['add[]'] contains a list of usernames that
     # should be added to the project
@@ -38,24 +35,9 @@ def edit_project_members(request, username, project_name):
             project.members.add(member.student)
         except:
             # bad request: user tried to add a non-existing project member
-            status_code = 400
-            break
-    
-    if status_code == 200:
-        # get usernames in a list and send them as a response
-        project_members = project.members.values('user')
-        members_list = []
-        for member in project_members:
-            user = User.objects.get(id=member['user'])
-            members_list.append(user.username)
+            return HttpResponse(status=400)
 
-        response = JsonResponse(members_list, safe=False)
-    else:
-        response = JsonResponse({})
-
-    response.status_code = status_code
-
-    return response
+    return HttpResponseRedirect(reverse('project_details', args=(username, project_name)))
 
 
 @require_POST

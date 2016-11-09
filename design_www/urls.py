@@ -24,18 +24,18 @@ urlpatterns = [
     
     url(r'^$', views.login, name='login'),
 
-    url(r'^(?P<username>\w+)/dashboard/$',
+    url(r'^(?P<username>.+?)/dashboard/$',
         views.dashboard, name='dashboard'),
     
-    url(r'^(?P<username>\w+)/calendar/$',
+    url(r'^(?P<username>.+?)/calendar/$',
         views.calendar, name='calendar'),
 
-    url(r'^(?P<username>\w+)/(?P<project_name>.+?)/$',
+    url(r'^(?P<username>.+?)/(?P<project_name>.+?)/$',
         views.project_details, name='project_details'),
     
-    url(r'^(?P<username>\w+)/(?P<project_name>.+?)/edit_project_members$',
+    url(r'^(?P<username>.+?)/(?P<project_name>.+?)/edit_project_members/?$',
         api.edit_project_members, name='edit_project_members'),
 
-    url(r'^search_users$',
+    url(r'^search_users/?$',
         api.search_users, name='search_users'),
 ]

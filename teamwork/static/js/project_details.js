@@ -1,5 +1,6 @@
 $('#user-search').typeahead({
-  source: searchUsers
+  source: searchUsers,
+  afterSelect: addToSelectedUsers
 })
 
 function searchUsers(query, process) {
@@ -20,24 +21,41 @@ function searchUsers(query, process) {
   })
 }
 
+function addToSelectedUsers(username) {
+  var userForm = $('#add-user-form')
+  userForm.find('.user-to-add').text(username)
+  userForm.find('#users-to-add').val([username])
+}
+
+function addMember() {
+  $('#add-user-form').submit()
+}
+
 function removeMember(username) {
   var badge = $("[data-member='" + username + "']")
   
+  editMembers({
+    remove: [username],
+    error: function(error) {
+      badge.fadeIn('fast')
+    }
+  })
+  
+  badge.fadeOut('fast')
+}
+
+function editMembers(options) {
   $.ajax({
     url: 'edit_project_members',
     method: 'post',
     data: {
       csrfmiddlewaretoken: CSRF_TOKEN,
-      remove: [username]
-    }
+      remove: options.remove,
+      add: options.add,
+    },
+    error: options.error,
+    success: function (result) {
+      console.log(result)
+    } 
   })
-  .done(function (result) {
-    console.log(result)
-  })
-  .fail(function(error) {
-    badge.fadeIn('fast')
-    console.log(error)
-  })
-
-  badge.fadeOut('fast')
 }

@@ -1,0 +1,32 @@
+{% extends 'modals/base_modal.html' %}
+
+{% block id %}
+id="add-member-modal"
+{% endblock %}
+
+{% block title %}
+Add member
+{% endblock %}
+
+{% block body %}
+<section role="search"class="form-group">
+  <label for="user-search">Search user</label>
+  <input id="user-search" type="text" class="form-control"
+    placeholder="Username" autocomplete="off">
+</section>
+<ul class="user-list">
+  <span class="badge user-list-item hidden">
+    <span class="added-user"></span>
+    <a class="remove-member" href="javascript:void(0)">x</a>
+  </span>
+</ul>
+{% endblock %}
+
+{% block footer %}
+<form action="edit_project_members" method="post" id="add-user-form">
+  {% csrf_token %}
+  <input id="users-to-add" name="add[]" type="hidden">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  <button type="submit" class="btn btn-primary">Add member</button>
+</form>
+{% endblock %}

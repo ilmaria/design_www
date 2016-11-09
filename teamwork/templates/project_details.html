@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/project_details.css' %}">
+{% endblock %}
+
 {% block content %}
 
 <div class="container">
@@ -13,10 +17,25 @@
   <p><i class="glyphicon glyphicon-user"></i>
     Group member: 
     {% for member in project.members.all %}
-    {{ member.user.username }}, 
+      <span class="badge" data-member="{{ member.user.username }}">
+        {{ member.user.username }}
+        <!--allow removing members only if they are not the project owner-->
+        {% if user != member.user %}
+        <a class="remove-member"
+          href="javascript:void(0)"
+          onclick="removeMember('{{ member.user.username }}')">x</a>
+        {% endif %}
+      </span>
     {% endfor %}
   </p>
-  <button type="button" class="btn btn-default" onclick="openEventCreator()">Add member</button>
+  {% if user == project.owner.user %}
+    <button id="add-member" type="button" class="btn btn-success"
+      data-toggle="modal" data-target="#add-member-modal">
+      Add member
+    </button>
+  {% endif %}
+
+  {% include 'modals/add_member.html' %}
 
   <div class="row">
     <div class="col-md-6">
@@ -28,7 +47,7 @@
         <li class="list-group-item">
           <input type="checkbox" 
           {% if task.done %}
-          checked 
+            checked
           {% endif %}> {{ task.name }}</input>
         </li>
         {% endfor %}
@@ -105,4 +124,9 @@
   <button type="button" class="btn btn-default" onclick="openEventCreator()">Add event</button>
 </div>
 
+<script>
+  var CSRF_TOKEN = '{{ csrf_token }}'
+</script>
+<script src="{% static 'libs/typeahead/typeahead.min.js' %}"></script>
+<script src="{% static 'js/project_details.js' %}"></script>
 {% endblock %}

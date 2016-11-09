@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 from .models import *
 from urllib.parse import unquote_plus
 from datetime import timedelta

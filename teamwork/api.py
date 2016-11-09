@@ -11,12 +11,11 @@ def edit_project_members(request, username, project_name):
     """Add or remove members from the project."""
 
     user = get_object_or_404(User, username=username)
-
     project_name = unquote_plus(project_name)
     project = get_object_or_404(Project,
         name=project_name,
         owner__user__username=username)
-
+    
     # POST['remove[]'] contains a list of usernames that
     # should be removed from the project
     for member_name in request.POST.getlist('remove[]'):
@@ -25,7 +24,7 @@ def edit_project_members(request, username, project_name):
             project.members.remove(member.student)
         except:
             # bad request: user tried to remove a non-existing project member
-            return HttpResponse(status=400)
+            break
     
     # POST['add[]'] contains a list of usernames that
     # should be added to the project
@@ -35,7 +34,7 @@ def edit_project_members(request, username, project_name):
             project.members.add(member.student)
         except:
             # bad request: user tried to add a non-existing project member
-            return HttpResponse(status=400)
+            break
 
     return HttpResponseRedirect(reverse('project_details', args=(username, project_name)))
 

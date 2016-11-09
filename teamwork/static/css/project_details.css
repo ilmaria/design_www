@@ -2,3 +2,11 @@
   color: white;
   text-decoration: none;
 }
+
+.user-list {
+  padding: 0px;
+}
+
+.user-list-item {
+  margin-right: 3px;
+}

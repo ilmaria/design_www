@@ -13,8 +13,14 @@ function searchUsers(query, process) {
     }
   })
   .done(function (result) {
-    console.log(result)
-    process(result)
+    // filter usernames if they are already in to-be-added list
+    var usernames = result.filter(function(username) {
+      var addedUsernames = $('.user-list').children().map(function() {
+        return $(this).data('username')
+      }).get()
+      return addedUsernames.indexOf(username) === -1
+    })
+    process(usernames)
   })
   .fail(function(error) {
     console.log(error)
@@ -23,8 +29,37 @@ function searchUsers(query, process) {
 
 function addToSelectedUsers(username) {
   var userForm = $('#add-user-form')
-  userForm.find('.user-to-add').text(username)
-  userForm.find('#users-to-add').val([username])
+  var userList = $('.user-list')
+  
+  var userItem = userList.children().first().clone()
+  userItem.find('.added-user').text(username)
+  userItem.data('username', username)
+  userItem.removeClass('hidden')
+  userList.append(userItem)
+  
+  var usernameList = userList.children().map(function() {
+    return $(this).data('username')
+  }).get()
+  
+  var userListInput = userForm.find('input#users-to-add')
+  userListInput.val(usernameList)
+  
+  // event listener for clicking 'x' to remove a username
+  userItem.find('.remove-member').on('click', function() {
+    var username = userItem.data('username')
+    userItem.remove()
+    var usernames = userListInput.val().split(',')
+    var index = usernames.indexOf(username)
+    
+    if (index > -1) {
+      usernames.splice(index, 1)
+    }
+    
+    userListInput.val(usernames)
+  })
+  
+  // empty search field
+  $('#user-search').val('')
 }
 
 function addMember() {

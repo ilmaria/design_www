@@ -31,6 +31,8 @@ def project_details(request, username, project_name):
 
         total_times_per_user.append((student.user.username, loggedtime_total))
 
+    total_times_json = [time for time in total_times_per_user]
+
     events = Event.objects.filter(project=project)
     deadlines = events.filter(type='deadline')
 
@@ -38,6 +40,7 @@ def project_details(request, username, project_name):
         'user': user,
         'project': project,
         'total_times_per_user': total_times_per_user,
+        'total_times_json': json.dumps(total_times_json, default=json_serialize),
         'deadlines': deadlines
     }
 

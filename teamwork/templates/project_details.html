@@ -3,6 +3,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/project_details.css' %}">
+<link rel="stylesheet" href="{% static 'css/piechart.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -82,10 +83,8 @@
 
     <!--  Time spent by each project's members -->
     <div class="col-md-6">
-      {% for username, total_time in total_times_per_user %}
-      <p>{{ username }} logged {{ total_time }}</p>
-      {% endfor %}
-      <p><button type="button" class="btn btn-primary" onclick="openEventCreator()">Log time</button></p>
+      <div id="piechart"></div>
+      <button type="button" class="btn btn-primary" onclick="openEventCreator()">Log time</button>
     </div>
 
     <!-- Logged time history from all the project memebers -->
@@ -129,4 +128,12 @@
 </script>
 <script src="{% static 'libs/typeahead/typeahead.min.js' %}"></script>
 <script src="{% static 'js/project_details.js' %}"></script>
+
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="{% static 'js/piechart.js' %}"></script>
+<script>
+  var loggedTimes = JSON.parse("{{ total_times_json|escapejs|default:'[]' }}")
+  initPiechart(loggedTimes)
+</script>
+
 {% endblock %}

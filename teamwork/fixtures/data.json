@@ -1,45 +1,5 @@
 [
 {
-  "model": "teamwork.project",
-  "pk": 1,
-  "fields": {
-    "name": "Design of WWW-services",
-    "owner": 1,
-    "description": "Awesome course",
-    "members": [
-      1,
-      2,
-      3
-    ]
-  }
-},
-{
-  "model": "teamwork.project",
-  "pk": 2,
-  "fields": {
-    "name": "C Programming",
-    "owner": 1,
-    "description": "Awesome course",
-    "members": [
-      1,
-      2
-    ]
-  }
-},
-{
-  "model": "teamwork.project",
-  "pk": 3,
-  "fields": {
-    "name": "Web services",
-    "owner": 1,
-    "description": "Awesome course",
-    "members": [
-      1,
-      3
-    ]
-  }
-},
-{
   "model": "teamwork.event",
   "pk": 1,
   "fields": {
@@ -117,83 +77,6 @@
   }
 },
 {
-  "model": "teamwork.loggedtime",
-  "pk": 1,
-  "fields": {
-    "date": "2016-10-07",
-    "hours": "00:03:00",
-    "student": 2,
-    "project": 2,
-    "event": 1
-  }
-},
-{
-  "model": "teamwork.loggedtime",
-  "pk": 2,
-  "fields": {
-    "date": "2016-10-17",
-    "hours": "04:00:00",
-    "student": 3,
-    "project": 1,
-    "event": null
-  }
-},
-{
-  "model": "teamwork.loggedtime",
-  "pk": 3,
-  "fields": {
-    "date": "2016-10-02",
-    "hours": "02:00:00",
-    "student": 3,
-    "project": 1,
-    "event": null
-  }
-},
-{
-  "model": "teamwork.loggedtime",
-  "pk": 4,
-  "fields": {
-    "date": "2016-10-23",
-    "hours": "02:00:00",
-    "student": 2,
-    "project": 1,
-    "event": null
-  }
-},
-{
-  "model": "teamwork.loggedtime",
-  "pk": 5,
-  "fields": {
-    "date": "2016-10-21",
-    "hours": "00:45:00",
-    "student": 1,
-    "project": 1,
-    "event": null
-  }
-},
-{
-  "model": "teamwork.loggedtime",
-  "pk": 6,
-  "fields": {
-    "date": "2016-10-24",
-    "hours": "03:00:00",
-    "student": 2,
-    "project": 1,
-    "event": null
-  }
-},
-{
-  "model": "teamwork.loggedtime",
-  "pk": 7,
-  "fields": {
-    "date": "2016-11-02",
-    "hours": "03:00:00",
-    "student": 1,
-    "project": 2,
-    "event": null
-  }
-},
-{
   "model": "teamwork.task",
   "pk": 1,
   "fields": {
@@ -234,14 +117,6 @@
   "fields": {
     "app_label": "teamwork",
     "model": "project"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 3,
-  "fields": {
-    "app_label": "teamwork",
-    "model": "student"
   }
 },
 {
@@ -325,6 +200,14 @@
   }
 },
 {
+  "model": "sessions.session",
+  "pk": "llhqc1ff7q2xj7wznytvgf3irssw0gxw",
+  "fields": {
+    "session_data": "YWIwZDQ2MjUxYWU0MTRhYzQyYzU5MDQ3ZmMxMmIwYzcyMjY1Mzc1NTp7Il9hdXRoX3VzZXJfaGFzaCI6IjEwYmQ3OWRiNWEzNzEzZDFhMmNiZmYzNmYyZGUxNGNjMmU1Yjc3N2UiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+    "expire_date": "2016-11-26T15:26:59.741Z"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -376,33 +259,6 @@
     "name": "Can delete project",
     "content_type": 2,
     "codename": "delete_project"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 7,
-  "fields": {
-    "name": "Can add student",
-    "content_type": 3,
-    "codename": "add_student"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 8,
-  "fields": {
-    "name": "Can change student",
-    "content_type": 3,
-    "codename": "change_student"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 9,
-  "fields": {
-    "name": "Can delete student",
-    "content_type": 3,
-    "codename": "delete_student"
   }
 },
 {
@@ -626,7 +482,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$30000$mhwtRG3rICaS$OVWE/2lmQmkG7lw72Vf/YPrBIYIajIWKQSo0cpDNwTM=",
-    "last_login": "2016-10-19T21:04:10.649Z",
+    "last_login": "2016-11-12T15:26:59.732Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -795,7 +651,7 @@
   "fields": {
     "action_time": "2016-10-06T11:48:26.867Z",
     "user": 1,
-    "content_type": 3,
+    "content_type": null,
     "object_id": "1",
     "object_repr": "Student object",
     "action_flag": 1,
@@ -808,7 +664,7 @@
   "fields": {
     "action_time": "2016-10-06T11:48:32.047Z",
     "user": 1,
-    "content_type": 3,
+    "content_type": null,
     "object_id": "2",
     "object_repr": "Student object",
     "action_flag": 1,
@@ -821,7 +677,7 @@
   "fields": {
     "action_time": "2016-10-06T11:48:35.298Z",
     "user": 1,
-    "content_type": 3,
+    "content_type": null,
     "object_id": "3",
     "object_repr": "Student object",
     "action_flag": 1,
@@ -1193,24 +1049,252 @@
   }
 },
 {
-  "model": "teamwork.student",
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2016-11-12T16:36:58.193Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "3",
+    "object_repr": "Project: \"Web services\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2016-11-12T16:37:15.081Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "2",
+    "object_repr": "Project: \"C Programming\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2016-11-12T16:37:31.392Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "1",
+    "object_repr": "Project: \"Design of WWW-services\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2016-11-12T16:38:03.710Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "7",
+    "object_repr": "LoggedTime: 2016-11-02 - kristian - 3:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"user\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2016-11-12T16:38:12.693Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "6",
+    "object_repr": "LoggedTime: 2016-10-24 - John - 3:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"user\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2016-11-12T16:38:20.302Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "5",
+    "object_repr": "LoggedTime: 2016-10-21 - mikael - 0:45:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"user\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2016-11-12T16:38:27.203Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "4",
+    "object_repr": "LoggedTime: 2016-10-23 - John - 2:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"user\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2016-11-12T16:38:34.439Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "3",
+    "object_repr": "LoggedTime: 2016-10-02 - mikael - 2:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"user\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2016-11-12T16:38:42.067Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "2",
+    "object_repr": "LoggedTime: 2016-10-17 - kristian - 4:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"user\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2016-11-12T16:38:49.198Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "LoggedTime: 2016-10-07 - kristian - 0:03:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"user\"]}}]"
+  }
+},
+{
+  "model": "teamwork.loggedtime",
   "pk": 1,
   "fields": {
-    "user": 3
+    "date": "2016-10-07",
+    "hours": "00:03:00",
+    "user": 2,
+    "project": 2,
+    "event": 1
   }
 },
 {
-  "model": "teamwork.student",
+  "model": "teamwork.loggedtime",
   "pk": 2,
   "fields": {
-    "user": 2
+    "date": "2016-10-17",
+    "hours": "04:00:00",
+    "user": 2,
+    "project": 1,
+    "event": null
   }
 },
 {
-  "model": "teamwork.student",
+  "model": "teamwork.loggedtime",
   "pk": 3,
   "fields": {
-    "user": 4
+    "date": "2016-10-02",
+    "hours": "02:00:00",
+    "user": 4,
+    "project": 1,
+    "event": null
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 4,
+  "fields": {
+    "date": "2016-10-23",
+    "hours": "02:00:00",
+    "user": 3,
+    "project": 1,
+    "event": null
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 5,
+  "fields": {
+    "date": "2016-10-21",
+    "hours": "00:45:00",
+    "user": 4,
+    "project": 1,
+    "event": null
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 6,
+  "fields": {
+    "date": "2016-10-24",
+    "hours": "03:00:00",
+    "user": 3,
+    "project": 1,
+    "event": null
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 7,
+  "fields": {
+    "date": "2016-11-02",
+    "hours": "03:00:00",
+    "user": 2,
+    "project": 2,
+    "event": null
+  }
+},
+{
+  "model": "teamwork.project",
+  "pk": 1,
+  "fields": {
+    "name": "Design of WWW-services",
+    "owner": 3,
+    "description": "Awesome course",
+    "members": [
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "teamwork.project",
+  "pk": 2,
+  "fields": {
+    "name": "C Programming",
+    "owner": 2,
+    "description": "Awesome course",
+    "members": [
+      2,
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "teamwork.project",
+  "pk": 3,
+  "fields": {
+    "name": "Web services",
+    "owner": 3,
+    "description": "Awesome course",
+    "members": [
+      2,
+      3,
+      4
+    ]
   }
 }
 ]

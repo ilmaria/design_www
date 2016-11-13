@@ -7,6 +7,9 @@
 {% endblock %}
 
 {% block content %}
+<!-- add PieChart JavaScript -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="{% static 'js/piechart.js' %}"></script>
 
 <div class="container">
 
@@ -16,7 +19,7 @@
 
   <!-- Group members -->
   <p><i class="glyphicon glyphicon-user"></i>
-    Group member: 
+    Group member:
     {% for member in project.members.all %}
       <span class="badge" data-member="{{ member.user.username }}">
         {{ member.user.username }}
@@ -46,7 +49,7 @@
       <ul class="list-group">
         {% for task in project.task_set.all %}
         <li class="list-group-item">
-          <input type="checkbox" 
+          <input type="checkbox"
           {% if task.done %}
             checked
           {% endif %}> {{ task.name }}</input>
@@ -63,9 +66,9 @@
         {% for deadline in deadlines|dictsort:'date' %}
         <li class="list-group-item">
           <p><span class="timeUntil">{{ deadline.date|timeuntil }} left</span> <strong>{{ deadline.name }}</strong> ({{ deadline.date|date:"D, d M Y" }}, {{ deadline.date|time:"H:i" }}
-          {% if deadline.location != "" %}, 
-          <i class="glyphicon glyphicon-map-marker"></i> {{ deadline.location }}
-          {% endif %})
+            {% if deadline.location != "" %},
+            <i class="glyphicon glyphicon-map-marker"></i> {{ deadline.location }}
+            {% endif %})
           </p>
         </li>
         {% empty %}
@@ -84,7 +87,19 @@
     <!--  Time spent by each project's members -->
     <div class="col-md-6">
       <div id="piechart"></div>
-      <button type="button" class="btn btn-primary" onclick="openEventCreator()">Log time</button>
+      <form class="form-inline">
+        <div class="form-group">
+          <label class="sr-only" for="inputDate">date</label>
+          <input type="date" class="form-control" id="inputDate" placeholder="dd/mm/yy">
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="inputTime">Time</label>
+          <input type="time" class="form-control" id="inputTime" placeholder="00:00:00">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" onclick="openEventCreator()">Log time</button>
+        </div>
+      </form>
     </div>
 
     <!-- Logged time history from all the project memebers -->

@@ -1,12 +1,13 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.decorators.http import require_POST
-from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
-from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse, HttpResponse
 from .models import *
 from urllib.parse import unquote_plus
 import json
 
 @require_POST
+@login_required
 def edit_project_members(request, username, project_name):
     """Add or remove members from the project."""
 
@@ -14,14 +15,14 @@ def edit_project_members(request, username, project_name):
     project_name = unquote_plus(project_name)
     project = get_object_or_404(Project,
         name=project_name,
-        owner__user__username=username)
+        owner__username=username)
     
     # POST['remove[]'] contains a list of usernames that
     # should be removed from the project
     for member_name in request.POST.getlist('remove[]'):
         try:
             member = User.objects.exclude(id=user.id).get(username=member_name)
-            project.members.remove(member.student)
+            project.members.remove(member)
         except:
             # bad request: user tried to remove a non-existing project member
             break
@@ -31,15 +32,16 @@ def edit_project_members(request, username, project_name):
     for member_name in request.POST.getlist('add[]'):
         try:
             member = User.objects.get(username=member_name)
-            project.members.add(member.student)
+            project.members.add(member)
         except:
             # bad request: user tried to add a non-existing project member
             break
 
-    return HttpResponseRedirect(reverse('project_details', args=(username, project_name)))
+    return redirect('project_details', project_name=project_name)
 
 
 @require_POST
+@login_required
 def search_users(request):
     """Return all usernames matching the search query."""
 

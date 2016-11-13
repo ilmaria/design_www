@@ -45,11 +45,11 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            {% url 'dashboard' user.username as url %}
+            {% url 'dashboard' as url %}
             <li {% if request.path == url %} class="active"{% endif %}>
               <a href="{{ url }}">Dashboard</a>
             </li>
-            {% url 'calendar' user.username as url %}
+            {% url 'calendar' as url %}
             <li {% if request.path == url %} class="active"{% endif %}>
               <a href="{{ url }}">Calendar</a>
             </li>

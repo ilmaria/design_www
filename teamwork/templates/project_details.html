@@ -7,6 +7,15 @@
 {% endblock %}
 
 {% block content %}
+<!-- Include Bootstrap Datepicker -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+
+<!-- add customized JavaScript -->
+<script src="{% static 'js/datepicker.js' %}"></script>
+
 <div class="container">
 
   <!-- Project details -->
@@ -83,13 +92,14 @@
     <!--  Time spent by each project's members -->
     <div class="col-md-6">
       <div id="piechart"></div>
-      <form class="form-inline">
+      <form id="logtimeForm" class="form-inline">
         <div class="form-group">
-          <label class="sr-only" for="inputDate">date</label>
-          <input type="date" class="form-control" id="inputDate" placeholder="dd/mm/yy">
+          <div class="input-group input-append date" id="datePicker">
+            <input type="text" class="form-control" name="date" />
+            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+          </div>
         </div>
         <div class="form-group">
-          <label class="sr-only" for="inputTime">Time</label>
           <input type="time" class="form-control" id="inputTime" placeholder="00:00:00">
         </div>
         <div class="form-group">

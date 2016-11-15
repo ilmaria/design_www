@@ -16,17 +16,22 @@
 
   <!-- Group members -->
   <p><i class="glyphicon glyphicon-user"></i>
-    Group member: 
+    Group members:
+    <!-- current user -->
+    <span class="badge own-badge">{{ user.username }}</span>
+    <!-- other users -->
     {% for member in project.members.all %}
+      {% if member != user %}
       <span class="badge" data-member="{{ member.username }}">
         {{ member.username }}
-        <!--allow removing members only if they are not the project owner-->
-        {% if user != member %}
+        <!-- only project owner can remove users -->
+        {% if user == project.owner %}
         <a class="remove-member"
           href="javascript:void(0)"
           onclick="removeMember('{{ member.username }}')">x</a>
         {% endif %}
       </span>
+      {% endif %}
     {% endfor %}
   </p>
   {% if user == project.owner %}

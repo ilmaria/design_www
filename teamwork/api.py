@@ -8,14 +8,13 @@ import json
 
 @require_POST
 @login_required
-def edit_project_members(request, username, project_name):
+def edit_project_members(request, project_name):
     """Add or remove members from the project."""
 
-    user = get_object_or_404(User, username=username)
     project_name = unquote_plus(project_name)
     project = get_object_or_404(Project,
         name=project_name,
-        owner__username=username)
+        owner=request.user)
     
     # POST['remove[]'] contains a list of usernames that
     # should be removed from the project

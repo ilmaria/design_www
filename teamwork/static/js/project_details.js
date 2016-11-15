@@ -30,34 +30,34 @@ function searchUsers(query, process) {
 function addToSelectedUsers(username) {
   var userForm = $('#add-user-form')
   var userList = $('.user-list')
-  
+
   var userItem = userList.children().first().clone()
   userItem.find('.added-user').text(username)
   userItem.data('username', username)
   userItem.removeClass('hidden')
   userList.append(userItem)
-  
+
   var usernameList = userList.children().map(function() {
     return $(this).data('username')
   }).get()
-  
+
   var userListInput = userForm.find('input#users-to-add')
   userListInput.val(usernameList)
-  
+
   // event listener for clicking 'x' to remove a username
   userItem.find('.remove-member').on('click', function() {
     var username = userItem.data('username')
     userItem.remove()
     var usernames = userListInput.val().split(',')
     var index = usernames.indexOf(username)
-    
+
     if (index > -1) {
       usernames.splice(index, 1)
     }
-    
+
     userListInput.val(usernames)
   })
-  
+
   // empty search field
   $('#user-search').val('')
 }
@@ -68,14 +68,14 @@ function addMember() {
 
 function removeMember(username) {
   var badge = $("[data-member='" + username + "']")
-  
+
   editMembers({
     remove: [username],
     error: function(error) {
       badge.fadeIn('fast')
     }
   })
-  
+
   badge.fadeOut('fast')
 }
 
@@ -91,6 +91,15 @@ function editMembers(options) {
     error: options.error,
     success: function (result) {
       console.log(result)
-    } 
+    }
   })
+}
+
+function logTime(){
+  var logTimeForm = $('#logTimeForm')
+  var logHours = $('#logHours')
+  var logMinutes = $('#logMinutes')
+
+  var logDateInput = $('#logDate').val()
+
 }

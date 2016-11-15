@@ -88,21 +88,21 @@
 <!-- Time Spent -->
 <h3>Time Spent</h3>
 <div class="form-group">
-  <form id="logtimeForm" class="form-inline">
+  <form id="logTimeForm" class="form-inline">
     <div class="form-group">
       <div class="input-group input-append date" id="datePicker">
-        <input type="text" class="form-control" name="date" placeholder="dd/mm/yyyy">
+        <input id="logDate" type="text" class="form-control" name="date" placeholder="dd/mm/yyyy">
         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
       </div>
     </div>
     <div class="form-group">
-      <input type="number" class="form-control bfh-number" id="hours" placeholder="Hours">
+      <input id="logHours" type="number" class="form-control bfh-number" placeholder="Hours">
     </div>
     <div class="form-group">
-      <input type="number" class="form-control bfh-number" id="minutes" placeholder="Minutes">
+      <input id="logMinutes" type="number" class="form-control bfh-number" placeholder="Minutes">
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary" onclick="openEventCreator()">Log time</button>
+      <button type="submit" class="btn btn-primary">Log time</button>
     </div>
   </form>
 </div>

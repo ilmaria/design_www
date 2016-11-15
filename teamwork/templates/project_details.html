@@ -16,20 +16,25 @@
 
   <!-- Group members -->
   <p><i class="glyphicon glyphicon-user"></i>
-    Group member: 
+    Group members:
+    <!-- current user -->
+    <span class="badge own-badge">{{ user.username }}</span>
+    <!-- other users -->
     {% for member in project.members.all %}
-      <span class="badge" data-member="{{ member.user.username }}">
-        {{ member.user.username }}
-        <!--allow removing members only if they are not the project owner-->
-        {% if user != member.user %}
+      {% if member != user %}
+      <span class="badge" data-member="{{ member.username }}">
+        {{ member.username }}
+        <!-- only project owner can remove users -->
+        {% if user == project.owner %}
         <a class="remove-member"
           href="javascript:void(0)"
-          onclick="removeMember('{{ member.user.username }}')">x</a>
+          onclick="removeMember('{{ member.username }}')">x</a>
         {% endif %}
       </span>
+      {% endif %}
     {% endfor %}
   </p>
-  {% if user == project.owner.user %}
+  {% if user == project.owner %}
     <button id="add-member" type="button" class="btn btn-success"
       data-toggle="modal" data-target="#add-member-modal">
       Add member
@@ -99,7 +104,7 @@
         <div class="panel-body">
           <ul class="list-group">
             {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
-            <li class="list-group-item">{{ loggedtime.date|date:"d/m/Y" }} - {{ loggedtime.student.user.username }} logged {{ loggedtime.hours }}</li>
+            <li class="list-group-item">{{ loggedtime.date|date:"d/m/Y" }} - {{ loggedtime.user.username }} logged {{ loggedtime.hours }}</li>
             {% endfor %}
           </ul>
         </div>

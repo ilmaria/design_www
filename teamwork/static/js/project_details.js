@@ -97,9 +97,13 @@ function editMembers(options) {
 
 function logTime(){
   var logTimeForm = $('#logTimeForm')
-  var logHours = $('#logHours')
-  var logMinutes = $('#logMinutes')
 
   var logDateInput = $('#logDate').val()
-
+  var logHoursInput = $('#logHours').val()
+  var logMinutesInput = $('#logMinutes').val()
+    console.group();
+      console.log(logDateInput);
+      console.log(logHoursInput);
+      console.log(logMinutesInput);
+    console.groupEnd();
 }

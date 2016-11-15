@@ -15,7 +15,7 @@ def edit_project_members(request, username, project_name):
     project = get_object_or_404(Project,
         name=project_name,
         owner__user__username=username)
-    
+
     # POST['remove[]'] contains a list of usernames that
     # should be removed from the project
     for member_name in request.POST.getlist('remove[]'):
@@ -25,7 +25,7 @@ def edit_project_members(request, username, project_name):
         except:
             # bad request: user tried to remove a non-existing project member
             break
-    
+
     # POST['add[]'] contains a list of usernames that
     # should be added to the project
     for member_name in request.POST.getlist('add[]'):
@@ -64,3 +64,15 @@ def search_users(request):
     response.status_code = status_code
 
     return response
+
+@require_POST
+def log_time(request, date, hours, username, project_name):
+    """Log time for current user under selected project"""
+
+    user = get_object_or_404(User, username=username)
+    project_name = unquote_plus(project_name)
+    project = get_object_or_404(Project,
+        name=project_name,
+        members__user__username=username)
+
+    

@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from teamwork import views
+from teamwork import api
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -31,4 +32,7 @@ urlpatterns = [
 
     url(r'^(?P<username>\w+)/(?P<project_name>.+?)/$',
         views.project_details, name='project_details'),
+
+    url(r'^add_project/?$',
+        api.add_project, name='add_project'),
 ]

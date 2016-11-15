@@ -15,27 +15,35 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.views.generic import RedirectView
 
 from teamwork import views
 from teamwork import api
 
 urlpatterns = [
+    url(r'^login/$', views.login, name='login'),
+    
+    url(r'^logout/', views.logout, name='logout'),
+    
     url(r'^admin/', admin.site.urls),
     
-    url(r'^$', views.login, name='login'),
+    url(r'^$', RedirectView.as_view(pattern_name='login'), name='home'),
 
-    url(r'^(?P<username>.+?)/dashboard/$',
+    url(r'^dashboard/$',
         views.dashboard, name='dashboard'),
     
-    url(r'^(?P<username>.+?)/calendar/$',
+    url(r'^calendar/$',
         views.calendar, name='calendar'),
 
-    url(r'^(?P<username>.+?)/(?P<project_name>.+?)/$',
+    url(r'^(?P<project_name>.+?)/$',
         views.project_details, name='project_details'),
     
-    url(r'^(?P<username>.+?)/(?P<project_name>.+?)/edit_project_members/?$',
+    url(r'^(?P<project_name>.+?)/edit_project_members/?$',
         api.edit_project_members, name='edit_project_members'),
 
     url(r'^search_users/?$',
         api.search_users, name='search_users'),
+    
+    url(r'^add_project/?$',
+        api.add_project, name='add_project'),
 ]

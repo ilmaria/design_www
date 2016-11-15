@@ -1,0 +1,27 @@
+{% extends 'modals/base_modal.html' %}
+
+{% block id %}
+id="add-project-modal"
+{% endblock %}
+
+{% block title %}
+Create new project
+{% endblock %}
+
+{% block body %}
+<form id="add-project-form" action="/add_project" method="post">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="new-project-name">Project name</label>
+    <input id="new-project-name" type="text" name="project_name"
+      placeholder="My new project" class="form-control">
+  </div>
+</form>
+{% endblock %}
+
+{% block footer %}
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<button type="submit" class="btn btn-primary" form="add-project-form">
+  Create project
+</button>
+{% endblock %}

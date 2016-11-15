@@ -29,53 +29,53 @@
     <span class="badge own-badge">{{ user.username }}</span>
     <!-- other users -->
     {% for member in project.members.all %}
-      {% if member != user %}
-      <span class="badge" data-member="{{ member.username }}">
-        {{ member.username }}
-        <!-- only project owner can remove users -->
-        {% if user == project.owner %}
-        <a class="remove-member"
-          href="javascript:void(0)"
-          onclick="removeMember('{{ member.username }}')">x</a>
-        {% endif %}
-      </span>
+    {% if member != user %}
+    <span class="badge" data-member="{{ member.username }}">
+      {{ member.username }}
+      <!-- only project owner can remove users -->
+      {% if user == project.owner %}
+      <a class="remove-member"
+      href="javascript:void(0)"
+      onclick="removeMember('{{ member.username }}')">x</a>
       {% endif %}
+    </span>
+    {% endif %}
     {% endfor %}
   </p>
   {% if user == project.owner %}
-    <button id="add-member" type="button" class="btn btn-default"
-      data-toggle="modal" data-target="#add-member-modal">
-      Add member
-    </button>
-  {% endif %}
+  <button id="add-member" type="button" class="btn btn-default"
+  data-toggle="modal" data-target="#add-member-modal">
+  Add member
+</button>
+{% endif %}
 
-  {% include 'modals/add_member.html' %}
+{% include 'modals/add_member.html' %}
 
-  <div class="row">
-    <div class="col-md-6">
+<div class="row">
+  <div class="col-md-6">
 
-      <!-- Task list -->
-      <h3>Tasks List</h3>
-      <ul class="list-group">
-        {% for task in project.task_set.all %}
-        <li class="list-group-item">
-          <input type="checkbox"
-          {% if task.done %}
-            checked
-          {% endif %}> {{ task.name }}</input>
-        </li>
-        {% endfor %}
-      </ul>
-      <button type="button" class="btn btn-default" onclick="openEventCreator()">Add task</button>
-    </div>
-    <div class="col-md-6">
+    <!-- Task list -->
+    <h3>Tasks List</h3>
+    <ul class="list-group">
+      {% for task in project.task_set.all %}
+      <li class="list-group-item">
+        <input type="checkbox"
+        {% if task.done %}
+        checked
+        {% endif %}> {{ task.name }}</input>
+      </li>
+      {% endfor %}
+    </ul>
+    <button type="button" class="btn btn-default" onclick="openEventCreator()">Add task</button>
+  </div>
+  <div class="col-md-6">
 
-      <!-- Deadline -->
-      <h3>Time till deadlines</h3>
-      <ul class="list-group">
-        {% for deadline in deadlines|dictsort:'date' %}
-        <li class="list-group-item">
-          <p><span class="timeUntil">{{ deadline.date|timeuntil }} left</span> <strong>{{ deadline.name }}</strong> ({{ deadline.date|date:"D, d M Y" }}, {{ deadline.date|time:"H:i" }}
+    <!-- Deadline -->
+    <h3>Time till deadlines</h3>
+    <ul class="list-group">
+      {% for deadline in deadlines|dictsort:'date' %}
+      <li class="list-group-item">
+        <p><span class="timeUntil">{{ deadline.date|timeuntil }} left</span> <strong>{{ deadline.name }}</strong> ({{ deadline.date|date:"D, d M Y" }}, {{ deadline.date|time:"H:i" }}
           {% if deadline.location != "" %},
           <i class="glyphicon glyphicon-map-marker"></i> {{ deadline.location }}
           {% endif %})

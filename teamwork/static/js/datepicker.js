@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('#datePicker')
         .datepicker({
             autoclose: true,
-            format: 'yyyy-mm-dd',
+            format: 'dd/mm/yyyy',
             todayBtn: 'linked'
         });
 });

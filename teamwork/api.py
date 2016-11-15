@@ -103,7 +103,9 @@ def log_time(request, project_name):
         name=project_name,
         owner=request.user)
 
+    # get input date can convert to yyyy-mm-dd format
     logged_date = request.POST.get('date')
+    logged_date_cor = datetime.datetime.strptime(logged_date, '%d/%m/%Y').strftime("%Y-%m-%d")
 
     # convert input hours and minutes into logged hours
     input_hours = request.POST.get('hours')
@@ -114,7 +116,7 @@ def log_time(request, project_name):
     )
 
     loggedTime = LoggedTime(
-        date=logged_date,
+        date=logged_date_cor,
         hours=logged_hours,
         user=request.user,
         project=project

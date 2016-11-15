@@ -52,9 +52,9 @@
 {% include 'modals/add_member.html' %}
 
 <div class="row">
-  <div class="col-md-6">
 
-    <!-- Task list -->
+  <!-- Task list -->
+  <div class="col-md-6">
     <h3>Tasks List</h3>
     <ul class="list-group">
       {% for task in project.task_set.all %}
@@ -68,9 +68,9 @@
     </ul>
     <button type="button" class="btn btn-default" onclick="openEventCreator()">Add task</button>
   </div>
-  <div class="col-md-6">
 
-    <!-- Deadline -->
+  <!-- Deadline -->
+  <div class="col-md-6">
     <h3>Time till deadlines</h3>
     <ul class="list-group">
       {% for deadline in deadlines|dictsort:'date' %}
@@ -93,7 +93,7 @@
 <!-- Time Spent -->
 <h3>Time Spent</h3>
 <div class="form-group">
-  <form action="log_time" method="post" id="logTimeForm" class="form-inline">
+  <form action="log_time" method="post" id="log-time-form" class="form-inline">
     {% csrf_token %}
     <div class="form-group">
       <div class="input-group input-append date" id="datePicker">
@@ -132,7 +132,6 @@
         </ul>
       </div>
     </div>
-
   </div>
 
   <!--  Time spent by each project's members -->

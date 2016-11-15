@@ -54,7 +54,8 @@
               <a href="{{ url }}">Calendar</a>
             </li>
             <li>
-              <button type="button" class="btn btn-success navbar-btn">
+              <button type="button" class="btn btn-success navbar-btn"
+                data-toggle="modal" data-target="#add-project-modal">
                 <span class="glyphicon glyphicon-plus"></span>
                 Add new project
               </button>
@@ -84,6 +85,8 @@
         <!--/.nav-collapse -->
       </div>
     </nav>
+
+    {% include 'modals/add_project.html' %}
 
     <!-- Content -->
     <main class="content">

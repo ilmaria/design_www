@@ -8,6 +8,31 @@ import json
 
 @require_POST
 @login_required
+def add_project(request):
+    """Add new project."""
+    
+    project_name = request.POST.get('project_name')
+
+    if project_name is None:
+        return HttpResponse(status=400)
+
+    project = Project(
+        name=project_name,
+        owner=request.user,
+        description=""
+    )
+    # apparently we need to save the project before we can access it's
+    # many-to-many fields (members field is many-to-many)
+    project.save()
+
+    project.members.add(request.user)
+    project.save()
+
+    return redirect('dashboard')
+
+
+@require_POST
+@login_required
 def edit_project_members(request, project_name):
     """Add or remove members from the project."""
 

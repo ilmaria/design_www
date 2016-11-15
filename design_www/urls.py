@@ -43,4 +43,7 @@ urlpatterns = [
 
     url(r'^search_users/?$',
         api.search_users, name='search_users'),
+    
+    url(r'^add_project/?$',
+        api.add_project, name='add_project'),
 ]

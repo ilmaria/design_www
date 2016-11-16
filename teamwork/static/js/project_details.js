@@ -94,3 +94,12 @@ function editMembers(options) {
     }
   })
 }
+
+function validateLogTime(event) {
+  // return logDate AND (logHours OR logMinutes)
+  if ($('#logDate').val() !== '' && 
+      ($('#logHours') !== '' || $('#logMinutes') !== '')) {
+    event.preventDefault()
+    return false
+  }
+}

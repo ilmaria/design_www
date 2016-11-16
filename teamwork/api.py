@@ -100,7 +100,7 @@ def log_time(request, project_name):
     project_name = unquote_plus(project_name)
     project = get_object_or_404(Project,
         name=project_name,
-        owner=request.user)
+        members__id=request.user.id)
 
     # get input date and convert to yyyy-mm-dd format
     logged_date = request.POST.get('date')
@@ -109,6 +109,12 @@ def log_time(request, project_name):
     # convert input hours and minutes into logged hours
     input_hours = request.POST.get('hours')
     input_minutes = request.POST.get('minutes')
+    
+    if input_hours == '':
+        input_hours = '0'
+    if input_minutes == '':
+        input_minutes = '0'
+
     logged_hours = timedelta(
         hours=int(input_hours),
         minutes=int(input_minutes)

@@ -1,5 +1,7 @@
 # [Setup](../../) | [Development](README_DEV.md) | [Git Guide](README_GIT.md)
 
+| Password for test users: `designwwwpass`
+
 ## 1. Install Python
 
 ### **Windows:**

@@ -1,46 +1,141 @@
 [
 {
-  "model": "teamwork.project",
+  "model": "teamwork.event",
   "pk": 1,
   "fields": {
-    "name": "My project",
-    "owner": 1,
-    "description": "",
-    "members": [
-      1
-    ]
+    "name": "Group meeting",
+    "date": "2016-12-23T12:50:00Z",
+    "project": 1,
+    "location": "",
+    "type": "event"
   }
 },
 {
   "model": "teamwork.event",
-  "pk": 1,
+  "pk": 2,
   "fields": {
-    "name": "My deadline",
-    "date": "2016-11-02T20:12:01Z",
+    "name": "Assignment 2",
+    "date": "2016-11-03T11:00:00Z",
+    "project": 2,
+    "location": "",
+    "type": "event"
+  }
+},
+{
+  "model": "teamwork.event",
+  "pk": 3,
+  "fields": {
+    "name": "Final report",
+    "date": "2016-12-29T10:00:00Z",
     "project": 1,
     "location": "",
     "type": "deadline"
   }
 },
 {
+  "model": "teamwork.event",
+  "pk": 4,
+  "fields": {
+    "name": "Demo Gala",
+    "date": "2016-11-16T10:00:00Z",
+    "project": 1,
+    "location": "T-talo T2",
+    "type": "deadline"
+  }
+},
+{
+  "model": "teamwork.event",
+  "pk": 5,
+  "fields": {
+    "name": "Final application submit",
+    "date": "2016-12-23T21:00:00Z",
+    "project": 2,
+    "location": "",
+    "type": "deadline"
+  }
+},
+{
+  "model": "teamwork.event",
+  "pk": 6,
+  "fields": {
+    "name": "1st version application submit",
+    "date": "2016-11-28T08:00:00Z",
+    "project": 2,
+    "location": "",
+    "type": "deadline"
+  }
+},
+{
+  "model": "teamwork.event",
+  "pk": 7,
+  "fields": {
+    "name": "Group meeting",
+    "date": "2016-11-02T11:00:00Z",
+    "project": 2,
+    "location": "T-talo Library",
+    "type": "event"
+  }
+},
+{
+  "model": "teamwork.event",
+  "pk": 8,
+  "fields": {
+    "name": "Phase 1 deadline",
+    "date": "2016-11-19T11:14:34Z",
+    "project": 2,
+    "location": "",
+    "type": "deadline"
+  }
+},
+{
+  "model": "teamwork.event",
+  "pk": 9,
+  "fields": {
+    "name": "Meeting",
+    "date": "2016-11-18T11:15:05Z",
+    "project": 2,
+    "location": "T-building",
+    "type": "event"
+  }
+},
+{
+  "model": "teamwork.task",
+  "pk": 1,
+  "fields": {
+    "name": "Create HTML layout",
+    "done": true,
+    "project": 1
+  }
+},
+{
+  "model": "teamwork.task",
+  "pk": 2,
+  "fields": {
+    "name": "Add project function",
+    "done": false,
+    "project": 1
+  }
+},
+{
+  "model": "teamwork.task",
+  "pk": 3,
+  "fields": {
+    "name": "Create permanent data in database",
+    "done": false,
+    "project": 1
+  }
+},
+{
   "model": "contenttypes.contenttype",
   "pk": 1,
   "fields": {
     "app_label": "teamwork",
-    "model": "task"
+    "model": "event"
   }
 },
 {
   "model": "contenttypes.contenttype",
   "pk": 2,
-  "fields": {
-    "app_label": "teamwork",
-    "model": "student"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 3,
   "fields": {
     "app_label": "teamwork",
     "model": "project"
@@ -50,24 +145,24 @@
   "model": "contenttypes.contenttype",
   "pk": 4,
   "fields": {
-    "app_label": "teamwork",
-    "model": "event"
+    "app_label": "admin",
+    "model": "logentry"
   }
 },
 {
   "model": "contenttypes.contenttype",
   "pk": 5,
   "fields": {
-    "app_label": "teamwork",
-    "model": "loggedtime"
+    "app_label": "auth",
+    "model": "user"
   }
 },
 {
   "model": "contenttypes.contenttype",
   "pk": 6,
   "fields": {
-    "app_label": "admin",
-    "model": "logentry"
+    "app_label": "auth",
+    "model": "permission"
   }
 },
 {
@@ -82,112 +177,109 @@
   "model": "contenttypes.contenttype",
   "pk": 8,
   "fields": {
-    "app_label": "auth",
-    "model": "user"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 9,
-  "fields": {
-    "app_label": "auth",
-    "model": "permission"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 10,
-  "fields": {
     "app_label": "contenttypes",
     "model": "contenttype"
   }
 },
 {
   "model": "contenttypes.contenttype",
-  "pk": 11,
+  "pk": 9,
   "fields": {
     "app_label": "sessions",
     "model": "session"
   }
 },
 {
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "teamwork",
+    "model": "loggedtime"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "teamwork",
+    "model": "task"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "0jla0o9qmhdt0rme98mn8rmddcgmmuq2",
+  "fields": {
+    "session_data": "YWIwZDQ2MjUxYWU0MTRhYzQyYzU5MDQ3ZmMxMmIwYzcyMjY1Mzc1NTp7Il9hdXRoX3VzZXJfaGFzaCI6IjEwYmQ3OWRiNWEzNzEzZDFhMmNiZmYzNmYyZGUxNGNjMmU1Yjc3N2UiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+    "expire_date": "2016-11-02T21:04:10.659Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "4c3mpk60gl6pabpfxkmj5igdj08kq45g",
+  "fields": {
+    "session_data": "M2QyMjgxOTQ5YTVjMDZkYjFlYjVlNTdlYWQ1ZmU5NzQwOWZlMGNmNDp7Il9hdXRoX3VzZXJfaGFzaCI6IjM5OGJkMjYxNGJmZTU4YTg0ZWVhNDIxNzAyZDliY2FjYzBmNWM4NTIiLCJfYXV0aF91c2VyX2lkIjoiMiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+    "expire_date": "2016-11-29T11:39:08.082Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "6qgyq5aj53qiz3azji00sd7tquderya7",
+  "fields": {
+    "session_data": "YWIwZDQ2MjUxYWU0MTRhYzQyYzU5MDQ3ZmMxMmIwYzcyMjY1Mzc1NTp7Il9hdXRoX3VzZXJfaGFzaCI6IjEwYmQ3OWRiNWEzNzEzZDFhMmNiZmYzNmYyZGUxNGNjMmU1Yjc3N2UiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
+    "expire_date": "2016-10-21T17:44:42.195Z"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
-    "name": "Can add task",
+    "name": "Can add event",
     "content_type": 1,
-    "codename": "add_task"
+    "codename": "add_event"
   }
 },
 {
   "model": "auth.permission",
   "pk": 2,
   "fields": {
-    "name": "Can change task",
+    "name": "Can change event",
     "content_type": 1,
-    "codename": "change_task"
+    "codename": "change_event"
   }
 },
 {
   "model": "auth.permission",
   "pk": 3,
   "fields": {
-    "name": "Can delete task",
+    "name": "Can delete event",
     "content_type": 1,
-    "codename": "delete_task"
+    "codename": "delete_event"
   }
 },
 {
   "model": "auth.permission",
   "pk": 4,
   "fields": {
-    "name": "Can add student",
+    "name": "Can add project",
     "content_type": 2,
-    "codename": "add_student"
+    "codename": "add_project"
   }
 },
 {
   "model": "auth.permission",
   "pk": 5,
   "fields": {
-    "name": "Can change student",
+    "name": "Can change project",
     "content_type": 2,
-    "codename": "change_student"
+    "codename": "change_project"
   }
 },
 {
   "model": "auth.permission",
   "pk": 6,
   "fields": {
-    "name": "Can delete student",
-    "content_type": 2,
-    "codename": "delete_student"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 7,
-  "fields": {
-    "name": "Can add project",
-    "content_type": 3,
-    "codename": "add_project"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 8,
-  "fields": {
-    "name": "Can change project",
-    "content_type": 3,
-    "codename": "change_project"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 9,
-  "fields": {
     "name": "Can delete project",
-    "content_type": 3,
+    "content_type": 2,
     "codename": "delete_project"
   }
 },
@@ -195,81 +287,81 @@
   "model": "auth.permission",
   "pk": 10,
   "fields": {
-    "name": "Can add event",
+    "name": "Can add log entry",
     "content_type": 4,
-    "codename": "add_event"
+    "codename": "add_logentry"
   }
 },
 {
   "model": "auth.permission",
   "pk": 11,
   "fields": {
-    "name": "Can change event",
+    "name": "Can change log entry",
     "content_type": 4,
-    "codename": "change_event"
+    "codename": "change_logentry"
   }
 },
 {
   "model": "auth.permission",
   "pk": 12,
   "fields": {
-    "name": "Can delete event",
+    "name": "Can delete log entry",
     "content_type": 4,
-    "codename": "delete_event"
+    "codename": "delete_logentry"
   }
 },
 {
   "model": "auth.permission",
   "pk": 13,
   "fields": {
-    "name": "Can add logged time",
+    "name": "Can add user",
     "content_type": 5,
-    "codename": "add_loggedtime"
+    "codename": "add_user"
   }
 },
 {
   "model": "auth.permission",
   "pk": 14,
   "fields": {
-    "name": "Can change logged time",
+    "name": "Can change user",
     "content_type": 5,
-    "codename": "change_loggedtime"
+    "codename": "change_user"
   }
 },
 {
   "model": "auth.permission",
   "pk": 15,
   "fields": {
-    "name": "Can delete logged time",
+    "name": "Can delete user",
     "content_type": 5,
-    "codename": "delete_loggedtime"
+    "codename": "delete_user"
   }
 },
 {
   "model": "auth.permission",
   "pk": 16,
   "fields": {
-    "name": "Can add log entry",
+    "name": "Can add permission",
     "content_type": 6,
-    "codename": "add_logentry"
+    "codename": "add_permission"
   }
 },
 {
   "model": "auth.permission",
   "pk": 17,
   "fields": {
-    "name": "Can change log entry",
+    "name": "Can change permission",
     "content_type": 6,
-    "codename": "change_logentry"
+    "codename": "change_permission"
   }
 },
 {
   "model": "auth.permission",
   "pk": 18,
   "fields": {
-    "name": "Can delete log entry",
+    "name": "Can delete permission",
     "content_type": 6,
-    "codename": "delete_logentry"
+    "codename": "delete_permission"
   }
 },
 {
@@ -303,124 +395,124 @@
   "model": "auth.permission",
   "pk": 22,
   "fields": {
-    "name": "Can add user",
+    "name": "Can add content type",
     "content_type": 8,
-    "codename": "add_user"
+    "codename": "add_contenttype"
   }
 },
 {
   "model": "auth.permission",
   "pk": 23,
   "fields": {
-    "name": "Can change user",
+    "name": "Can change content type",
     "content_type": 8,
-    "codename": "change_user"
+    "codename": "change_contenttype"
   }
 },
 {
   "model": "auth.permission",
   "pk": 24,
   "fields": {
-    "name": "Can delete user",
+    "name": "Can delete content type",
     "content_type": 8,
-    "codename": "delete_user"
+    "codename": "delete_contenttype"
   }
 },
 {
   "model": "auth.permission",
   "pk": 25,
   "fields": {
-    "name": "Can add permission",
+    "name": "Can add session",
     "content_type": 9,
-    "codename": "add_permission"
+    "codename": "add_session"
   }
 },
 {
   "model": "auth.permission",
   "pk": 26,
   "fields": {
-    "name": "Can change permission",
+    "name": "Can change session",
     "content_type": 9,
-    "codename": "change_permission"
+    "codename": "change_session"
   }
 },
 {
   "model": "auth.permission",
   "pk": 27,
   "fields": {
-    "name": "Can delete permission",
+    "name": "Can delete session",
     "content_type": 9,
-    "codename": "delete_permission"
+    "codename": "delete_session"
   }
 },
 {
   "model": "auth.permission",
   "pk": 28,
   "fields": {
-    "name": "Can add content type",
+    "name": "Can add logged time",
     "content_type": 10,
-    "codename": "add_contenttype"
+    "codename": "add_loggedtime"
   }
 },
 {
   "model": "auth.permission",
   "pk": 29,
   "fields": {
-    "name": "Can change content type",
+    "name": "Can change logged time",
     "content_type": 10,
-    "codename": "change_contenttype"
+    "codename": "change_loggedtime"
   }
 },
 {
   "model": "auth.permission",
   "pk": 30,
   "fields": {
-    "name": "Can delete content type",
+    "name": "Can delete logged time",
     "content_type": 10,
-    "codename": "delete_contenttype"
+    "codename": "delete_loggedtime"
   }
 },
 {
   "model": "auth.permission",
   "pk": 31,
   "fields": {
-    "name": "Can add session",
+    "name": "Can add task",
     "content_type": 11,
-    "codename": "add_session"
+    "codename": "add_task"
   }
 },
 {
   "model": "auth.permission",
   "pk": 32,
   "fields": {
-    "name": "Can change session",
+    "name": "Can change task",
     "content_type": 11,
-    "codename": "change_session"
+    "codename": "change_task"
   }
 },
 {
   "model": "auth.permission",
   "pk": 33,
   "fields": {
-    "name": "Can delete session",
+    "name": "Can delete task",
     "content_type": 11,
-    "codename": "delete_session"
+    "codename": "delete_task"
   }
 },
 {
   "model": "auth.user",
   "pk": 1,
   "fields": {
-    "password": "pbkdf2_sha256$30000$qDL3z027jmLZ$cPaNLW3coTjRv+mOcEwPWYaLmDc/WTE/tasyjyLVkZM=",
-    "last_login": "2016-11-02T10:09:52.465Z",
+    "password": "pbkdf2_sha256$30000$mhwtRG3rICaS$OVWE/2lmQmkG7lw72Vf/YPrBIYIajIWKQSo0cpDNwTM=",
+    "last_login": "2016-11-15T11:37:32.800Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
     "last_name": "",
-    "email": "example@dasda.com",
+    "email": "admin@ddd.com",
     "is_staff": true,
     "is_active": true,
-    "date_joined": "2016-11-02T10:09:33.527Z",
+    "date_joined": "2016-10-06T11:44:31.302Z",
     "groups": [],
     "user_permissions": []
   }
@@ -429,16 +521,178 @@
   "model": "auth.user",
   "pk": 2,
   "fields": {
-    "password": "pbkdf2_sha256$30000$uXcL0IANl6K3$SgMSatLXzplwK9KWXH4M4dFAzNq2ShCVaSB2P4BDMeU=",
-    "last_login": null,
+    "password": "pbkdf2_sha256$30000$j6CL9FLdZUOa$aVUViLglbnAdo/3vrpeN0r0I2zk8T4obzKD+zO5gOXM=",
+    "last_login": "2016-11-15T11:39:08.070Z",
     "is_superuser": false,
     "username": "kristian",
+    "first_name": "Kristian",
+    "last_name": "O'Brien",
+    "email": "kristian@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2016-10-06T11:45:48.319Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$30000$3mb870jaVTgi$a1I6XqwTxApxft1fTKBKTCW3QvBd8p9FSXju5isdWLc=",
+    "last_login": "2016-11-15T10:32:53.608Z",
+    "is_superuser": false,
+    "username": "John",
+    "first_name": "John",
+    "last_name": "Smith",
+    "email": "john@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2016-10-06T11:46:50.041Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$30000$69frDmbXzAIU$pn+86DQdHaw8txr+7wL7Hu+1aRw4wPJ+tHcxPTB4LHk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "mikael",
+    "first_name": "Mikael",
+    "last_name": "Saari",
+    "email": "mikael@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2016-10-06T11:47:25.877Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$30000$5elWNasTzr2T$8BxJZh/zvyUnRwvLkxzQhYrpT0ZtdWlIhkoh4zdxjKM=",
+    "last_login": "2016-10-06T11:57:04.064Z",
+    "is_superuser": true,
+    "username": "ilmari",
+    "first_name": "",
+    "last_name": "",
+    "email": "ilm@sda.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2016-10-06T11:56:48.008Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$30000$irtb1uk5W1kD$Rws6t3gBWcFX0Jo7tJmU6ceJAcCCK+UrRtDN0OOOMAs=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "teemu",
     "first_name": "",
     "last_name": "",
     "email": "",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2016-11-02T10:11:10.057Z",
+    "date_joined": "2016-11-15T11:06:11.082Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$30000$x1AFVs5auuQj$t6adeJQ6okVVLW4u9vzlyfi26rlIVVbMm/3JizwpY58=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "ali",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2016-11-15T11:06:43.132Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$30000$Gj93dafet56v$VTMb4UzYiGi3pFYLUyz9W2tJBhi6Rhu5DW82SU6659U=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "jack",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2016-11-15T11:07:02.136Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$30000$0vGDBL6pE8DS$CILdc07JigB7LJFO03ojLvq5lRIAFhabfB6yJhICSh8=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "steve23",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2016-11-15T11:07:52.653Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 10,
+  "fields": {
+    "password": "pbkdf2_sha256$30000$OJ084H6cNVTy$TJetaVmsv4LSyf2istQPXsAWeRZN76E+M7DKPcNXO8M=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "pekka",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2016-11-15T11:08:15.831Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 11,
+  "fields": {
+    "password": "pbkdf2_sha256$30000$kVRo1ggrUt1d$6Ed78XoWtNuf2J2VMDerrKlINtlmTil3gqBWO32nQh8=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "timo",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2016-11-15T11:08:30.345Z",
     "groups": [],
     "user_permissions": []
   }
@@ -447,9 +701,9 @@
   "model": "admin.logentry",
   "pk": 1,
   "fields": {
-    "action_time": "2016-11-02T10:11:10.088Z",
+    "action_time": "2016-10-06T11:45:48.371Z",
     "user": 1,
-    "content_type": 8,
+    "content_type": 5,
     "object_id": "2",
     "object_repr": "kristian",
     "action_flag": 1,
@@ -460,24 +714,24 @@
   "model": "admin.logentry",
   "pk": 2,
   "fields": {
-    "action_time": "2016-11-02T10:11:26.167Z",
+    "action_time": "2016-10-06T11:46:34.638Z",
     "user": 1,
-    "content_type": 2,
-    "object_id": "1",
-    "object_repr": "Student: kristian",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
+    "content_type": 5,
+    "object_id": "2",
+    "object_repr": "kristian",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"first_name\", \"last_name\", \"email\"]}}]"
   }
 },
 {
   "model": "admin.logentry",
   "pk": 3,
   "fields": {
-    "action_time": "2016-11-02T10:11:44.385Z",
+    "action_time": "2016-10-06T11:46:50.096Z",
     "user": 1,
-    "content_type": 3,
-    "object_id": "1",
-    "object_repr": "Project: \"My project\"",
+    "content_type": 5,
+    "object_id": "3",
+    "object_repr": "John",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
   }
@@ -486,20 +740,1152 @@
   "model": "admin.logentry",
   "pk": 4,
   "fields": {
-    "action_time": "2016-11-02T10:12:14.060Z",
+    "action_time": "2016-10-06T11:47:14.589Z",
     "user": 1,
-    "content_type": 4,
-    "object_id": "1",
-    "object_repr": "Event: \"My deadline\" - Project: \"My project\" - 2016-11-02 20:12:01+00:00 - deadline",
+    "content_type": 5,
+    "object_id": "3",
+    "object_repr": "John",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"first_name\", \"last_name\", \"email\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2016-10-06T11:47:25.918Z",
+    "user": 1,
+    "content_type": 5,
+    "object_id": "4",
+    "object_repr": "mikael",
     "action_flag": 1,
     "change_message": "[{\"added\": {}}]"
   }
 },
 {
-  "model": "teamwork.student",
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2016-10-06T11:48:03.521Z",
+    "user": 1,
+    "content_type": 5,
+    "object_id": "4",
+    "object_repr": "mikael",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"first_name\", \"last_name\", \"email\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2016-10-06T11:48:26.867Z",
+    "user": 1,
+    "content_type": null,
+    "object_id": "1",
+    "object_repr": "Student object",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2016-10-06T11:48:32.047Z",
+    "user": 1,
+    "content_type": null,
+    "object_id": "2",
+    "object_repr": "Student object",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2016-10-06T11:48:35.298Z",
+    "user": 1,
+    "content_type": null,
+    "object_id": "3",
+    "object_repr": "Student object",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2016-10-06T11:49:41.491Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "1",
+    "object_repr": "\"Design of WWW-services\"",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2016-10-06T11:50:03.750Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "2",
+    "object_repr": "\"C Programming\"",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2016-10-06T11:50:15.572Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "3",
+    "object_repr": "\"Web services\"",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2016-10-06T11:51:00.967Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "1",
+    "object_repr": "\"Design of WWW-services\", 2016-12-23 14:50:37+02:00",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2016-10-06T11:57:36.841Z",
+    "user": 5,
+    "content_type": 5,
+    "object_id": "1",
+    "object_repr": "admin",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2016-10-06T21:18:28.204Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "2",
+    "object_repr": "\"C Programming\", 2016-11-03 13:00:00+02:00",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2016-10-06T21:18:57.329Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "3",
+    "object_repr": "\"Design of WWW-services\", 2016-12-29 12:00:00+02:00",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2016-10-06T21:19:20.768Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "1",
+    "object_repr": "\"Design of WWW-services\", 2016-12-23 14:50:00+02:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"date\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2016-10-07T17:45:46.019Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "LoggedTime object",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2016-10-19T21:04:36.313Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "2",
+    "object_repr": "LoggedTime: 2016-10-17 - Student: mikael - 4:00:00",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2016-10-22T15:25:52.460Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "3",
+    "object_repr": "LoggedTime: 2016-10-02 - Student: mikael - 2:00:00",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2016-10-23T13:07:58.740Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "4",
+    "object_repr": "LoggedTime: 2016-10-23 - Student: kristian - 2:00:00",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2016-10-23T13:08:24.336Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "5",
+    "object_repr": "LoggedTime: 2016-10-21 - Student: John - 0:45:00",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2016-10-24T16:57:18.391Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "6",
+    "object_repr": "LoggedTime: 2016-10-24 - Student: kristian - 3:00:00",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2016-10-24T17:22:30.005Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "6",
+    "object_repr": "LoggedTime: 2016-10-24 - Student: kristian - 0:00:03",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"hours\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2016-10-24T17:22:41.883Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "6",
+    "object_repr": "LoggedTime: 2016-10-24 - Student: kristian - 3:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"hours\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2016-11-02T09:21:13.927Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "3",
+    "object_repr": "Event: \"Final report\" - Project: \"Design of WWW-services\" - 2016-12-29 12:00:00+02:00 - deadline",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"type\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2016-11-02T09:21:47.812Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "4",
+    "object_repr": "Event: \"Demo ala\" - Project: \"Design of WWW-services\" - 2016-11-16 12:00:00+02:00 - deadline",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2016-11-02T09:22:32.892Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "1",
+    "object_repr": "Task: \"Create HTML layout\" - True",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2016-11-02T09:22:58.092Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "2",
+    "object_repr": "Task: \"Add project function\" - False",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2016-11-02T09:23:25.568Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "3",
+    "object_repr": "Task: \"Create permanent data in database\" - False",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2016-11-02T09:24:36.774Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "4",
+    "object_repr": "Event: \"Demo Gala\" - Project: \"Design of WWW-services\" - 2016-11-16 12:00:00+02:00 - deadline",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2016-11-02T09:36:28.718Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "5",
+    "object_repr": "Event: \"Final document\" - Project: \"Design of WWW-services\" - 2016-12-23 23:00:00+02:00 - deadline",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2016-11-02T09:37:08.166Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "6",
+    "object_repr": "Event: \"Application submit\" - Project: \"C Programming\" - 2016-11-28 10:00:00+02:00 - deadline",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2016-11-02T09:37:37.318Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "7",
+    "object_repr": "Event: \"Group meeting\" - Project: \"C Programming\" - 2016-11-02 13:00:00+02:00 - event",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2016-11-02T09:38:25.201Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "5",
+    "object_repr": "Event: \"Final application submit\" - Project: \"C Programming\" - 2016-12-23 23:00:00+02:00 - deadline",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"name\", \"project\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2016-11-02T09:39:11.186Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "6",
+    "object_repr": "Event: \"1st version application submit\" - Project: \"C Programming\" - 2016-11-28 10:00:00+02:00 - deadline",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2016-11-02T09:40:16.929Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "7",
+    "object_repr": "LoggedTime: 2016-11-02 - Student: John - 3:00:00",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2016-11-12T16:36:58.193Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "3",
+    "object_repr": "Project: \"Web services\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2016-11-12T16:37:15.081Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "2",
+    "object_repr": "Project: \"C Programming\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2016-11-12T16:37:31.392Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "1",
+    "object_repr": "Project: \"Design of WWW-services\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2016-11-12T16:38:03.710Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "7",
+    "object_repr": "LoggedTime: 2016-11-02 - kristian - 3:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"user\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2016-11-12T16:38:12.693Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "6",
+    "object_repr": "LoggedTime: 2016-10-24 - John - 3:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"user\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2016-11-12T16:38:20.302Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "5",
+    "object_repr": "LoggedTime: 2016-10-21 - mikael - 0:45:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"user\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2016-11-12T16:38:27.203Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "4",
+    "object_repr": "LoggedTime: 2016-10-23 - John - 2:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"user\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2016-11-12T16:38:34.439Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "3",
+    "object_repr": "LoggedTime: 2016-10-02 - mikael - 2:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"user\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2016-11-12T16:38:42.067Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "2",
+    "object_repr": "LoggedTime: 2016-10-17 - kristian - 4:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"user\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2016-11-12T16:38:49.198Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "LoggedTime: 2016-10-07 - kristian - 0:03:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"user\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2016-11-15T11:06:11.113Z",
+    "user": 1,
+    "content_type": 5,
+    "object_id": "6",
+    "object_repr": "teemu",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2016-11-15T11:06:43.165Z",
+    "user": 1,
+    "content_type": 5,
+    "object_id": "7",
+    "object_repr": "ali",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2016-11-15T11:07:02.165Z",
+    "user": 1,
+    "content_type": 5,
+    "object_id": "8",
+    "object_repr": "jack",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2016-11-15T11:07:52.683Z",
+    "user": 1,
+    "content_type": 5,
+    "object_id": "9",
+    "object_repr": "steve23",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2016-11-15T11:08:15.862Z",
+    "user": 1,
+    "content_type": 5,
+    "object_id": "10",
+    "object_repr": "pekka",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2016-11-15T11:08:30.389Z",
+    "user": 1,
+    "content_type": 5,
+    "object_id": "11",
+    "object_repr": "timo",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2016-11-15T11:09:28.269Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "3",
+    "object_repr": "Project: \"Web services\"",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2016-11-15T11:09:53.979Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "2",
+    "object_repr": "Project: \"C Programming\"",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2016-11-15T11:10:13.486Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "1",
+    "object_repr": "Project: \"Design of WWW-services\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2016-11-15T11:10:38.646Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "3",
+    "object_repr": "Project: \"Web services\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2016-11-15T11:11:20.099Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "4",
+    "object_repr": "Project: \"My awesome project\"",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 59,
+  "fields": {
+    "action_time": "2016-11-15T11:12:27.386Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "5",
+    "object_repr": "Project: \"User Interfaces\"",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 60,
+  "fields": {
+    "action_time": "2016-11-15T11:13:27.559Z",
+    "user": 1,
+    "content_type": 2,
+    "object_id": "3",
+    "object_repr": "Project: \"Web services\"",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 61,
+  "fields": {
+    "action_time": "2016-11-15T11:14:53.276Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "8",
+    "object_repr": "Event: \"Phase 1 deadline\" - Project: \"C Programming\" - 2016-11-19 11:14:34+00:00 - deadline",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 62,
+  "fields": {
+    "action_time": "2016-11-15T11:15:29.736Z",
+    "user": 1,
+    "content_type": 1,
+    "object_id": "9",
+    "object_repr": "Event: \"Meeting\" - Project: \"C Programming\" - 2016-11-18 11:15:05+00:00 - event",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 63,
+  "fields": {
+    "action_time": "2016-11-15T11:18:25.832Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "8",
+    "object_repr": "LoggedTime: 2016-11-15 - teemu - 0:00:04",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 64,
+  "fields": {
+    "action_time": "2016-11-15T11:18:47.461Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "6",
+    "object_repr": "LoggedTime: 2016-10-24 - John - 3:00:00",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 65,
+  "fields": {
+    "action_time": "2016-11-15T11:18:47.467Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "4",
+    "object_repr": "LoggedTime: 2016-10-23 - John - 2:00:00",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 66,
+  "fields": {
+    "action_time": "2016-11-15T11:19:26.297Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "9",
+    "object_repr": "LoggedTime: 2016-11-15 - ali - 0:00:02",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 67,
+  "fields": {
+    "action_time": "2016-11-15T11:20:02.421Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "10",
+    "object_repr": "LoggedTime: 2016-11-11 - pekka - 0:00:01",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 68,
+  "fields": {
+    "action_time": "2016-11-15T11:20:35.862Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "11",
+    "object_repr": "LoggedTime: 2016-11-14 - kristian - 0:00:01",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 69,
+  "fields": {
+    "action_time": "2016-11-15T11:21:05.463Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "12",
+    "object_repr": "LoggedTime: 2016-11-10 - steve23 - 0:00:03",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 70,
+  "fields": {
+    "action_time": "2016-11-15T11:21:35.052Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "13",
+    "object_repr": "LoggedTime: 2016-11-09 - teemu - 0:00:05",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 71,
+  "fields": {
+    "action_time": "2016-11-15T11:37:55.316Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "8",
+    "object_repr": "LoggedTime: 2016-11-15 - teemu - 4:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"hours\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 72,
+  "fields": {
+    "action_time": "2016-11-15T11:38:08.632Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "9",
+    "object_repr": "LoggedTime: 2016-11-15 - ali - 0:50:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"hours\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 73,
+  "fields": {
+    "action_time": "2016-11-15T11:38:18.102Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "10",
+    "object_repr": "LoggedTime: 2016-11-11 - pekka - 1:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"hours\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 74,
+  "fields": {
+    "action_time": "2016-11-15T11:38:25.185Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "11",
+    "object_repr": "LoggedTime: 2016-11-14 - kristian - 1:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"hours\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 75,
+  "fields": {
+    "action_time": "2016-11-15T11:38:32.997Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "12",
+    "object_repr": "LoggedTime: 2016-11-10 - steve23 - 3:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"hours\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 76,
+  "fields": {
+    "action_time": "2016-11-15T11:38:39.608Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "13",
+    "object_repr": "LoggedTime: 2016-11-09 - teemu - 4:00:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"hours\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 77,
+  "fields": {
+    "action_time": "2016-11-15T11:38:52.771Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "LoggedTime: 2016-10-07 - kristian - 2:30:00",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"hours\"]}}]"
+  }
+},
+{
+  "model": "teamwork.loggedtime",
   "pk": 1,
   "fields": {
-    "user": 2
+    "date": "2016-10-07",
+    "hours": "02:30:00",
+    "user": 2,
+    "project": 2,
+    "event": 1
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 2,
+  "fields": {
+    "date": "2016-10-17",
+    "hours": "04:00:00",
+    "user": 2,
+    "project": 1,
+    "event": null
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 3,
+  "fields": {
+    "date": "2016-10-02",
+    "hours": "02:00:00",
+    "user": 4,
+    "project": 1,
+    "event": null
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 5,
+  "fields": {
+    "date": "2016-10-21",
+    "hours": "00:45:00",
+    "user": 4,
+    "project": 1,
+    "event": null
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 7,
+  "fields": {
+    "date": "2016-11-02",
+    "hours": "03:00:00",
+    "user": 2,
+    "project": 2,
+    "event": null
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 8,
+  "fields": {
+    "date": "2016-11-15",
+    "hours": "04:00:00",
+    "user": 6,
+    "project": 1,
+    "event": 3
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 9,
+  "fields": {
+    "date": "2016-11-15",
+    "hours": "00:50:00",
+    "user": 7,
+    "project": 2,
+    "event": 2
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 10,
+  "fields": {
+    "date": "2016-11-11",
+    "hours": "01:00:00",
+    "user": 10,
+    "project": 2,
+    "event": 2
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 11,
+  "fields": {
+    "date": "2016-11-14",
+    "hours": "01:00:00",
+    "user": 2,
+    "project": 3,
+    "event": null
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 12,
+  "fields": {
+    "date": "2016-11-10",
+    "hours": "03:00:00",
+    "user": 9,
+    "project": 3,
+    "event": null
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 13,
+  "fields": {
+    "date": "2016-11-09",
+    "hours": "04:00:00",
+    "user": 6,
+    "project": 3,
+    "event": null
+  }
+},
+{
+  "model": "teamwork.project",
+  "pk": 1,
+  "fields": {
+    "name": "Design of WWW-services",
+    "owner": 2,
+    "description": "Awesome course",
+    "members": [
+      2,
+      4,
+      6
+    ]
+  }
+},
+{
+  "model": "teamwork.project",
+  "pk": 2,
+  "fields": {
+    "name": "C Programming",
+    "owner": 2,
+    "description": "Awesome course",
+    "members": [
+      2,
+      7,
+      10
+    ]
+  }
+},
+{
+  "model": "teamwork.project",
+  "pk": 3,
+  "fields": {
+    "name": "Web services",
+    "owner": 6,
+    "description": "Awesome course",
+    "members": [
+      2,
+      6,
+      9
+    ]
+  }
+},
+{
+  "model": "teamwork.project",
+  "pk": 4,
+  "fields": {
+    "name": "My awesome project",
+    "owner": 4,
+    "description": "This is awesome",
+    "members": [
+      4,
+      10
+    ]
+  }
+},
+{
+  "model": "teamwork.project",
+  "pk": 5,
+  "fields": {
+    "name": "User Interfaces",
+    "owner": 4,
+    "description": "Nice course",
+    "members": [
+      2,
+      3,
+      4
+    ]
   }
 }
 ]

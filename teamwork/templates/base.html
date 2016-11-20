@@ -45,16 +45,17 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            {% url 'dashboard' user.username as url %}
+            {% url 'dashboard' as url %}
             <li {% if request.path == url %} class="active"{% endif %}>
               <a href="{{ url }}">Dashboard</a>
             </li>
-            {% url 'calendar' user.username as url %}
+            {% url 'calendar' as url %}
             <li {% if request.path == url %} class="active"{% endif %}>
               <a href="{{ url }}">Calendar</a>
             </li>
             <li>
-              <button type="button" class="btn btn-success navbar-btn">
+              <button type="button" class="btn btn-success navbar-btn"
+                data-toggle="modal" data-target="#add-project-modal">
                 <span class="glyphicon glyphicon-plus"></span>
                 Add new project
               </button>
@@ -75,7 +76,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                  <a href="#">Log out</a>
+                  <a href="/logout">Log out</a>
                 </li>
               </ul>
             </li>
@@ -84,6 +85,8 @@
         <!--/.nav-collapse -->
       </div>
     </nav>
+
+    {% include 'modals/add_project.html' %}
 
     <!-- Content -->
     <main class="content">

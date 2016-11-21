@@ -23,7 +23,8 @@ Add member
 {% endblock %}
 
 {% block footer %}
-<form action="edit_project_members" method="post" id="add-user-form">
+<form action="edit_project_members" method="post" id="add-user-form"
+  onsubmit="return validateNewMembers()">
   {% csrf_token %}
   <input id="users-to-add" name="add[]" type="hidden">
   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

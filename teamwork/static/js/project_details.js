@@ -126,18 +126,6 @@ function editMembers(options) {
       remove: options.remove,
       add: options.add,
     },
-    error: options.error,
-    success: function (result) {
-      console.log(result)
-    }
+    error: options.error
   })
-}
-
-/**
- * Validate time format for time logging.
- */
-function validateLogTime() {
-  // check if: logDate AND (logHours OR logMinutes)
-  return $('#logDate').val() !== '' && 
-      ($('#logHours').val() !== '' || $('#logMinutes').val() !== '')
 }

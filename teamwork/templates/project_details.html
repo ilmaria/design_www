@@ -99,7 +99,7 @@
   <h3>Time Spent</h3>
   <div class="form-group">
     <form action="log_time" method="post" id="log-time-form"
-      class="form-inline" onsubmit="return validateLogTime()">
+      class="form-inline" onsubmit="return validateNewTimelog()">
       {% csrf_token %}
       <div class="form-group">
         <div class="input-group input-append date" id="datePicker">
@@ -188,6 +188,7 @@
 <script src="{% static 'libs/typeahead/typeahead.min.js' %}"></script>
 <script src="{% static 'js/project_details.js' %}"></script>
 <script src="{% static 'js/piechart.js' %}"></script>
+<script src="{% static 'js/form_validations.js' %}"></script>
 
 <script>
   var CSRF_TOKEN = '{{ csrf_token }}'

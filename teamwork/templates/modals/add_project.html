@@ -9,7 +9,8 @@ Create new project
 {% endblock %}
 
 {% block body %}
-<form id="add-project-form" action="/add_project" method="post">
+<form id="add-project-form" action="/add_project" method="post"
+  onsubmit="return validateNewProject()">
   {% csrf_token %}
   <div class="form-group">
     <label for="new-project-name">Project name</label>

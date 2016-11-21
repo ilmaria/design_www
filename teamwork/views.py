@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import *
 from urllib.parse import unquote_plus
-from datetime import timedelta
+from datetime import timedelta, datetime
 from .utils import json_serialize
 import json
 
@@ -36,7 +36,9 @@ def project_details(request, project_name):
     total_times_json = [time for time in total_times_per_user]
 
     events = Event.objects.filter(project=project)
-    deadlines = events.filter(type='deadline')
+    # include only events that have type of 'deadline' and the event date
+    # is in the future
+    deadlines = events.filter(type='deadline', date__gt=datetime.now())
 
     context = {
         'project': project,

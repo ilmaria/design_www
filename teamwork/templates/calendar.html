@@ -6,11 +6,6 @@
 {% endblock %}
 
 {% block content %}
-<script src="{% static 'libs/moment/moment.min.js' %}"></script>
-<script src="{% static 'libs/clndr/clndr.min.js' %}"></script>
-<script src="{% static 'libs/lodash/lodash.custom.min.js' %}"></script>
-
-<script src="{% static 'js/calendar.js' %}"></script>
 
 <div class="calendar-container">
   <script id="calendar-template" type="text/template">
@@ -81,10 +76,21 @@
   </div>
 </div>
 
+{% endblock %}
+
+
+{% block scripts %}
+
+<script src="{% static 'libs/moment/moment.min.js' %}"></script>
+<script src="{% static 'libs/clndr/clndr.min.js' %}"></script>
+<script src="{% static 'libs/lodash/lodash.custom.min.js' %}"></script>
+<script src="{% static 'js/calendar.js' %}"></script>
+
 <script>
   var events = JSON.parse("{{ events|escapejs|default:'[]' }}")
   var template = $('#calendar-template').html()
   
   initCalendar('.calendar-container', template, events)
 </script>
+
 {% endblock %}

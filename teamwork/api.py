@@ -4,13 +4,14 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
 from .models import *
 from urllib.parse import unquote_plus
+from datetime import datetime, timedelta
 import json
 
 @require_POST
 @login_required
 def add_project(request):
     """Add new project."""
-    
+
     project_name = request.POST.get('project_name')
 
     if project_name is None:
@@ -40,7 +41,7 @@ def edit_project_members(request, project_name):
     project = get_object_or_404(Project,
         name=project_name,
         owner=request.user)
-    
+
     # POST['remove[]'] contains a list of usernames that
     # should be removed from the project
     for member_name in request.POST.getlist('remove[]'):
@@ -50,7 +51,7 @@ def edit_project_members(request, project_name):
         except:
             # bad request: user tried to remove a non-existing project member
             return HttpResponse(status=400)
-    
+
     # POST['add[]'] contains a list of usernames that
     # should be added to the project
     for member_name in request.POST.getlist('add[]'):
@@ -90,3 +91,42 @@ def search_users(request):
     response.status_code = status_code
 
     return response
+
+@require_POST
+@login_required
+def log_time(request, project_name):
+    """Log date and time for current user in the project"""
+
+    project_name = unquote_plus(project_name)
+    project = get_object_or_404(Project,
+        name=project_name,
+        members__id=request.user.id)
+
+    # get input date and convert to yyyy-mm-dd format
+    logged_date = request.POST.get('date')
+    logged_date_cor = datetime.strptime(logged_date, '%d/%m/%Y').strftime("%Y-%m-%d")
+
+    # convert input hours and minutes into logged hours
+    input_hours = request.POST.get('hours')
+    input_minutes = request.POST.get('minutes')
+    
+    if input_hours == '':
+        input_hours = '0'
+    if input_minutes == '':
+        input_minutes = '0'
+
+    logged_hours = timedelta(
+        hours=int(input_hours),
+        minutes=int(input_minutes)
+    )
+
+    loggedTime = LoggedTime(
+        date=logged_date_cor,
+        hours=logged_hours,
+        user=request.user,
+        project=project
+    )
+
+    loggedTime.save()
+
+    return redirect('project_details', project_name=project_name)

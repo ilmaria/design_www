@@ -55,9 +55,11 @@ def dashboard(request):
     """
 
     projects = Project.objects.filter(members__id=request.user.id)
+    next_event = Event.objects.all()[:1]
 
     context = {
-        'projects': projects
+        'projects': projects,
+        'next_event': next_event
     }
 
     return render(request, 'dashboard.html', context)
@@ -84,11 +86,11 @@ def calendar(request):
 
 def login(request):
     """Login view."""
-    
+
     return auth_views.login(request, template_name='login.html')
 
 
 def logout(request):
     """Logout view."""
-    
+
     return auth_views.logout(request, template_name='logout.html')

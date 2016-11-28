@@ -4,24 +4,34 @@
 {% block content %}
 <!-- Next Event from all project -->
 <div class="container">
-  <h3>Next Event</h3>
-
+  <h4>Next Event</h4>
+  <ul class="list-group">
+    {% for event in next_event %}
+    <li class="list-group-item">
+      <strong>{{ event.name }}</strong>
+      <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}</p>
+      {% if event.location != "" %}
+      <p><i class="glyphicon glyphicon-map-marker"></i> {{ event.location }}</p>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
 </div>
 <!-- List of ongoing pojects -->
 <div class="container">
-  <h3>Ongoing Projects</h3>
+  <h4>Ongoing Projects</h4>
   {% for project in projects %}
   <div class="jumbotron">
-    <h2>
+    <h3>
       <a href="{% url 'project_details' project.name|urlencode_plus %}">
       {{ project.name }}</a>
-    </h2>
+    </h3>
     {% with project.event_set.all|dictsort:'date' as events %}
     <p><b>Next event:</b>
       {{ events.0.name }} - {{ events.0.date }}
     </p>
     {% endwith %}
-    <p><button type="button" class="btn btn-primary btn-lg" onclick="openEventCreator()">Log time</button></p>
+    <p><button type="button" class="btn btn-default btn-lg" onclick="openEventCreator()">Log time</button></p>
   </div>
   {% endfor %}
 

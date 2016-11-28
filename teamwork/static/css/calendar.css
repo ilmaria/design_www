@@ -16,7 +16,7 @@
 
 .clndr-grid {
   width: 764px;
-  border-left: 1px solid #2e2e35; 
+  border-left: 1px solid #2e2e35;
 }
 
 .days {
@@ -30,10 +30,11 @@
 }
 
 .header-day {
-  height: 40px;
+  height: 50px;
   font-size: 1.5em;
   text-align: center;
-  color: black;    
+  color: white;
+  background-color: #1ABC9C;
 }
 
 .day {

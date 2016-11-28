@@ -4,17 +4,17 @@
 {% block content %}
 <!-- Next Event from all project -->
 <div class="container">
+  <h5>Next Event</h5>
   <div class="row">
     <div class="col-xs-2">
-      <img class="img-responsive center-block" src="/static/img/calendar.png" alt="cal-icon">
+      <img class="img-responsive" src="/static/img/calendar.png" width="80px" alt="cal-icon">
     </div>
     <div class="col-xs-10">
-      <p class="lead">Next Event</p>
       {% for event in next_event %}
       <strong>{{ event.name }}</strong>
       <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}</p>
       {% if event.location != "" %}
-      <p><i class="glyphicon glyphicon-map-marker"></i> {{ event.location }}</p>
+      <small><i class="fui-location"></i> {{ event.location }}</small>
       {% endif %}
       {% endfor %}
     </div>
@@ -23,7 +23,7 @@
 
 <!-- List of ongoing pojects -->
 <div class="container">
-  <p class="lead">Ongoing Projects</p>
+  <h5>Ongoing Projects</h5>
   {% for project in projects %}
   <div class="jumbotron">
     <h6>
@@ -33,6 +33,8 @@
     {% with project.event_set.all|dictsort:'date' as events %}
     <p><i class="fui-calendar"></i> <b>Next event:</b>
       {{ events.0.name }} - {{ events.0.date }}
+    </p>
+    <p><i class="fui-time"></i> <b>Spent hours:</b>
     </p>
     {% endwith %}
     <p><button type="button" class="btn btn-default btn-lg" onclick="openEventCreator()">Log time</button></p>

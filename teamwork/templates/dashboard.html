@@ -4,30 +4,34 @@
 {% block content %}
 <!-- Next Event from all project -->
 <div class="container">
-  <h4>Next Event</h4>
-  <ul class="list-group">
-    {% for event in next_event %}
-    <li class="list-group-item">
+  <div class="row">
+    <div class="col-xs-2">
+      <img class="img-responsive center-block" src="/static/img/calendar.png" alt="cal-icon">
+    </div>
+    <div class="col-xs-10">
+      <p class="lead">Next Event</p>
+      {% for event in next_event %}
       <strong>{{ event.name }}</strong>
       <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}</p>
       {% if event.location != "" %}
       <p><i class="glyphicon glyphicon-map-marker"></i> {{ event.location }}</p>
       {% endif %}
-    </li>
-    {% endfor %}
-  </ul>
+      {% endfor %}
+    </div>
+  </div>
 </div>
+
 <!-- List of ongoing pojects -->
 <div class="container">
-  <h4>Ongoing Projects</h4>
+  <p class="lead">Ongoing Projects</p>
   {% for project in projects %}
   <div class="jumbotron">
-    <h3>
+    <h6>
       <a href="{% url 'project_details' project.name|urlencode_plus %}">
       {{ project.name }}</a>
-    </h3>
+    </h6>
     {% with project.event_set.all|dictsort:'date' as events %}
-    <p><b>Next event:</b>
+    <p><i class="fui-calendar"></i> <b>Next event:</b>
       {{ events.0.name }} - {{ events.0.date }}
     </p>
     {% endwith %}

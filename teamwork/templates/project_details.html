@@ -64,6 +64,24 @@
           {% endif %}> {{ task.name }}</input>
         </li>
         {% endfor %}
+        <li class="list-group-item collapsed">
+          <a role="button" data-toggle="collapse" href="javascript:void(0)"
+            aria-expanded="false" aria-controls="add-task-form"
+            data-target="#add-task-form">
+            Add task
+          </a>
+          <form action="/add-task" id="add-task-form" class="form-group collapse">
+            <div class="form-group">
+              <label for="task-name-input">Task name</label>
+              <input type="text" id="task-name-input" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="task-name-input">Assignees</label>
+              <input type="text" id="task-name-input" class="form-control">
+            </div>
+            <button>Create task</button>
+          </form>
+        </li>
       </ul>
       <button type="button" class="btn btn-default"
         onclick="openEventCreator()">Add task</button>

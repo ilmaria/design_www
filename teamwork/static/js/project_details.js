@@ -7,7 +7,7 @@ $('#user-search').typeahead({
 })
 
 /**
- * Initialize date picker for logging times in project. 
+ * Initialize date picker for logging times in project.
  */
 $('#datePicker').datepicker({
   autoclose: true,

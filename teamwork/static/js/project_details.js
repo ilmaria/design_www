@@ -129,3 +129,14 @@ function editMembers(options) {
     error: options.error
   })
 }
+
+/**
+ * Submit form to delete a task.
+ * @param {string} taskName - Name of the task to delete.
+ */
+function deleteTask(taskName) {
+  // delete_task is the form element
+  var input = $(delete_task).find('input[name="task_name"]')
+  input.val(taskName)
+  delete_task.submit()
+}

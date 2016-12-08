@@ -14,3 +14,8 @@
 .own-badge {
   background-color: #4cae4c;
 }
+
+.delete-task {
+  cursor: pointer;
+  float: right;
+}

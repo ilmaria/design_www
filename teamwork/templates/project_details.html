@@ -56,12 +56,17 @@
     <div class="col-md-6">
       <h3>Tasks List</h3>
       <ul class="list-group">
+        <form action="delete_task" name="delete_task" method="post" class="delete-task">
+          {% csrf_token %}
+          <input name="task_name" type="hidden">
+        </form>
         {% for task in project.task_set.all %}
         <li class="list-group-item">
-          <input type="checkbox"
-          {% if task.done %}
-          checked
-          {% endif %}> {{ task.name }}</input>
+          <input type="checkbox" {% if task.done %} checked {% endif %}>
+          {{ task.name }}
+          <span class="delete-task">
+            <span class="glyphicon glyphicon-trash" onclick="deleteTask('{{ task.name }}')"></span>
+          </span>
         </li>
         {% endfor %}
         <li class="list-group-item collapsed">
@@ -70,16 +75,20 @@
             data-target="#add-task-form">
             Add task
           </a>
-          <form action="/add-task" id="add-task-form" class="form-group collapse">
+          <form action="add_task" id="add-task-form" class="form-group collapse"
+            method="post">
+            {% csrf_token %}
             <div class="form-group">
               <label for="task-name-input">Task name</label>
-              <input type="text" id="task-name-input" class="form-control">
+              <input type="text" id="task-name-input" name="task_name" class="form-control">
             </div>
             <div class="form-group">
-              <label for="task-name-input">Assignees</label>
-              <input type="text" id="task-name-input" class="form-control">
+              <label for="assignees-input">Assignees</label>
+              <input type="text" id="assignees-input" name="assignees[]" class="form-control">
             </div>
-            <button>Create task</button>
+            <div style="text-align: right">
+              <button class="btn btn-primary">Create task</button>
+            </div>
           </form>
         </li>
       </ul>

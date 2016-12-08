@@ -32,7 +32,7 @@ class Task(models.Model):
     """Tasks for check list."""
 
     name = models.CharField(max_length=255, default='My task')
-    done = models.BooleanField()
+    done = models.BooleanField(default=False)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     assignees = models.ManyToManyField(User, related_name='tasks')
     estimated_hours = models.DurationField(default=timedelta)

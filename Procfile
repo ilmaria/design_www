@@ -1,1 +1,1 @@
-web: gunicorn teamwork.wsgi --log-file -
+web: gunicorn design_www.wsgi --log-file -

@@ -34,20 +34,20 @@
         <!-- only project owner can remove users -->
         {% if user == project.owner %}
         <span class="remove-member"
-              href="javascript:void(0)"
+        href="javascript:void(0)"
         onclick="removeMember('{{ member.username }}')"></span>
-          {% endif %}
-        </span>
+        {% endif %}
+      </span>
       {% endif %}
       {% endfor %}
     </div>
 
-  <!-- Add member button-->
-  {% if user == project.owner %}
+    <!-- Add member button-->
+    {% if user == project.owner %}
     <button id="add-member" type="button" class="btn btn-default"
-      data-toggle="modal" data-target="#add-member-modal">
-      Add member
-    </button>
+    data-toggle="modal" data-target="#add-member-modal">
+    Add member
+  </button>
   {% endif %}
   {% include 'modals/add_member.html' %}
 
@@ -66,7 +66,7 @@
         {% endfor %}
       </ul>
       <button type="button" class="btn btn-default"
-        onclick="openEventCreator()">Add task</button>
+      onclick="openEventCreator()">Add task</button>
     </div>
 
     <!-- Deadline -->
@@ -75,20 +75,20 @@
       <ul class="list-group">
         {% for deadline in deadlines|dictsort:'date' %}
         <li class="list-group-item">
-            <p>
-              <span class="timeUntil">{{ deadline.date|timeuntil }} left</span>
-              <strong>{{ deadline.name }}</strong>
-              ({{ deadline.date|date:"D, d M Y" }}, {{ deadline.date|time:"H:i" }}
+          <p>
+            <span class="timeUntil">{{ deadline.date|timeuntil }} left</span>
+            <strong>{{ deadline.name }}</strong>
+            ({{ deadline.date|date:"D, d M Y" }}, {{ deadline.date|time:"H:i" }}
 
-              {% if deadline.location != "" %},
-                <i class="glyphicon glyphicon-map-marker"></i> {{ deadline.location }}
-              {% endif %})
-            </p>
-          </li>
-          {% empty %}
-          <li class="list-group-item">
-            <p>There is no deadline coming up</p>
-          </li>
+            {% if deadline.location != "" %},
+            <i class="glyphicon glyphicon-map-marker"></i> {{ deadline.location }}
+            {% endif %})
+          </p>
+        </li>
+        {% empty %}
+        <li class="list-group-item">
+          <p>There is no deadline coming up</p>
+        </li>
         {% endfor %}
       </ul>
     </div>
@@ -98,83 +98,85 @@
   <!-- Time Spent -->
   <h5>Time Spent</h5>
   <div class="form-group">
-    <form action="log_time" method="post" id="log-time-form" class="form-inline">
-      class="form-inline" onsubmit="return validateNewTimelog()">
-      {% csrf_token %}
-      <div class="form-group">
-        <div class="input-group input-append date" id="datePicker">
-          <input id="logDate" type="text" class="form-control"
-            name="date" placeholder="dd/mm/yyyy">
-          <span class="input-group-addon add-on">
-            <span class="glyphicon glyphicon-calendar"></span>
-          </span>
-        </div>
+    <form action="log_time" method="post" id="log-time-form"
+    class="form-inline" onsubmit="return validateNewTimelog()">
+    {% csrf_token %}
+    <div class="form-group">
+      <div class="input-group input-append date" id="datePicker">
+        <input id="logDate" type="text" class="form-control"
+        name="date" placeholder="dd/mm/yyyy">
+        <span class="input-group-addon add-on">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
       </div>
-      <div class="form-group">
-        <input id="logHours" type="number" class="form-control bfh-number"
-          name="hours" placeholder="Hours">
+    </div>
+    <div class="form-group">
+      <input id="logHours" type="number" class="form-control bfh-number"
+      name="hours" placeholder="Hours">
+    </div>
+    <div class="form-group">
+      <input id="logMinutes" type="number" class="form-control bfh-number"
+      name="minutes" placeholder="Minutes">
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" onclick="validateLogTime(event)">Log time</button>
+    </div>
+  </form>
+</div>
+
+<div class="row">
+
+  <!-- Logged time history from all the project memebers -->
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5 class="panel-title">
+          <i class="glyphicon glyphicon-time"></i>
+          Log history
+        </h5>
       </div>
-      <div class="form-group">
-        <input id="logMinutes" type="number" class="form-control bfh-number"
-          name="minutes" placeholder="Minutes">
+      <div class="panel-body">
+        <ul class="list-group">
+          {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
+          <li class="list-group-item">
+            {{ loggedtime.date|date:"d/m/Y" }} -
+            {{ loggedtime.user.username }}
+            logged {{ loggedtime.hours }}
+          </li>
+          {% endfor %}
+        </ul>
       </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary" onclick="validateLogTime(event)">Log time</button>
-      </div>
-    </form>
+    </div>
   </div>
 
-  <div class="row">
+  <!--  Time spent by each project's members -->
+  <div class="col-md-6">
+    <div id="piechart"></div>
+  </div>
 
-    <!-- Logged time history from all the project memebers -->
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h5 class="panel-title">
-            <i class="glyphicon glyphicon-time"></i>
-            Log history
-          </h5>
-        </div>
-        <div class="panel-body">
-          <ul class="list-group">
-            {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
-              <li class="list-group-item">
-                {{ loggedtime.date|date:"d/m/Y" }} -
-                {{ loggedtime.user.username }}
-                logged {{ loggedtime.hours }}
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </div>
+</div> <!--/.row-->
 
-    <!--  Time spent by each project's members -->
-    <div class="col-md-6">
-      <div id="piechart"></div>
-    </div>
+<!-- Events -->
+<h5>Upcoming Events</h5>
+<ul class="list-group">
+  {% for event in project.event_set.all|dictsort:'date' %}
+  <li class="list-group-item">
+    <strong>{{ event.name }}</strong>
+    <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}</p>
 
-  </div> <!--/.row-->
-
-  <!-- Events -->
-  <h5>Upcoming Events</h5>
-  <ul class="list-group">
-    {% for event in project.event_set.all|dictsort:'date' %}
-      <li class="list-group-item">
-        <strong>{{ event.name }}</strong>
-        <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}</p>
-
-        {% if event.location != "" %}
-          <p>
-            <i class="glyphicon glyphicon-map-marker"></i>
-            {{ event.location }}
-          </p>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+    {% if event.location != "" %}
+    <p>
+      <i class="glyphicon glyphicon-map-marker"></i>
+      {{ event.location }}
+    </p>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+<p>
   <button type="button" class="btn btn-default"
-    onclick="openEventCreator()">Add event</button>
+  onclick="openEventCreator()">Add event</button>
+</p>
 
 </div> <!--/.container-->
 
@@ -191,9 +193,9 @@
 <script src="{% static 'js/form_validations.js' %}"></script>
 
 <script>
-  var CSRF_TOKEN = '{{ csrf_token }}'
-  var loggedTimes = JSON.parse("{{ total_times_json|escapejs|default:'[]' }}")
-  initPiechart(loggedTimes)
+var CSRF_TOKEN = '{{ csrf_token }}'
+var loggedTimes = JSON.parse("{{ total_times_json|escapejs|default:'[]' }}")
+initPiechart(loggedTimes)
 </script>
 
 {% endblock %}

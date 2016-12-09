@@ -14,7 +14,7 @@ def add_project(request):
 
     project_name = request.POST.get('project_name')
 
-    if project_name is None:
+    if project_name is None or project_name == '':
         return HttpResponse(status=400)
 
     project = Project(
@@ -29,7 +29,7 @@ def add_project(request):
     project.members.add(request.user)
     project.save()
 
-    return redirect('dashboard')
+    return redirect('project_details', project_name=project_name)
 
 
 @require_POST

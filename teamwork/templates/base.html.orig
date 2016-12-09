@@ -1,0 +1,122 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      {% block title %}
+        MyProjects
+      {% endblock %}
+    </title>
+    <meta name="description" content="Website for managing multiple projects in one place.">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'libs/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/flatUI/css/flat-ui.min.css' %}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    {% block styles %}
+<<<<<<< HEAD
+    {% endblock%}
+
+    <!-- add jQuery -->
+    <script src="{% static 'libs/jquery/jquery-3.1.1.min.js' %}"></script>
+
+    <!-- add Bootstrap JavaScript -->
+    <script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+=======
+    {% endblock %}
+>>>>>>> refs/remotes/origin/master
+  </head>
+  
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle"
+              data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand"><img alt="logo" src="/static/img/logo-reverse.png"></span>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            {% url 'dashboard' as url %}
+            <li {% if request.path == url %} class="active"{% endif %}>
+              <a href="{{ url }}">Dashboard</a>
+            </li>
+            {% url 'calendar' as url %}
+            <li {% if request.path == url %} class="active"{% endif %}>
+              <a href="{{ url }}">Calendar</a>
+            </li>
+          </ul>
+          <div class="navbar-form navbar-left">
+            <button type="button" class="btn btn-primary navbar-btn"
+              data-toggle="modal" data-target="#add-project-modal">
+              <span class="glyphicon glyphicon-plus"></span>
+              Add new project
+            </button>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown-open">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+                {{ user.username }}
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#"><span class="glyphicon glyphicon-cog"></span>
+                    Settings
+                  </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="/logout">Log out</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    {% include 'modals/add_project.html' %}
+
+    <!-- Content -->
+    <main class="content">
+      {% block content %}
+      {% endblock %}
+    </main>
+
+    <!--Footer -->
+    <footer>
+        <p class="text-center">
+          <a alt="mycourse" href="https://mycourses.aalto.fi/" title="MyCourse" >My Courses</a>
+          |
+          <a href="#" title="Description" >Service Description</a>
+        <p>
+    </footer>
+
+<<<<<<< HEAD
+    <!-- add customized JavaScript -->
+=======
+    <script src="{% static 'libs/jquery/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+
+>>>>>>> refs/remotes/origin/master
+    <script src="{% static 'js/navbar.js' %}"></script>
+
+    {% block scripts %}
+    {% endblock %}
+  </body>
+</html>

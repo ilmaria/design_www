@@ -22,7 +22,7 @@ def add_project(request):
         owner=request.user,
         description=""
     )
-    # apparently we need to save the project before we can access it's
+    # apparently we need to save the model before we can access it's
     # many-to-many fields (members field is many-to-many)
     project.save()
 
@@ -49,9 +49,18 @@ def add_task(request, project_name):
     if task_name is None or task_name == '' or task_exists:
         return HttpResponse(status=400)
 
-    task = Task(name=task_name, project=project)
+    time_estimate = request.POST.get('time_estimate').split(':')
+    hours = int(time_estimate[0])
+    minutes = int(time_estimate[1]) if len(time_estimate) == 2 else 0
+    estimated_hours = timedelta(hours=hours, minutes=minutes)
 
-    # apparently we need to save the task before we can access it's
+    task = Task(
+        name=task_name,
+        project=project,
+        estimated_hours=estimated_hours
+    )
+
+    # apparently we need to save the model before we can access it's
     # many-to-many fields (members field is many-to-many)
     task.save()
 

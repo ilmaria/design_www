@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load extra_tags %}
 
 {% block styles %}
 <!-- Include Bootstrap Datepicker -->
@@ -63,7 +64,8 @@
         {% for task in project.task_set.all %}
         <li class="list-group-item">
           <input type="checkbox" {% if task.done %} checked {% endif %}>
-          {{ task.name }}
+          <span>{{ task.name }}</span>
+          <span>{{ task.estimated_hours|duration }}</span>
           <span class="delete-task">
             <span class="glyphicon glyphicon-trash" onclick="deleteTask('{{ task.name }}')"></span>
           </span>
@@ -76,7 +78,7 @@
             Add task
           </a>
           <form action="add_task" id="add-task-form" class="form-group collapse"
-            method="post">
+            method="post" onsubmit="return validateNewTask()">
             {% csrf_token %}
             <div class="form-group">
               <label for="task-name-input">Task name</label>
@@ -85,6 +87,11 @@
             <div class="form-group">
               <label for="assignees-input">Assignees</label>
               <input type="text" id="assignees-input" name="assignees[]" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="time-estimate-input">Estimated work hours</label>
+              <input type="text" id="time-estimate-input" name="time_estimate"
+                class="form-control" placeholder="00:00">
             </div>
             <div style="text-align: right">
               <button class="btn btn-primary">Create task</button>

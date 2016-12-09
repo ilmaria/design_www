@@ -21,7 +21,7 @@
   <!-- Group members -->
   <p>
     Group members:</p>
-    <div class="bootstrap-tagsinput" type="text">
+    <div class="bootstrap-tagsinput">
       <!-- current user -->
       <span class="tagsinput-primary">
         <span class="tag label label-info">{{ user.username }}</span>
@@ -55,16 +55,14 @@
     <!-- Task list -->
     <div class="col-md-6">
       <h5>Tasks List</h5>
-      <ul class="list-group">
-        {% for task in project.task_set.all %}
-        <li class="list-group-item">
-          <input type="checkbox"
-          {% if task.done %}
-          checked
-          {% endif %}> {{ task.name }}</input>
-        </li>
-        {% endfor %}
-      </ul>
+      {% for task in project.task_set.all %}
+      <label class="checkbox" for="task 1">
+        <input type="checkbox" id="task 1" value="" data-toggle="checkbox"
+        {% if task.done %}
+        checked
+        {% endif %}>{{ task.name }}</input>
+      </label>
+      {% endfor %}
       <button type="button" class="btn btn-default"
       onclick="openEventCreator()">Add task</button>
     </div>

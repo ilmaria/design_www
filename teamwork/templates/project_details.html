@@ -19,34 +19,33 @@
   <p>{{ project.description }}</p>
 
   <!-- Group members -->
-  <p>
-    Group members:</p>
-    <div class="bootstrap-tagsinput">
-      <!-- current user -->
-      <span class="tagsinput-primary">
-        <span class="tag label label-info">{{ user.username }}</span>
-      </span>
-      <!-- other users -->
-      {% for member in project.members.all %}
-      {% if member != user %}
-      <span class="tag label label-info" data-member="{{ member.username }}">
-        {{ member.username }}
-        <!-- only project owner can remove users -->
-        {% if user == project.owner %}
-        <span class="remove-member"
-        href="javascript:void(0)"
-        onclick="removeMember('{{ member.username }}')"></span>
-        {% endif %}
-      </span>
+  <p>Group members:</p>
+  <div class="bootstrap-tagsinput">
+    <!-- current user -->
+    <span class="tagsinput-primary">
+      <span class="tag label label-info">{{ user.username }}</span>
+    </span>
+    <!-- other users -->
+    {% for member in project.members.all %}
+    {% if member != user %}
+    <span class="tag label label-info" data-member="{{ member.username }}">
+      {{ member.username }}
+      <!-- only project owner can remove users -->
+      {% if user == project.owner %}
+      <span class="remove-member"
+      href="javascript:void(0)"
+      onclick="removeMember('{{ member.username }}')"></span>
       {% endif %}
-      {% endfor %}
-    </div>
+    </span>
+    {% endif %}
+    {% endfor %}
+  </div>
 
-    <!-- Add member button-->
-    {% if user == project.owner %}
-    <button id="add-member" type="button" class="btn btn-default"
-    data-toggle="modal" data-target="#add-member-modal">
-    Add member
+  <!-- Add member button-->
+  {% if user == project.owner %}
+  <button id="add-member" type="button" class="btn btn-default"
+  data-toggle="modal" data-target="#add-member-modal">
+  Add member
   </button>
   {% endif %}
   {% include 'modals/add_member.html' %}
@@ -159,6 +158,9 @@
 <ul class="list-group">
   {% for event in project.event_set.all|dictsort:'date' %}
   <li class="list-group-item">
+    {% if event.type == "deadline" %}
+    <span class="timeUntil">{{ event.date|timeuntil }} left</span>
+    {% endif %}
     <strong>{{ event.name }}</strong>
     <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}</p>
 

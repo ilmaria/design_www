@@ -35,7 +35,26 @@ def project_details(request, project_name):
 
     total_times_json = [time for time in total_times_per_user]
 
+    task_list = Task.objects.filter(project=project)
+    tasks = []
+
+    for task in task_list:
+        logged_times = LoggedTime.objects.filter(task=task)
+        task_logged_time = timedelta()
+
+        for time in logged_times:
+            task_logged_time += time
+
+        if task.estimated_hours.total_seconds() > 0:
+            task_progress = min(task_logged_time / task.estimated_hours, 1)
+            task_progress = round(task_progress, 2) * 100
+        else:
+            task_progress = 0
+
+        tasks.append((task, task_progress))
+
     events = Event.objects.filter(project=project)
+
     # include only events that have type of 'deadline' and the event date
     # is in the future
     deadlines = events.filter(type='deadline', date__gt=datetime.now())
@@ -44,7 +63,8 @@ def project_details(request, project_name):
         'project': project,
         'total_times_per_user': total_times_per_user,
         'total_times_json': json.dumps(total_times_json, default=json_serialize),
-        'deadlines': deadlines
+        'deadlines': deadlines,
+        'tasks': tasks
     }
 
     return render(request, 'project_details.html', context)
@@ -86,11 +106,11 @@ def calendar(request):
 
 def login(request):
     """Login view."""
-    
+
     return auth_views.login(request, template_name='login.html')
 
 
 def logout(request):
     """Logout view."""
-    
+
     return auth_views.logout(request, template_name='logout.html')

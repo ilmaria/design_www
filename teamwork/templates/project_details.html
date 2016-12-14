@@ -73,6 +73,15 @@
               {{ task_progress }}%
             </div>
           </div>
+          <div>
+            <span>Assignees:</span>
+            {% for assignee in task.assignees.all %}
+              {{ assignee.username }},
+            {% endfor %}
+          </div>
+          <span style="cursor: pointer">
+            <span class="glyphicon glyphicon-pencil" onclick="editTask('{{ task.name }}')"></span>
+          </span>
           <span class="delete-task">
             <span class="glyphicon glyphicon-trash" onclick="deleteTask('{{ task.name }}')"></span>
           </span>

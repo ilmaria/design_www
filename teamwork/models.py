@@ -55,5 +55,5 @@ class LoggedTime(models.Model):
         blank=True, null=True)
 
     def __str__(self):
-        return 'LoggedTime: {0} - {1} - {2}'.format(self.date,
-            self.user, self.hours)
+        return 'LoggedTime: {0} - {1} - {2} - {3}'.format(self.date,
+            self.user, self.hours, self.task)

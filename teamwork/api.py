@@ -184,13 +184,19 @@ def log_time(request, project_name):
         minutes=int(input_minutes)
     )
 
-    loggedTime = LoggedTime(
+    logged_time = LoggedTime(
         date=logged_date_cor,
         hours=logged_hours,
         user=request.user,
         project=project
     )
 
-    loggedTime.save()
+    task_name = request.POST.get('log-time-task', '')
+
+    if task_name != '':
+        task = Task.objects.get(name=task_name, project=project)
+        logged_time.task = task
+
+    logged_time.save()
 
     return redirect('project_details', project_name=project_name)

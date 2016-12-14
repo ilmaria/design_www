@@ -43,11 +43,11 @@ def project_details(request, project_name):
         task_logged_time = timedelta()
 
         for time in logged_times:
-            task_logged_time += time
+            task_logged_time += time.hours
 
         if task.estimated_hours.total_seconds() > 0:
             task_progress = min(task_logged_time / task.estimated_hours, 1)
-            task_progress = round(task_progress, 2) * 100
+            task_progress = int(round(task_progress, 2) * 100)
         else:
             task_progress = 0
 

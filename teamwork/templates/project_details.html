@@ -106,8 +106,6 @@
           </form>
         </li>
       </ul>
-      <button type="button" class="btn btn-default"
-        onclick="openEventCreator()">Add task</button>
     </div>
 
     <!-- Deadline -->
@@ -161,6 +159,15 @@
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Log time</button>
+      </div>
+      <div>
+        <label for="log-time-task">Task</label>
+        <select class="form-control" name="log-time-task" id="log-time-task">
+          <option value="">-</option>
+          {% for task, x in tasks %}
+            <option value="{{ task.name }}">{{ task.name }}</option>
+          {% endfor %}
+        </select>
       </div>
     </form>
   </div>

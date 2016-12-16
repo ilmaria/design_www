@@ -68,26 +68,29 @@
 
     <!-- Deadline -->
     <div class="col-md-6">
-      <h5>Time till deadlines</h5>
+      <!-- Events -->
+      <h5>Upcoming Events</h5>
       <ul class="list-group">
-        {% for deadline in deadlines|dictsort:'date' %}
+        {% for event in project.event_set.all|dictsort:'date' %}
         <li class="list-group-item">
-          <p>
-            <span class="timeUntil">{{ deadline.date|timeuntil }} left</span>
-            <strong>{{ deadline.name }}</strong>
-            ({{ deadline.date|date:"D, d M Y" }}, {{ deadline.date|time:"H:i" }}
-
-            {% if deadline.location != "" %},
-            <i class="glyphicon glyphicon-map-marker"></i> {{ deadline.location }}
-            {% endif %})
+          {% if event.type == "deadline" %}
+          <span class="timeUntil">{{ event.date|timeuntil }} left</span>
+          {% endif %}
+          <strong>{{ event.name }}</strong>
+          <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}
+          {% if event.location != "" %}
+            , <i class="glyphicon glyphicon-map-marker"></i>
+            {{ event.location }}
           </p>
-        </li>
-        {% empty %}
-        <li class="list-group-item">
-          <p>There is no deadline coming up</p>
+          {% endif %}
         </li>
         {% endfor %}
       </ul>
+      <p>
+        <button type="button" class="btn btn-default"
+        onclick="openEventCreator()">Add event</button>
+      </p>
+      <!-- end Events -->
     </div>
 
   </div> <!--/.row-->
@@ -152,31 +155,6 @@
   </div>
 
 </div> <!--/.row-->
-
-<!-- Events -->
-<h5>Upcoming Events</h5>
-<ul class="list-group">
-  {% for event in project.event_set.all|dictsort:'date' %}
-  <li class="list-group-item">
-    {% if event.type == "deadline" %}
-    <span class="timeUntil">{{ event.date|timeuntil }} left</span>
-    {% endif %}
-    <strong>{{ event.name }}</strong>
-    <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}</p>
-
-    {% if event.location != "" %}
-    <p>
-      <i class="glyphicon glyphicon-map-marker"></i>
-      {{ event.location }}
-    </p>
-    {% endif %}
-  </li>
-  {% endfor %}
-</ul>
-<p>
-  <button type="button" class="btn btn-default"
-  onclick="openEventCreator()">Add event</button>
-</p>
 
 </div> <!--/.container-->
 

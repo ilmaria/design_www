@@ -77,7 +77,7 @@
           {% endif %}
           <strong>{{ event.name }}</strong>
           <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}
-          {% if event.location != "" %}
+            {% if event.location != "" %}
             , <i class="glyphicon glyphicon-map-marker"></i>
             {{ event.location }}
           </p>
@@ -125,39 +125,39 @@
       <button type="submit" class="btn btn-primary" onclick="validateLogTime(event)">Log time</button>
     </div>
   </form>
-</div>
+  </div>
 
-<div class="row">
+  <div class="row">
 
-  <!-- Logged time history from all the project memebers -->
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h5 class="panel-title">
-          <i class="glyphicon glyphicon-time"></i>
-          Log history
-        </h5>
-      </div>
-      <div class="panel-body">
-        <ul class="list-group">
-          {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
-          <li class="list-group-item">
-            {{ loggedtime.date|date:"d/m/Y" }} -
-            {{ loggedtime.user.username }}
-            logged {{ loggedtime.hours }}
-          </li>
-          {% endfor %}
-        </ul>
+    <!-- Logged time history from all the project memebers -->
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h5 class="panel-title">
+            <i class="glyphicon glyphicon-time"></i>
+            Log history
+          </h5>
+        </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
+            <li class="list-group-item">
+              {{ loggedtime.date|date:"d/m/Y" }} -
+              {{ loggedtime.user.username }}
+              logged {{ loggedtime.hours }}
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!--  Time spent by each project's members -->
-  <div class="col-md-6">
-    <div id="piechart"></div>
-  </div>
+    <!--  Time spent by each project's members -->
+    <div class="col-md-6">
+      <div id="piechart"></div>
+    </div>
 
-</div> <!--/.row-->
+  </div> <!--/.row-->
 
 </div> <!--/.container-->
 

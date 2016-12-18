@@ -27,21 +27,21 @@ function onClickDay(day) {
     var eventList = eventListModal.find('.modal-body .event-list')
     var template = eventList.find('.event-item').first().clone()
     eventList.empty()
-    
+
     day.events.forEach(function(event) {
       var eventHtml = template.clone()
       eventHtml.find('.event-name').text(
         moment(event.date).format('hh:mm')  + ' - ' + event.name)
-        
+
       if (event.location) {
         eventHtml.find('.event-location').text(event.location)
       } else {
         eventHtml.find('.event-location').remove()
       }
-      
+
       eventHtml.appendTo(eventList)
     })
-    
+
     eventListModal.modal('show')
   }
 }

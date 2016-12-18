@@ -26,10 +26,10 @@
   <h5>Ongoing Projects</h5>
   {% for project in projects %}
   <div class="jumbotron">
-    <h6>
+    <h5>
       <a href="{% url 'project_details' project.name|urlencode_plus %}">
       {{ project.name }}</a>
-    </h6>
+    </h5>
     {% with project.event_set.all|dictsort:'date' as events %}
     <p><i class="fui-calendar"></i> <b>Next event:</b>
       {{ events.0.name }} - {{ events.0.date }}
@@ -37,7 +37,32 @@
     <p><i class="fui-time"></i> <b>Total spent hours:</b>
     </p>
     {% endwith %}
-    <p><button type="button" class="btn btn-default btn-lg" onclick="openEventCreator()">Log time</button></p>
+    <div class="form-group">
+      <form action="log_time" method="post" id="log-time-form"
+      class="form-inline" onsubmit="return validateNewTimelog()">
+      {% csrf_token %}
+      <div class="form-group">
+        <div class="input-group input-append date" id="datePicker">
+          <input id="logDate" type="text" class="form-control"
+          name="date" placeholder="dd/mm/yyyy">
+          <span class="input-group-addon add-on">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <input id="logHours" type="number" class="form-control bfh-number"
+        name="hours" placeholder="Hours">
+      </div>
+      <div class="form-group">
+        <input id="logMinutes" type="number" class="form-control bfh-number"
+        name="minutes" placeholder="Minutes">
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" onclick="validateLogTime(event)">Log time</button>
+      </div>
+    </form>
+    </div>
   </div>
   {% endfor %}
 

@@ -34,17 +34,14 @@ def project_details(request, project_name):
         total_times_per_user.append((member.username, loggedtime_total))
 
     total_times_json = [time for time in total_times_per_user]
-
-    events = Event.objects.filter(project=project)
-    # include only events that have type of 'deadline' and the event date
-    # is in the future
-    deadlines = events.filter(type='deadline', date__gt=datetime.now())
+    
+    events = Event.objects.filter(project=project, date__gt=datetime.now())
 
     context = {
         'project': project,
         'total_times_per_user': total_times_per_user,
         'total_times_json': json.dumps(total_times_json, default=json_serialize),
-        'deadlines': deadlines
+        'events': events,
     }
 
     return render(request, 'project_details.html', context)

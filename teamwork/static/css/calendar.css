@@ -1,7 +1,7 @@
 .clndr-controls {
   display: flex;
   justify-content: space-between;
-  font-size: 2.2em;
+  font-size: 25px;
 }
 
 .clndr-next-button,
@@ -16,7 +16,8 @@
 
 .clndr-grid {
   width: 764px;
-  border-left: 1px solid #2e2e35;
+  border-left: 1px solid white;
+  background-color: #edeff1;
 }
 
 .days {
@@ -31,54 +32,58 @@
 
 .header-day {
   height: 50px;
-  font-size: 1.5em;
+  padding: 8px 0px;
+  font-size: 20px;
   text-align: center;
   color: white;
   background-color: #1ABC9C;
 }
 
 .day {
-  height: 75px;
+  height: 120px;
+  padding: 0px 5px;
 }
 
 .day:hover {
   cursor: pointer;
-  background-color: #e8e8e8;
+  background-color: white;
 }
 
 .days .event-name {
-  padding: 0 0.5em;
+  font-size: 15px;
+  padding: 2px 5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-color: #3883a3;
+  background-color: #34495E;
   color: white;
+  border-radius: 4px;
 }
 
 .day-number {
-  font-size: 1.1em;
+  font-size: 15px;
 }
 
 .days-of-the-week {
   background-color: #3883a3;
-  border: 1px solid #2e2e35;
-  border-left: none;
+  border-right: 1px solid white;
+  border-bottom: 2px solid white;
   display: flex;
 }
 
 .day,
 .event-listing {
-  border-right: 1px solid #2e2e35;
-  border-bottom: 1px solid #2e2e35;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
 }
 
 .event-listing {
-  border-top: 1px solid #2e2e35;
+  border-top: 1px solid white;
   width: 300px;
 }
 
 .event-listing-title {
-  border-bottom: 1px solid #2e2e35;
+  border-bottom: 1px solid white;
 }
 
 

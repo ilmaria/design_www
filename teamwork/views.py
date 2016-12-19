@@ -34,17 +34,14 @@ def project_details(request, project_name):
         total_times_per_user.append((member.username, loggedtime_total))
 
     total_times_json = [time for time in total_times_per_user]
-
-    events = Event.objects.filter(project=project)
-    # include only events that have type of 'deadline' and the event date
-    # is in the future
-    deadlines = events.filter(type='deadline', date__gt=datetime.now())
+    
+    events = Event.objects.filter(project=project, date__gt=datetime.now())
 
     context = {
         'project': project,
         'total_times_per_user': total_times_per_user,
         'total_times_json': json.dumps(total_times_json, default=json_serialize),
-        'deadlines': deadlines
+        'events': events,
     }
 
     return render(request, 'project_details.html', context)
@@ -57,9 +54,11 @@ def dashboard(request):
     """
 
     projects = Project.objects.filter(members__id=request.user.id)
+    next_event = Event.objects.all()[:1]
 
     context = {
-        'projects': projects
+        'projects': projects,
+        'next_event': next_event
     }
 
     return render(request, 'dashboard.html', context)
@@ -86,11 +85,11 @@ def calendar(request):
 
 def login(request):
     """Login view."""
-    
+
     return auth_views.login(request, template_name='login.html')
 
 
 def logout(request):
     """Logout view."""
-    
+
     return auth_views.logout(request, template_name='logout.html')

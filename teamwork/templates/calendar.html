@@ -40,7 +40,7 @@
       <% }) %>
       </div>
     </div>
-    
+
   </script>
 </div>
 
@@ -89,7 +89,7 @@
 <script>
   var events = JSON.parse("{{ events|escapejs|default:'[]' }}")
   var template = $('#calendar-template').html()
-  
+
   initCalendar('.calendar-container', template, events)
 </script>
 

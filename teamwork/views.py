@@ -34,7 +34,7 @@ def project_details(request, project_name):
         total_times_per_user.append((member.username, loggedtime_total))
 
     total_times_json = [time for time in total_times_per_user]
-    
+
     events = Event.objects.filter(project=project, date__gt=datetime.now())
 
     context = {
@@ -62,7 +62,6 @@ def dashboard(request):
     }
 
     return render(request, 'dashboard.html', context)
-
 
 @login_required
 def calendar(request):

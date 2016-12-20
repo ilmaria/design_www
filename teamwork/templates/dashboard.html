@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load extra_tags %}
+{% load next_event %}
 
 {% block content %}
 <!-- Next Event from all project -->
@@ -30,9 +31,9 @@
       <a href="{% url 'project_details' project.name|urlencode_plus %}">
       {{ project.name }}</a>
     </h5>
-    {% with project.event_set.all|dictsort:'date' as events %}
+    {% with next_event=project.event_set.all|dictsort:'date'|next_event %}
     <p><i class="fui-calendar"></i> <b>Next event:</b>
-      {{ events.0.name }} - {{ events.0.date }}
+      {{ next_event.name }} - {{ next_event.date }}
     </p>
     <p><i class="fui-time"></i> <b>Total spent hours:</b>
     </p>

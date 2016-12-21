@@ -32,7 +32,7 @@ function onClickDay(day) {
       var eventHtml = template.clone()
       eventHtml.find('.event-name').text(event.name)
 
-      eventHtml.find('.event-date').text(moment(event.date).format('dddd, DD MMM YYYY - hh.mm'))
+      eventHtml.find('.event-date').text(moment(event.date).format('dddd, DD MMM YYYY - HH.mm'))
 
       eventHtml.find('.event-project-name').text(' ' + '(' + event.project__name + ')')
 

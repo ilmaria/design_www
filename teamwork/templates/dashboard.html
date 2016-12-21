@@ -33,7 +33,7 @@
     </h5>
     {% with next_event=project.event_set.all|dictsort:'date'|next_event %}
     <p><i class="fui-calendar"></i> <b>Next event:</b>
-      {{ next_event.name }} - {{ next_event.date }}
+      {{ next_event.name }} - {{ next_event.date|date:"D, d M Y" }}, {{ next_event.date|time:"H:i" }}
     </p>
     <p><i class="fui-time"></i> <b>Total spent hours:</b>
     </p>

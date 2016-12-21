@@ -87,6 +87,18 @@
   border-bottom: 1px solid white;
 }
 
+li.event-item {
+  font-size: 18px;
+  line-height: inherit;
+  border-left: 4px solid #1ABC9C;
+  padding: 0 0 0 16px;
+  margin: 0 0 30px;
+}
+
+.event-name {
+  font-weight: bold;
+  margin-bottom: 2px;
+}
 
 /* Small */
 @media (min-width: 768px) and (max-width: 991px) {

@@ -78,7 +78,7 @@
           <strong>{{ event.name }}</strong>
           <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}
             {% if event.location != "" %}
-            , <i class="glyphicon glyphicon-map-marker"></i>
+            , <i class="fui-location"></i>
             {{ event.location }}
           </p>
           {% endif %}

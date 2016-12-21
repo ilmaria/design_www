@@ -31,7 +31,7 @@ function onClickDay(day) {
     day.events.forEach(function(event) {
       var eventHtml = template.clone()
       eventHtml.find('.event-name').text(
-        moment(event.date).format('hh:mm')  + ' - ' + event.name)
+        moment(event.date).format('dddd, DD.MM.YYYY, hh.mm')  + ' - ' + event.name)
 
       if (event.location) {
         eventHtml.find('.event-location').text(event.location)

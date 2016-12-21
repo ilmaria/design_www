@@ -4,8 +4,8 @@
 
 function validateNewTimelog() {
   // check if: logDate AND (logHours OR logMinutes)
-  return $('#logDate').val() !== '' &&
-    ($('#logHours').val() !== '' || $('#logMinutes').val() !== '')
+  return $('#log-date-input').val() !== '' &&
+    parseInt($('#log-time-input').val()) > 0
 }
 
 function validateNewMembers() {

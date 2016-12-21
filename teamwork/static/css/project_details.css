@@ -19,3 +19,8 @@
   cursor: pointer;
   float: right;
 }
+
+.create-task-confirm {
+  text-align: right;
+  margin-top: 1em;
+}

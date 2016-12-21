@@ -140,3 +140,14 @@ function deleteTask(taskName) {
   input.val(taskName)
   delete_task.submit()
 }
+
+function openTaskCreator() {
+  $('#add-task-form').collapse('show')
+  $('#open-task-creator').hide()
+}
+
+function cancelTaskCreation() {
+  $('#add-task-form').collapse('hide')
+  $('#open-task-creator').show()
+  return false
+}

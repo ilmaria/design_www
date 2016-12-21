@@ -171,18 +171,13 @@ def log_time(request, project_name):
     logged_date_cor = datetime.strptime(logged_date, '%d/%m/%Y').strftime("%Y-%m-%d")
 
     # convert input hours and minutes into logged hours
-    input_hours = request.POST.get('hours')
-    input_minutes = request.POST.get('minutes')
+    time_input = request.POST.get('time')
 
-    if input_hours == '':
-        input_hours = '0'
-    if input_minutes == '':
-        input_minutes = '0'
+    time = time_input.split(':')
+    hours = int(time[0])
+    minutes = int(time[1]) if len(time) == 2 else 0
 
-    logged_hours = timedelta(
-        hours=int(input_hours),
-        minutes=int(input_minutes)
-    )
+    logged_hours = timedelta(hours=hours, minutes=minutes)
 
     logged_time = LoggedTime(
         date=logged_date_cor,

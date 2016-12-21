@@ -49,7 +49,7 @@ def project_details(request, project_name):
             task_progress = min(task_logged_time / task.estimated_hours, 1)
             task_progress = int(round(task_progress, 2) * 100)
         else:
-            task_progress = 0
+            task_progress = 100
 
         tasks.append((task, task_progress))
 

@@ -30,11 +30,8 @@
       <% days.map(function(day) { %>
         <div class="<%= day.classes %>" id="<%= day.id %>">
           <span class="day-number"><%= day.day %></span>
-          <% if (day.events.length) { %>
-            <div class="event-name"><%= day.events[0].name %></div>
-          <% } %>
-          <% if (day.events.length > 1) { %>
-            <p>+ <%= day.events.length - 1 %> more</p>
+          <% for(var i = 0; i < day.events.length; ++i) { %>
+            <div class="event-name"><%= day.events[i].name %></div>
           <% } %>
         </div>
       <% }) %>

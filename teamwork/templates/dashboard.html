@@ -4,24 +4,40 @@
 {% block content %}
 <!-- Next Event from all project -->
 <div class="container">
-  <h3>Next Event</h3>
-
+  <h5>Next Event</h5>
+  <div class="row">
+    <div class="col-xs-2">
+      <img class="img-responsive" src="/static/img/calendar.png" width="80px" alt="cal-icon">
+    </div>
+    <div class="col-xs-10">
+      {% for event in next_event %}
+      <strong>{{ event.name }}</strong>
+      <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}</p>
+      {% if event.location != "" %}
+      <small><i class="fui-location"></i> {{ event.location }}</small>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 </div>
+
 <!-- List of ongoing pojects -->
 <div class="container">
-  <h3>Ongoing Projects</h3>
+  <h5>Ongoing Projects</h5>
   {% for project in projects %}
   <div class="jumbotron">
-    <h2>
+    <h6>
       <a href="{% url 'project_details' project.name|urlencode_plus %}">
       {{ project.name }}</a>
-    </h2>
+    </h6>
     {% with project.event_set.all|dictsort:'date' as events %}
-    <p><b>Next event:</b>
+    <p><i class="fui-calendar"></i> <b>Next event:</b>
       {{ events.0.name }} - {{ events.0.date }}
     </p>
+    <p><i class="fui-time"></i> <b>Total spent hours:</b>
+    </p>
     {% endwith %}
-    <p><button type="button" class="btn btn-primary btn-lg" onclick="openEventCreator()">Log time</button></p>
+    <p><button type="button" class="btn btn-default btn-lg" onclick="openEventCreator()">Log time</button></p>
   </div>
   {% endfor %}
 

@@ -63,8 +63,8 @@ def project_details(request, project_name):
         'project': project,
         'total_times_per_user': total_times_per_user,
         'total_times_json': json.dumps(total_times_json, default=json_serialize),
-        'deadlines': deadlines,
-        'tasks': tasks
+        'tasks': tasks,
+        'events': events
     }
 
     return render(request, 'project_details.html', context)
@@ -77,9 +77,11 @@ def dashboard(request):
     """
 
     projects = Project.objects.filter(members__id=request.user.id)
+    next_event = Event.objects.all()[:1]
 
     context = {
-        'projects': projects
+        'projects': projects,
+        'next_event': next_event
     }
 
     return render(request, 'dashboard.html', context)

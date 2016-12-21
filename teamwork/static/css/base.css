@@ -13,6 +13,15 @@ body {
   min-height: 100vh;
 }
 
+body.before-login {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background-color: #2C3E50;
+}
+
 .jumbotron {
   padding-top: 15px;
   padding-bottom: 15px;
@@ -24,11 +33,19 @@ body {
 .navbar-brand {
   margin: 0;
   color: white !important;
-  background-color: black !important;
+}
+
+.navbar-brand>img {
+  height: 100%;
+  width: auto;
 }
 
 li {
   list-style: none;
+}
+
+li.borderless {
+  border: 0 none;
 }
 
 main.content {
@@ -52,4 +69,11 @@ main.content {
 
 .timeUntil:empty {
   display: none;
+}
+
+footer p {
+  font-size: 15px;
+  line-height: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

@@ -14,14 +14,16 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'libs/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/flatUI/css/flat-ui.css' %}">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
     {% block styles %}
     {% endblock %}
+
   </head>
-  
+
   <body>
     <!-- Navigation bar -->
     <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -34,9 +36,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          {% if project %}
-          <p class="navbar-brand">{{ project.name }}</p>
-          {% endif %}
+          <span class="navbar-brand"><img alt="logo" src="/static/img/logo-reverse.png"></span>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -48,16 +48,16 @@
             <li {% if request.path == url %} class="active"{% endif %}>
               <a href="{{ url }}">Calendar</a>
             </li>
-            <li>
-              <button type="button" class="btn btn-success navbar-btn"
-                data-toggle="modal" data-target="#add-project-modal">
-                <span class="glyphicon glyphicon-plus"></span>
-                Add new project
-              </button>
-            </li>
           </ul>
+          <div class="navbar-form navbar-left">
+            <button type="button" class="btn btn-primary navbar-btn"
+              data-toggle="modal" data-target="#add-project-modal">
+              <span class="glyphicon glyphicon-plus"></span>
+              Add new project
+            </button>
+          </div>
           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
+            <li class="dropdown-open">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <span class="glyphicon glyphicon-user"></span>
                 {{ user.username }}
@@ -90,12 +90,12 @@
     </main>
 
     <!--Footer -->
-    <footer class="text-center">
-      <p>
-        <a href="https://mycourses.aalto.fi/" title="MyCourse" >My Courses</a>
-        |
-        <a href="#" title="Description" >Service Description</a>
-      </p>
+    <footer>
+        <p class="text-center">
+          <a href="https://mycourses.aalto.fi/" title="MyCourses" >MyCourses</a>
+          |
+          <a href="#" title="Description" >Service Description</a>
+        <p>
     </footer>
 
     <script src="{% static 'libs/jquery/jquery-3.1.1.min.js' %}"></script>

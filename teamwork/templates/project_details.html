@@ -55,12 +55,16 @@
     <div class="col-md-6">
       <h5>Tasks List</h5>
       {% for task in project.task_set.all %}
-      <label class="checkbox" for="task 1">
-        <input type="checkbox" id="task 1" value="" data-toggle="checkbox"
-        {% if task.done %}
-        checked
-        {% endif %}>{{ task.name }}</input>
-      </label>
+        {% with forloop.counter|stringformat:"s" as loop_index%}
+          {% with 'Task'|add:loop_index as task_id %}
+          <label class="checkbox" for={{task_id}}>
+            <input type="checkbox" id={{task_id}} value="" data-toggle="checkbox"
+            {% if task.done %}
+            checked
+            {% endif %}>{{ task.name }}</input>
+          </label>
+          {% endwith %}
+        {% endwith %}
       {% endfor %}
       <button type="button" class="btn btn-default"
       onclick="openEventCreator()">Add task</button>
@@ -172,6 +176,18 @@
 <script src="{% static 'js/project_details.js' %}"></script>
 <script src="{% static 'js/piechart.js' %}"></script>
 <script src="{% static 'js/form_validations.js' %}"></script>
+<script src="{% static 'libs/flatUI/js/radiocheck.js' %}"></script>
+<script>
+$(document).ready(function() {
+    $('input[type="checkbox"]').each(function(i, obj) {
+      console.log(i);
+
+      $(this).radiocheck();
+
+
+    });
+});
+</script>
 
 <script>
 var CSRF_TOKEN = '{{ csrf_token }}'

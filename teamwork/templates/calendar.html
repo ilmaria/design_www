@@ -20,67 +20,67 @@
     <!-- Calendar -->
     <div class="clndr-grid">
       <div class="days-of-the-week">
-      <% daysOfTheWeek.map(function(weekday) { %>
-        <div class="header-day">
-          <%= weekday %>
+        <% daysOfTheWeek.map(function(weekday) { %>
+          <div class="header-day">
+            <%= weekday %>
+          </div>
+          <% }) %>
         </div>
-      <% }) %>
-      </div>
-      <div class="days">
-      <% days.map(function(day) { %>
-        <div class="<%= day.classes %>" id="<%= day.id %>">
-          <span class="day-number"><%= day.day %></span>
-          <% for(var i = 0; i < day.events.length; ++i) { %>
-            <div class="event-name"><%= day.events[i].name %></div>
-          <% } %>
-        </div>
-      <% }) %>
-      </div>
-    </div>
+        <div class="days">
+          <% days.map(function(day) { %>
+            <div class="<%= day.classes %>" id="<%= day.id %>">
+              <span class="day-number"><%= day.day %></span>
+              <% for(var i = 0; i < day.events.length; ++i) { %>
+                <div class="event-name"><%= day.events[i].name %></div>
+                <% } %>
+              </div>
+              <% }) %>
+            </div>
+          </div>
 
-  </script>
-</div>
+        </script>
+      </div>
 
-<!-- Event list modal -->
-<div class="modal fade" id="event-list-modal" tabindex="-1"
-    role="dialog" aria-labelledby="modal-title">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close"
+      <!-- Event list modal -->
+      <div class="modal fade" id="event-list-modal" tabindex="-1"
+      role="dialog" aria-labelledby="modal-title">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close"
             data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="modal-title">Events</h4>
-      </div>
-      <div class="modal-body">
-        <ul class="event-list">
-          <li class="event-item">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="modal-title">Events</h4>
+        </div>
+        <div class="modal-body">
+          <ul class="event-list">
+            <li class="event-item">
               <span class="event-name"></span><small class="event-project-name"></small>
               <div class="event-date"></div>
               <i class="fui-location"></i><div class="event-location"></div>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-{% endblock %}
+  {% endblock %}
 
 
-{% block scripts %}
+  {% block scripts %}
 
-<script src="{% static 'libs/moment/moment.min.js' %}"></script>
-<script src="{% static 'libs/clndr/clndr.min.js' %}"></script>
-<script src="{% static 'libs/lodash/lodash.custom.min.js' %}"></script>
-<script src="{% static 'js/calendar.js' %}"></script>
+  <script src="{% static 'libs/moment/moment.min.js' %}"></script>
+  <script src="{% static 'libs/clndr/clndr.min.js' %}"></script>
+  <script src="{% static 'libs/lodash/lodash.custom.min.js' %}"></script>
+  <script src="{% static 'js/calendar.js' %}"></script>
 
-<script>
+  <script>
   var events = JSON.parse("{{ events|escapejs|default:'[]' }}")
   var template = $('#calendar-template').html()
 
   initCalendar('.calendar-container', template, events)
-</script>
+  </script>
 
-{% endblock %}
+  {% endblock %}

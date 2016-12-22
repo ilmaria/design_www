@@ -46,122 +46,122 @@
   <button id="add-member" type="button" class="btn btn-default"
   data-toggle="modal" data-target="#add-member-modal">
   Add member
-  </button>
-  {% endif %}
-  {% include 'modals/add_member.html' %}
+</button>
+{% endif %}
+{% include 'modals/add_member.html' %}
 
-  <div class="row">
-    <!-- Task list -->
-    <div class="col-md-6">
-      <h5>Tasks List</h5>
-      {% for task in project.task_set.all %}
-        {% with forloop.counter|stringformat:"s" as loop_index%}
-          {% with 'Task'|add:loop_index as task_id %}
-          <label class="checkbox" for={{task_id}}>
-            <input type="checkbox" id={{task_id}} value="" data-toggle="checkbox"
-            {% if task.done %}
-            checked
-            {% endif %}>{{ task.name }}</input>
-          </label>
-          {% endwith %}
-        {% endwith %}
-      {% endfor %}
-      <button type="button" class="btn btn-default"
-      onclick="openEventCreator()">Add task</button>
-    </div>
-
-    <!-- Events -->
-    <div class="col-md-6">
-      <h5>Upcoming Events</h5>
-      <ul class="list-group">
-        {% for event in events|dictsort:'date' %}
-        <li class="list-group-item">
-          {% if event.type == "deadline" %}
-          <span class="timeUntil">{{ event.date|timeuntil }} left</span>
-          {% endif %}
-          <strong>{{ event.name }}</strong>
-          <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}
-            {% if event.location != "" %}
-            , <i class="fui-location"></i>
-            {{ event.location }}
-          </p>
-          {% endif %}
-        </li>
-        {% empty %}
-        <li class="list-group-item">
-          <p>There is no event coming up</p>
-        </li>
-        {% endfor %}
-      </ul>
-      <p>
-        <button type="button" class="btn btn-default"
-        onclick="openEventCreator()">Add event</button>
-      </p>
-    </div>
-    <!-- end Events -->
-
-  </div> <!--/.row-->
-
-  <!-- Time Spent -->
-  <h5>Time Spent</h5>
-  <div class="form-group">
-    <form action="log_time" method="post" id="log-time-form"
-    class="form-inline" onsubmit="return validateNewTimelog()">
-    {% csrf_token %}
-    <div class="form-group">
-      <div class="input-group input-append date" id="datePicker">
-        <input id="logDate" type="text" class="form-control"
-        name="date" placeholder="dd/mm/yyyy">
-        <span class="input-group-addon add-on">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
-    </div>
-    <div class="form-group">
-      <input id="logHours" type="number" class="form-control bfh-number"
-      name="hours" placeholder="Hours">
-    </div>
-    <div class="form-group">
-      <input id="logMinutes" type="number" class="form-control bfh-number"
-      name="minutes" placeholder="Minutes">
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary" onclick="validateLogTime(event)">Log time</button>
-    </div>
-  </form>
+<div class="row">
+  <!-- Task list -->
+  <div class="col-md-6">
+    <h5>Tasks List</h5>
+    {% for task in project.task_set.all %}
+    {% with forloop.counter|stringformat:"s" as loop_index%}
+    {% with 'Task'|add:loop_index as task_id %}
+    <label class="checkbox" for={{task_id}}>
+      <input type="checkbox" id={{task_id}} value="" data-toggle="checkbox"
+      {% if task.done %}
+      checked
+      {% endif %}>{{ task.name }}</input>
+    </label>
+    {% endwith %}
+    {% endwith %}
+    {% endfor %}
+    <button type="button" class="btn btn-default"
+    onclick="openEventCreator()">Add task</button>
   </div>
 
-  <div class="row">
+  <!-- Events -->
+  <div class="col-md-6">
+    <h5>Upcoming Events</h5>
+    <ul class="list-group">
+      {% for event in events|dictsort:'date' %}
+      <li class="list-group-item">
+        {% if event.type == "deadline" %}
+        <span class="timeUntil">{{ event.date|timeuntil }} left</span>
+        {% endif %}
+        <strong>{{ event.name }}</strong>
+        <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}
+          {% if event.location != "" %}
+          , <i class="fui-location"></i>
+          {{ event.location }}
+        </p>
+        {% endif %}
+      </li>
+      {% empty %}
+      <li class="list-group-item">
+        <p>There is no event coming up</p>
+      </li>
+      {% endfor %}
+    </ul>
+    <p>
+      <button type="button" class="btn btn-default"
+      onclick="openEventCreator()">Add event</button>
+    </p>
+  </div>
+  <!-- end Events -->
 
-    <!-- Logged time history from all the project memebers -->
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h5 class="panel-title">
-            <i class="glyphicon glyphicon-time"></i>
-            Log history
-          </h5>
-        </div>
-        <div class="panel-body">
-          <ul class="list-group">
-            {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
-            <li class="list-group-item">
-              {{ loggedtime.date|date:"d/m/Y" }} -
-              {{ loggedtime.user.username }}
-              logged {{ loggedtime.hours }}
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
+</div> <!--/.row-->
+
+<!-- Time Spent -->
+<h5>Time Spent</h5>
+<div class="form-group">
+  <form action="log_time" method="post" id="log-time-form"
+  class="form-inline" onsubmit="return validateNewTimelog()">
+  {% csrf_token %}
+  <div class="form-group">
+    <div class="input-group input-append date" id="datePicker">
+      <input id="logDate" type="text" class="form-control"
+      name="date" placeholder="dd/mm/yyyy">
+      <span class="input-group-addon add-on">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <input id="logHours" type="number" class="form-control bfh-number"
+    name="hours" placeholder="Hours">
+  </div>
+  <div class="form-group">
+    <input id="logMinutes" type="number" class="form-control bfh-number"
+    name="minutes" placeholder="Minutes">
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary" onclick="validateLogTime(event)">Log time</button>
+  </div>
+</form>
+</div>
+
+<div class="row">
+
+  <!-- Logged time history from all the project memebers -->
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5 class="panel-title">
+          <i class="glyphicon glyphicon-time"></i>
+          Log history
+        </h5>
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
+          <li class="list-group-item">
+            {{ loggedtime.date|date:"d/m/Y" }} -
+            {{ loggedtime.user.username }}
+            logged {{ loggedtime.hours }}
+          </li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
+  </div>
 
-    <!--  Time spent by each project's members -->
-    <div class="col-md-6">
-      <div id="piechart"></div>
-    </div>
+  <!--  Time spent by each project's members -->
+  <div class="col-md-6">
+    <div id="piechart"></div>
+  </div>
 
-  </div> <!--/.row-->
+</div> <!--/.row-->
 
 </div> <!--/.container-->
 
@@ -179,9 +179,9 @@
 <script src="{% static 'libs/flatUI/js/radiocheck.js' %}"></script>
 <script>
 $(document).ready(function() {
-    $('input[type="checkbox"]').each(function(i, obj) {
-      $(this).radiocheck();
-    });
+  $('input[type="checkbox"]').each(function(i, obj) {
+    $(this).radiocheck();
+  });
 });
 </script>
 

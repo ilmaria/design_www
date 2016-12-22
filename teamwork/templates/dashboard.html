@@ -29,33 +29,33 @@
   <div class="jumbotron">
     <h5>
       <a href="{% url 'project_details' project.name|urlencode_plus %}">
-      {{ project.name }}</a>
-    </h5>
-    {% with next_event=project.event_set.all|dictsort:'date'|next_event %}
-    <p><i class="fui-calendar"></i> <strong>Next event:</strong>
-      {{ next_event.name }} - {{ next_event.date|date:"D, d M Y" }}, {{ next_event.date|time:"H:i" }}
-    <br /><i class="fui-time"></i> <strong>Total spent hours:</strong>
-    </p>
-    {% endwith %}
-    <div class="form-group">
-      <form action="log_time" method="post" id="log-time-form"
-      class="form-inline" onsubmit="return validateNewTimelog()">
-      {% csrf_token %}
-      <div class="from-group">
-        <strong>Today time spent:</strong>
-      </div>
+        {{ project.name }}</a>
+      </h5>
+      {% with next_event=project.event_set.all|dictsort:'date'|next_event %}
+      <p><i class="fui-calendar"></i> <strong>Next event:</strong>
+        {{ next_event.name }} - {{ next_event.date|date:"D, d M Y" }}, {{ next_event.date|time:"H:i" }}
+        <br /><i class="fui-time"></i> <strong>Total spent hours:</strong>
+      </p>
+      {% endwith %}
       <div class="form-group">
-        <input id="logHours" type="number" class="form-control bfh-number"
-        name="hours" placeholder="Hours">
-      </div>
-      <div class="form-group">
-        <input id="logMinutes" type="number" class="form-control bfh-number"
-        name="minutes" placeholder="Minutes">
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary" onclick="validateLogTime(event)">Log time</button>
-      </div>
-    </form>
+        <form action="log_time" method="post" id="log-time-form"
+        class="form-inline" onsubmit="return validateNewTimelog()">
+        {% csrf_token %}
+        <div class="from-group">
+          <strong>Today time spent:</strong>
+        </div>
+        <div class="form-group">
+          <input id="logHours" type="number" class="form-control bfh-number"
+          name="hours" placeholder="Hours">
+        </div>
+        <div class="form-group">
+          <input id="logMinutes" type="number" class="form-control bfh-number"
+          name="minutes" placeholder="Minutes">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" onclick="validateLogTime(event)">Log time</button>
+        </div>
+      </form>
     </div>
   </div>
   {% endfor %}

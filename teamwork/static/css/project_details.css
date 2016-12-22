@@ -15,9 +15,14 @@
   background-color: #4cae4c;
 }
 
-.delete-task {
+.task-edit-btn {
   cursor: pointer;
   float: right;
+}
+
+.label-assignee {
+  background-color: #ebedef;
+  color: #7b8996;
 }
 
 .create-task-confirm {

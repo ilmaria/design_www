@@ -53,11 +53,7 @@ def project_details(request, project_name):
 
         tasks.append((task, task_progress))
 
-    events = Event.objects.filter(project=project)
-
-    # include only events that have type of 'deadline' and the event date
-    # is in the future
-    deadlines = events.filter(type='deadline', date__gt=datetime.now())
+    events = Event.objects.filter(project=project, date__gt=datetime.now())
 
     context = {
         'project': project,

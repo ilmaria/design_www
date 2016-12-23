@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load extra_tags %}
 
 {% block styles %}
 <!-- Include Bootstrap Datepicker -->
@@ -148,7 +149,7 @@
           <li class="list-group-item borderless">
             {{ loggedtime.date|date:"d/m/Y" }} -
             {{ loggedtime.user.username }}
-            logged {{ loggedtime.hours }}
+            logged {{ loggedtime.hours|duration }}
           </li>
           {% endfor %}
         </ul>
@@ -161,7 +162,7 @@
     <div class="panel panel-borderless">
       <div class="panel-body">
         <p>Total time spent on project</p>
-          <h4>{{ total_project_loggedtime }}</h4>
+          <h4>{{ total_project_loggedtime|duration }}</h4>
         <p>Time spent per member</p>
         <div id="piechart"></div>
       </div>

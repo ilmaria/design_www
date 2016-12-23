@@ -19,7 +19,9 @@ function drawChart(loggedTimes) {
   formatter.format(data, 1)
 
   var options = {
-    title: 'Total logged times',
+    width: 440,
+    height: 240,
+    colors: ['#1ABC9C', '#BDC3C7', '#7F8C8D', '#34495E', '#2C3E50', '#16A085'],
     pieHole: 0.4,
   }
 

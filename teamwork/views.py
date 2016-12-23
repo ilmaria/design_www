@@ -24,6 +24,9 @@ def project_details(request, project_name):
     total_times_per_user = []
     members = project.members.all()
 
+    # total time logged by all members
+    total_project_loggedtime = timedelta();
+
     for member in members:
         loggedtimes = project.loggedtime_set.filter(user=member)
         loggedtime_total = timedelta()
@@ -31,6 +34,7 @@ def project_details(request, project_name):
         for loggedtime in loggedtimes:
             loggedtime_total += loggedtime.hours
 
+        total_project_loggedtime += loggedtime_total
         total_times_per_user.append((member.username, loggedtime_total))
 
     total_times_json = [time for time in total_times_per_user]
@@ -39,6 +43,7 @@ def project_details(request, project_name):
 
     context = {
         'project': project,
+        'total_project_loggedtime': total_project_loggedtime,
         'total_times_per_user': total_times_per_user,
         'total_times_json': json.dumps(total_times_json, default=json_serialize),
         'events': events,

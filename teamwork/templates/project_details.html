@@ -102,8 +102,8 @@
 
 </div> <!--/.row-->
 
-<!-- Time Spent -->
-<h5>Time Spent</h5>
+<!-- Time -->
+<h5>Log time</h5>
 <div class="form-group">
   <form action="log_time" method="post" id="log-time-form"
   class="form-inline" onsubmit="return validateNewTimelog()">
@@ -145,7 +145,7 @@
       <div class="panel-body">
         <ul class="list-group">
           {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
-          <li class="list-group-item">
+          <li class="list-group-item borderless">
             {{ loggedtime.date|date:"d/m/Y" }} -
             {{ loggedtime.user.username }}
             logged {{ loggedtime.hours }}
@@ -158,7 +158,14 @@
 
   <!--  Time spent by each project's members -->
   <div class="col-md-6">
-    <div id="piechart"></div>
+    <div class="panel panel-borderless">
+      <div class="panel-body">
+        <p>Total time spent on project</p>
+          <h4>{{ total_project_loggedtime }}</h4>
+        <p>Time spent per member</p>
+        <div id="piechart"></div>
+      </div>
+    </div>
   </div>
 
 </div> <!--/.row-->

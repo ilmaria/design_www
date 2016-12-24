@@ -19,8 +19,9 @@ function drawChart(loggedTimes) {
   formatter.format(data, 1)
 
   var options = {
-    width: 440,
-    height: 240,
+    chartArea:{left:6,top:1,width:'85%',height:'85%'},
+    legend:{textStyle: {color: '#34495e',fontSize: 18,fontName: 'Lato'}},
+    tooltip:{textStyle: {color: '#34495e',fontSize: 18,fontName: 'Lato'}},
     colors: ['#1ABC9C', '#BDC3C7', '#7F8C8D', '#34495E', '#2C3E50', '#16A085'],
     pieHole: 0.4,
   }

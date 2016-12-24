@@ -64,10 +64,12 @@
         <li class="list-group-item">
           <input type="checkbox" {% if task.done %} checked {% endif %}>
           <span>{{ task.name }}</span>
-          <span>{{ task.estimated_hours|duration }}</span>
-          <span class="task-edit-btn">
-            <span class="glyphicon glyphicon-pencil" onclick="editTask('{{ task.name }}')"></span>
-          </span>
+
+          <div style="display: inline-block; float: right">
+            <span style="font-size: 0.8em">Estimated duration:</span>
+            <span>{{ task.estimated_hours|duration }}</span>
+          </div>
+
           <div class="progress">
             <div class="progress-bar" role="progressbar" aria-valuenow="{{ task_progress }}"
               aria-valuemin="0" aria-valuemax="100"
@@ -83,8 +85,11 @@
               </span>
             {% endfor %}
             <span class="task-edit-btn">
-              <span class="glyphicon glyphicon-trash" onclick="deleteTask('{{ task.name }}')"></span>
+              <span class="glyphicon glyphicon-pencil" onclick="editTask('{{ task.name }}')"></span>
             </span>
+            <!--<span class="task-edit-btn">
+              <span class="glyphicon glyphicon-trash" onclick="deleteTask('{{ task.name }}')"></span>
+            </span>-->
           </div>
         </li>
         {% endfor %}

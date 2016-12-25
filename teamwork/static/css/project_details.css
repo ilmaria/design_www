@@ -14,3 +14,19 @@
 .own-badge {
   background-color: #4cae4c;
 }
+
+.task-edit-btn {
+  cursor: pointer;
+  float: right;
+}
+
+.label-assignee {
+  background-color: #ebedef;
+  color: #7b8996;
+  margin-right: 5px;
+}
+
+.create-task-confirm {
+  text-align: right;
+  margin-top: 1em;
+}

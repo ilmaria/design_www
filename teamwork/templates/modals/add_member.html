@@ -27,7 +27,7 @@ Add member
   onsubmit="return validateNewMembers()">
   {% csrf_token %}
   <input id="users-to-add" name="users-to-add" type="hidden">
-  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+  <button class="btn btn-default" data-dismiss="modal">Cancel</button>
   <button type="submit" class="btn btn-primary">Add member</button>
 </form>
 {% endblock %}

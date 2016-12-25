@@ -111,32 +111,19 @@ function addUserToForm(username, form, userList, visibleInput, hiddenInput) {
 function removeMember(username) {
   var badge = $("[data-member='" + username + "']")
 
-  editMembers({
-    remove: [username],
-    error: function(error) {
-      badge.fadeIn('fast')
-    }
-  })
-
-  badge.fadeOut('fast')
-}
-
-/**
- * Ajax function for adding or removing users from the project.
- * @param {Object} options - An object with properties `remove` and `add`
- * that are arrays of usernames.
- */
-function editMembers(options) {
   $.ajax({
     url: 'edit_project_members',
     method: 'post',
     data: {
       csrfmiddlewaretoken: CSRF_TOKEN,
-      remove: options.remove,
-      add: options.add,
+      'users-to-remove': username,
     },
-    error: options.error
+    error: function(err) {
+      console.log(err)
+    }
   })
+
+  badge.fadeOut('fast')
 }
 
 /**

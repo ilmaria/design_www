@@ -36,7 +36,7 @@ def add_project(request):
 def add_task(request, project_name):
     """Add new task."""
 
-    task_name = request.POST.get('task_name')
+    task_name = request.POST.get('task_name', '')
 
     project_name = unquote_plus(project_name)
     project = get_object_or_404(Project,
@@ -46,10 +46,10 @@ def add_task(request, project_name):
     task_exists = Task.objects.filter(
         name=task_name, project=project).exists()
 
-    if task_name is None or task_name == '' or task_exists:
+    if task_name == '' or task_exists:
         return HttpResponse(status=400)
 
-    time_estimate = request.POST.get('time_estimate').split(':')
+    time_estimate = request.POST.get('time_estimate', '').split(':')
     hours = int(time_estimate[0])
     minutes = int(time_estimate[1]) if len(time_estimate) == 2 else 0
     estimated_hours = timedelta(hours=hours, minutes=minutes)
@@ -64,7 +64,9 @@ def add_task(request, project_name):
     # many-to-many fields (members field is many-to-many)
     task.save()
 
-    for username in request.POST.getlist('assignees[]'):
+    assignees = request.POST.get('assignees', '').split(',')
+
+    for username in assignees:
         try:
             user = User.objects.get(username=username)
             task.assignees.add(user)
@@ -79,9 +81,9 @@ def add_task(request, project_name):
 def delete_task(request, project_name):
     """Delete task."""
 
-    task_name = request.POST.get('task_name')
+    task_name = request.POST.get('task_name', '')
 
-    if task_name is None or task_name == '':
+    if task_name == '':
         return HttpResponse(status=400)
 
     project_name = unquote_plus(project_name)
@@ -106,22 +108,22 @@ def edit_project_members(request, project_name):
         name=project_name,
         owner=request.user)
 
-    # POST['remove[]'] contains a list of usernames that
+    # POST['users-to-remove'] contains a list of usernames that
     # should be removed from the project
-    print('remove[]')
-    print(request.POST.getlist('remove[]'))
-    for member_name in request.POST.getlist('remove[]'):
+    users_to_remove = request.POST.get('users-to-remove', '').split(',')
+
+    for member_name in users_to_remove:
         try:
             member = User.objects.exclude(id=request.user.id).get(username=member_name)
             project.members.remove(member)
         except:
             continue
 
-    print('add[]')
-    print(request.POST.getlist('add[]'))
-    # POST['add[]'] contains a list of usernames that
+    # POST['users-to-add'] contains a list of usernames that
     # should be added to the project
-    for member_name in request.POST.getlist('add[]'):
+    users_to_add = request.POST.get('users-to-add', '').split(',')
+
+    for member_name in users_to_add:
         try:
             member = User.objects.get(username=member_name)
             project.members.add(member)

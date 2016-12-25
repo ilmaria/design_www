@@ -23,6 +23,7 @@
 .label-assignee {
   background-color: #ebedef;
   color: #7b8996;
+  margin-right: 5px;
 }
 
 .create-task-confirm {

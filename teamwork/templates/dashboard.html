@@ -24,7 +24,7 @@
 <!-- List of ongoing pojects -->
 <div class="container">
   <h5>Ongoing Projects</h5>
-  {% for project in projects %}
+  {% for project, estimate, logged_time, progress in project_list %}
   <div class="jumbotron">
     <h6>
       <a href="{% url 'project_details' project.name|urlencode_plus %}">
@@ -34,8 +34,18 @@
     <p><i class="fui-calendar"></i> <b>Next event:</b>
       {{ events.0.name }} - {{ events.0.date }}
     </p>
-    <p><i class="fui-time"></i> <b>Total spent hours:</b>
+    <p>
+      <i class="fui-time"></i>
+      <b>Total spent hours:</b>
+      {{ logged_time|duration }}
     </p>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ progress }}"
+        aria-valuemin="0" aria-valuemax="100"
+        style="min-width: 2em; width: {{ progress }}%;">
+        {{ progress }}%
+      </div>
+    </div>
     {% endwith %}
     <p><button type="button" class="btn btn-default btn-lg" onclick="openEventCreator()">Log time</button></p>
   </div>

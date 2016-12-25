@@ -75,8 +75,30 @@ def dashboard(request):
     projects = Project.objects.filter(members__id=request.user.id)
     next_event = Event.objects.all()[:1]
 
+    project_list = []
+
+    for project in projects:
+        task_list = Task.objects.filter(project=project)
+        logged_times = LoggedTime.objects.filter(project=project)
+        estimate = timedelta()
+        logged_time = timedelta()
+
+        for task in task_list:
+            estimate += task.estimated_hours
+
+        for time in logged_times:
+            logged_time += time.hours
+
+        progress = 0
+
+        if estimate.total_seconds() > 0:
+            progress = min(logged_time / estimate, 1)
+            progress = int(round(progress, 2) * 100)
+
+        project_list.append((project, estimate, logged_time, progress))
+
     context = {
-        'projects': projects,
+        'project_list': project_list,
         'next_event': next_event
     }
 

@@ -34,7 +34,7 @@ class Task(models.Model):
     name = models.CharField(max_length=255, default='My task')
     done = models.BooleanField(default=False)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    assignees = models.ManyToManyField(User, related_name='tasks')
+    assignees = models.ManyToManyField(User, related_name='tasks', blank=True)
     estimated_hours = models.DurationField(default=timedelta)
 
     def __str__(self):

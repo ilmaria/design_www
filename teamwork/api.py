@@ -103,6 +103,9 @@ def edit_task(request, project_name):
     estimated_hours = timedelta(hours=hours, minutes=minutes)
     task.estimated_hours = estimated_hours
 
+    for user in task.assignees.all():
+        task.assignees.remove(user)
+
     for username in assignees:
         try:
             user = User.objects.get(username=username)

@@ -53,6 +53,7 @@
   {% include 'modals/add_member.html' %}
 
   <div class="row">
+
     <!-- Task list -->
     <div class="col-md-6">
       <h5>Tasks List</h5>
@@ -114,8 +115,8 @@
           {% endif %}
           <strong>{{ event.name }}</strong>
           <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}
-          {% if event.location != "" %}
-            , <i class="glyphicon glyphicon-map-marker"></i>
+            {% if event.location != "" %}
+            , <i class="fui-location"></i>
             {{ event.location }}
           </p>
           {% endif %}
@@ -134,7 +135,6 @@
     <!-- end Events -->
 
   </div> <!--/.row-->
-
 
   <div class="row">
     <div class="col-md-6">
@@ -179,37 +179,37 @@
     </div>
   </div> <!--/.row-->
 
-<div class="row">
+  <div class="row">
 
-  <!-- Logged time history from all the project memebers -->
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h5 class="panel-title">
-          <i class="glyphicon glyphicon-time"></i>
-          Log history
-        </h5>
-      </div>
-      <div class="panel-body">
-        <ul class="list-group">
-          {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
-          <li class="list-group-item">
-            {{ loggedtime.date|date:"d/m/Y" }} -
-            {{ loggedtime.user.username }}
-            logged {{ loggedtime.hours }}
-          </li>
-          {% endfor %}
-        </ul>
+    <!-- Logged time history from all the project memebers -->
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h5 class="panel-title">
+            <i class="glyphicon glyphicon-time"></i>
+            Log history
+          </h5>
+        </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
+              <li class="list-group-item">
+                {{ loggedtime.date|date:"d/m/Y" }} -
+                {{ loggedtime.user.username }}
+                logged {{ loggedtime.hours }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!--  Time spent by each project's members -->
-  <div class="col-md-6">
-    <div id="piechart"></div>
-  </div>
+    <!--  Time spent by each project's members -->
+    <div class="col-md-6">
+      <div id="piechart"></div>
+    </div>
 
-</div> <!--/.row-->
+  </div> <!--/.row-->
 
 </div> <!--/.container-->
 
@@ -228,11 +228,17 @@
 <script src="{% static 'js/project_details.js' %}"></script>
 <script src="{% static 'js/piechart.js' %}"></script>
 <script src="{% static 'js/form_validations.js' %}"></script>
-
+<script src="{% static 'libs/flatUI/js/radiocheck.js' %}"></script>
 <script>
-var CSRF_TOKEN = '{{ csrf_token }}'
-var loggedTimes = JSON.parse("{{ total_times_json|escapejs|default:'[]' }}")
-initPiechart(loggedTimes)
+  $(document).ready(function() {
+    $('input[type="checkbox"]').each(function(i, obj) {
+      $(this).radiocheck()
+    })
+  })
+
+  var CSRF_TOKEN = '{{ csrf_token }}'
+  var loggedTimes = JSON.parse("{{ total_times_json|escapejs|default:'[]' }}")
+  initPiechart(loggedTimes)
 </script>
 
 {% endblock %}

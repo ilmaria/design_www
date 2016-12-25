@@ -27,21 +27,24 @@ function onClickDay(day) {
     var eventList = eventListModal.find('.modal-body .event-list')
     var template = eventList.find('.event-item').first().clone()
     eventList.empty()
-    
+
     day.events.forEach(function(event) {
       var eventHtml = template.clone()
-      eventHtml.find('.event-name').text(
-        moment(event.date).format('hh:mm')  + ' - ' + event.name)
-        
+      eventHtml.find('.event-name').text(event.name)
+
+      eventHtml.find('.event-date').text(moment(event.date).format('dddd, DD MMM YYYY - HH.mm'))
+
+      eventHtml.find('.event-project-name').text(' ' + '(' + event.project__name + ')')
+
       if (event.location) {
         eventHtml.find('.event-location').text(event.location)
       } else {
         eventHtml.find('.event-location').remove()
       }
-      
+
       eventHtml.appendTo(eventList)
     })
-    
+
     eventListModal.modal('show')
   }
 }

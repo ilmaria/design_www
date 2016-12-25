@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
 {% load extra_tags %}
+{% load next_event %}
 
 {% block content %}
 <!-- Next Event from all project -->
@@ -26,31 +28,72 @@
   <h5>Ongoing Projects</h5>
   {% for project, estimate, logged_time, progress in project_list %}
   <div class="jumbotron">
-    <h6>
+    <h5>
       <a href="{% url 'project_details' project.name|urlencode_plus %}">
-      {{ project.name }}</a>
-    </h6>
-    {% with project.event_set.all|dictsort:'date' as events %}
-    <p><i class="fui-calendar"></i> <b>Next event:</b>
-      {{ events.0.name }} - {{ events.0.date }}
-    </p>
-    <p>
-      <i class="fui-time"></i>
-      <b>Total spent hours:</b>
-      {{ logged_time|duration }}
-    </p>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="{{ progress }}"
-        aria-valuemin="0" aria-valuemax="100"
-        style="min-width: 2em; width: {{ progress }}%;">
-        {{ progress }}%
+        {{ project.name }}</a>
+      </h5>
+      {% with next_event=project.event_set.all|dictsort:'date'|next_event %}
+      <p><i class="fui-calendar"></i> <strong>Next event:</strong>
+        {{ next_event.name }} - {{ next_event.date|date:"D, d M Y" }}, {{ next_event.date|time:"H:i" }}
+        <br />
+        <i class="fui-time"></i>
+        <strong>Total spent hours:</strong>
+        {{ logged_time|duration }}
+      </p>
+      {% endwith %}
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="{{ progress }}"
+          aria-valuemin="0" aria-valuemax="100"
+          style="min-width: 2em; width: {{ progress }}%;">
+          {{ progress }}%
+        </div>
       </div>
-    </div>
-    {% endwith %}
-    <p><button type="button" class="btn btn-default btn-lg" onclick="openEventCreator()">Log time</button></p>
+
+      <!-- Timelog -->
+      <div class="form-group">
+        <form action="log_time" method="post" id="log-time-form"
+          class="form-inline" onsubmit="return validateNewTimelog()">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="log-date-input">Date</label>
+            <div class="input-group input-append date" id="datePicker"
+              style="max-width: 9em">
+              <input id="log-date-input" type="text" class="form-control"
+                name="date" placeholder="dd/mm/yyyy">
+              <span class="input-group-addon add-on">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="log-time-input">Time</label>
+            <input id="log-time-input" type="time" class="form-control bfh-number"
+              name="time" placeholder="00:00" style="max-width: 5em">
+          </div>
+          <div class="form-group">
+            <label for="log-time-task">Task</label>
+            <select class="form-control" name="log-time-task" id="log-time-task">
+              <option value="">-</option>
+              {% for task in project.task_set.all %}
+                <option value="{{ task.name }}">{{ task.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Log time</button>
+          </div>
+        </form>
+      </div>
+
   </div>
   {% endfor %}
 
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{% static 'js/form_validations.js' %}"></script>
 
 {% endblock %}

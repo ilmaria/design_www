@@ -3,7 +3,18 @@
  */
 $('#user-search').typeahead({
   source: searchUsers,
-  afterSelect: addToSelectedUsers
+  afterSelect: function addUserToMembers(username) {
+    addUserToForm(username, '#add-user-form', '#member-user-list',
+      '#user-search', '#users-to-add')
+  }
+})
+
+$('#assignees-input').typeahead({
+  source: searchUsers,
+  afterSelect: function addUserToTask(username) {
+    addUserToForm(username, '#add-task-form', '#assignee-user-list',
+      '#assignees-input', '#assignees-hidden')
+  }
 })
 
 /**
@@ -52,10 +63,15 @@ function searchUsers(query, process) {
  * Adds `username` to the list of selected users that are to be added
  * to the project.
  * @param {string} username - Username to add to the project.
+ * @param {string} form - Css selector for the form where the
+ * usernames are added.
+ * @param {string} userList - Selector for list element to store users.
+ * @param {string} visibleInput - Selector for the visible input element.
+ * @param {string} hiddenInput - Selector for the hidden input element.
  */
-function addToSelectedUsers(username) {
-  var userForm = $('#add-user-form')
-  var userList = $('.user-list')
+function addUserToForm(username, form, userList, visibleInput, hiddenInput) {
+  var userForm = $(form)
+  var userList = $(userList)
 
   var userItem = userList.children().first().clone()
   userItem.find('.added-user').text(username)
@@ -67,7 +83,7 @@ function addToSelectedUsers(username) {
     return $(this).data('username')
   }).get()
 
-  var userListInput = userForm.find('input#users-to-add')
+  var userListInput = userForm.find(hiddenInput)
   userListInput.val(usernameList)
 
   // event listener for clicking 'x' to remove a username
@@ -85,14 +101,7 @@ function addToSelectedUsers(username) {
   })
 
   // empty search field
-  $('#user-search').val('')
-}
-
-/**
- * Submit form for adding new users.
- */
-function addMember() {
-  $('#add-user-form').submit()
+  $(visibleInput).val('')
 }
 
 /**
@@ -139,15 +148,4 @@ function deleteTask(taskName) {
   var input = $(delete_task).find('input[name="task_name"]')
   input.val(taskName)
   delete_task.submit()
-}
-
-function openTaskCreator() {
-  $('#add-task-form').collapse('show')
-  $('#open-task-creator').hide()
-}
-
-function cancelTaskCreation() {
-  $('#add-task-form').collapse('hide')
-  $('#open-task-creator').show()
-  return false
 }

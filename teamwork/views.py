@@ -34,7 +34,7 @@ def project_details(request, project_name):
         total_times_per_user.append((member.username, loggedtime_total))
 
     total_times_json = [time for time in total_times_per_user]
-    
+
     events = Event.objects.filter(project=project, date__gt=datetime.now())
 
     context = {
@@ -63,14 +63,13 @@ def dashboard(request):
 
     return render(request, 'dashboard.html', context)
 
-
 @login_required
 def calendar(request):
     """Calendar that shows all events."""
 
     projects = Project.objects.filter(members__id=request.user.id)
     event_set = Event.objects.filter(project__in=projects)\
-        .values('date', 'name', 'location')
+        .values('date', 'name', 'location', 'project__name')
 
     # turn QuerySet into a native python list of dictionaries
     events = [event for event in event_set]

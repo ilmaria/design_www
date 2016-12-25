@@ -2,7 +2,9 @@
  * Initialize search suggestions for searching users.
  */
 $('#user-search').typeahead({
-  source: searchUsers,
+  source: function(query, process) {
+    searchUsers(query, projectMembers, '', process)
+  },
   afterSelect: function addUserToMembers(username) {
     addUserToForm(username, '#add-user-form', '#member-user-list',
       '#user-search', '#users-to-add')
@@ -10,10 +12,22 @@ $('#user-search').typeahead({
 })
 
 $('#assignees-input').typeahead({
-  source: searchUsers,
+  source: function(query, process) {
+    searchUsers(query, '', projectMembers, process)
+  },
   afterSelect: function addUserToTask(username) {
     addUserToForm(username, '#add-task-form', '#assignee-user-list',
       '#assignees-input', '#assignees-hidden')
+  }
+})
+
+$('#edit-assignees').typeahead({
+  source: function(query, process) {
+    searchUsers(query, '', projectMembers, process)
+  },
+  afterSelect: function addUserToTask(username) {
+    addUserToForm(username, '#edit-task-form', '#edit-assignee-list',
+      '#edit-assignees', '#edit-assignees-hidden')
   }
 })
 
@@ -35,13 +49,15 @@ $('#datePicker').datepicker({
  * @param {Function} process - Callback function for processing returned
  * usernames. (Used by the typeahead plugin.)
  */
-function searchUsers(query, process) {
+function searchUsers(query, blacklist, whitelist, process) {
   $.ajax({
     url: '/search_users',
     method: 'post',
     data: {
       csrfmiddlewaretoken: CSRF_TOKEN,
-      query: query
+      query: query,
+      blacklist: blacklist,
+      whitelist: whitelist
     }
   })
   .done(function (result) {
@@ -127,12 +143,52 @@ function removeMember(username) {
 }
 
 /**
- * Submit form to delete a task.
- * @param {string} taskName - Name of the task to delete.
+ * Autofill selected task information to the edit task modal.
+ * @param {string} taskStr - Task to edit.
  */
-function deleteTask(taskName) {
-  // delete_task is the form element
-  var input = $(delete_task).find('input[name="task_name"]')
-  input.val(taskName)
-  delete_task.submit()
+function editTaskModal(taskStr) {
+  var task = taskStr.split(';')
+  var name = task[0]
+
+  var assignees = task[1].split(',').filter(function(username) {
+    return username.length > 0
+  })
+
+  var estimate = task[2].split(':')
+  estimate.pop()
+  estimate = estimate.join(':')
+
+  assignees.forEach(function(username) {
+    addUserToForm(username, '#edit-task-form', '#edit-assignee-list',
+      '#edit-assignees', '#edit-assignees-hidden')
+  })
+
+  $('#old-task-name').val(name)
+  $('#edit-task-name').val(name)
+  $('#remove-task-name').val(name)
+  $('#edit-time-estimate').val(estimate)
 }
+
+function taskDoneToggle(taskId, event) {
+  var progressBar = $('#task-progress-' + taskId)
+
+  if (event.target.checked) {
+    progressBar
+      .css('width', 100+'%')
+      .attr('aria-valuenow', 100)
+      .text('100%')
+  } else {
+    var original = progressBar.data('original-value')
+    progressBar
+      .css('width', original+'%')
+      .attr('aria-valuenow', original)
+      .text(original+'%')
+  }
+}
+
+$(function() {
+  // Trigger click twice to set the progress bar dynamically.
+  $('.task-done').each(function() {
+    $(this).trigger('click').trigger('click')
+  })
+})

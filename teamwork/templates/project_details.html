@@ -28,27 +28,28 @@
     </span>
     <!-- other users -->
     {% for member in project.members.all %}
-    {% if member != user %}
-    <span class="tag label label-info" data-member="{{ member.username }}">
-      {{ member.username }}
-      <!-- only project owner can remove users -->
-      {% if user == project.owner %}
-      <span class="remove-member"
-      href="javascript:void(0)"
-      onclick="removeMember('{{ member.username }}')"></span>
+      {% if member != user %}
+        <span class="tag label label-info" data-member="{{ member.username }}">
+          {{ member.username }}
+          <!-- only project owner can remove users -->
+          {% if user == project.owner %}
+            <span class="remove-member"
+              href="javascript:void(0)"
+              onclick="removeMember('{{ member.username }}')"></span>
+          {% endif %}
+        </span>
       {% endif %}
-    </span>
-    {% endif %}
     {% endfor %}
   </div>
 
   <!-- Add member button-->
   {% if user == project.owner %}
-  <button id="add-member" type="button" class="btn btn-default"
-  data-toggle="modal" data-target="#add-member-modal">
-  Add member
-  </button>
+    <button id="add-member" type="button" class="btn btn-default"
+      data-toggle="modal" data-target="#add-member-modal">
+      Add member
+    </button>
   {% endif %}
+
   {% include 'modals/add_member.html' %}
 
   <div class="row">
@@ -62,7 +63,8 @@
         </form>
         {% for task, task_progress in tasks %}
         <li class="list-group-item">
-          <input type="checkbox" {% if task.done %} checked {% endif %}>
+          <input class="task-done" type="checkbox" onclick="taskDoneToggle('{{ task.id }}', event)"
+            {% if task.done %} checked {% endif %}>
           <span>{{ task.name }}</span>
 
           <div style="display: inline-block; float: right">
@@ -71,8 +73,8 @@
           </div>
 
           <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="{{ task_progress }}"
-              aria-valuemin="0" aria-valuemax="100"
+            <div id="task-progress-{{ task.id }}" class="progress-bar" role="progressbar" aria-valuenow="{{ task_progress }}"
+              aria-valuemin="0" aria-valuemax="100" data-original-value="{{ task_progress }}"
               style="min-width: 2em; width: {{ task_progress }}%;">
               {{ task_progress }}%
             </div>
@@ -85,11 +87,10 @@
               </span>
             {% endfor %}
             <span class="task-edit-btn">
-              <span class="glyphicon glyphicon-pencil" onclick="editTask('{{ task.name }}')"></span>
+              <span class="glyphicon glyphicon-pencil" data-toggle="modal"
+                onclick="editTaskModal('{{ task.name }};{{ task.assignees.all|join:',' }};{{ task.estimated_hours }}')"
+                data-target="#edit-task-modal"></span>
             </span>
-            <!--<span class="task-edit-btn">
-              <span class="glyphicon glyphicon-trash" onclick="deleteTask('{{ task.name }}')"></span>
-            </span>-->
           </div>
         </li>
         {% endfor %}
@@ -216,6 +217,10 @@
 
 
 {% block scripts %}
+
+<script>
+  var projectMembers = '{{ project.members.all|join:","|escapejs }}'
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 <script src="https://www.gstatic.com/charts/loader.js"></script>

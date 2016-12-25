@@ -78,10 +78,49 @@ def add_task(request, project_name):
 
 @require_POST
 @login_required
+def edit_task(request, project_name):
+    """Edit task."""
+
+    project_name = unquote_plus(project_name)
+    project = get_object_or_404(Project,
+        name=project_name,
+        members__id=request.user.id)
+
+    old_name = request.POST.get('old-task-name', '')
+    new_name = request.POST.get('task-name', '')
+    assignees = request.POST.get('assignees', '').split(',')
+    time_estimate = request.POST.get('time-estimate', '').split(':')
+
+    if new_name == '':
+        return HttpResponse(status=400)
+
+    task = get_object_or_404(Task, name=old_name, project=project)
+
+    task.name = new_name
+
+    hours = int(time_estimate[0])
+    minutes = int(time_estimate[1]) if len(time_estimate) == 2 else 0
+    estimated_hours = timedelta(hours=hours, minutes=minutes)
+    task.estimated_hours = estimated_hours
+
+    for username in assignees:
+        try:
+            user = User.objects.get(username=username)
+            task.assignees.add(user)
+        except:
+            continue
+
+    task.save()
+
+    return redirect('project_details', project_name=project_name)
+
+
+@require_POST
+@login_required
 def delete_task(request, project_name):
     """Delete task."""
 
-    task_name = request.POST.get('task_name', '')
+    task_name = request.POST.get('task-name', '')
 
     if task_name == '':
         return HttpResponse(status=400)
@@ -91,7 +130,7 @@ def delete_task(request, project_name):
         name=project_name,
         members__id=request.user.id)
 
-    task = Task.objects.get( name=task_name, project=project)
+    task = Task.objects.get(name=task_name, project=project)
 
     task.delete()
 
@@ -138,22 +177,26 @@ def edit_project_members(request, project_name):
 def search_users(request):
     """Return all usernames matching the search query."""
 
-    query = request.POST.get('query')
+    query = request.POST.get('query', '')
+    blacklist = request.POST.get('blacklist', '').split(',')
+    whitelist = request.POST.get('whitelist', '').split(',')
 
-    # check if the query is a string
-    if isinstance(query, str):
+    if query != '':
         # ok request
         status_code = 200
-        matching_users = User.objects\
-            .exclude(id=request.user.id)\
-            .filter(username__startswith=query)\
-            .values('username')
+        matching_users = User.objects.exclude(username__in=blacklist)
+
+        if len(whitelist) > 0 and whitelist[0] != '':
+            matching_users = matching_users.filter(
+                username__iregex=r'(' + '|'.join(whitelist) + ')')
+
+        matching_users.filter(username__startswith=query).values('username')
     else:
         # bad request: query isn't string
         status_code = 400
         matching_users = []
 
-    usernames = [user['username'] for user in matching_users]
+    usernames = [user.username for user in matching_users]
 
     response = JsonResponse(usernames, safe=False)
     response.status_code = status_code

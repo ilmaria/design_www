@@ -35,3 +35,20 @@ function validateNewTask() {
 
   return $('input#task-name-input').val() !== '' && isEstimateValid
 }
+
+function validateTaskEdit() {
+  var estimate = $('#edit-time-estimate').val()
+  var isEstimateValid = true
+
+  if (estimate) {
+    var time = estimate.split(':')
+    var hours = Number(time[0])
+    var minutes = time.length === 2 ? Number(time[1]) : 0
+
+    if (isNaN(hours) || isNaN(minutes) || minutes > 59 || time.length > 2) {
+      isEstimateValid = false
+    }
+  }
+
+  return $('#edit-task-name').val() !== '' && isEstimateValid
+}

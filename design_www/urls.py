@@ -43,6 +43,8 @@ urlpatterns = [
 
     url(r'^(?P<project_name>.+?)/add_task/?$', api.add_task, name='add_task'),
 
+    url(r'^(?P<project_name>.+?)/edit_task/?$', api.edit_task, name='edit_task'),
+
     url(r'^(?P<project_name>.+?)/delete_task/?$', api.delete_task, name='delete_task'),
 
     url(r'^search_users/?$', api.search_users, name='search_users'),

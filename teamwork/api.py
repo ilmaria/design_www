@@ -142,4 +142,24 @@ def add_event(request, project_name):
     project = get_object_or_404(Project,
         name=project_name)
 
+    # get input date and convert to yyyy-mm-dd format
+    event_date = request.POST.get('eventDate')
+
+    event_hour = request.POST.get('eventHour')
+    event_min = request.POST.get('eventMin')
+
+    #HOW is this done?
+    event_date_cor = datetime.strptime(event_date, '%d/%m/%Y').strftime("%Y-%m-%d")
+
+    event_location = request.POST.get('eventLocation')
+
+    newEvent = Event(
+        name=event_name,
+        date=event_date_cor,
+        project=project,
+        location=event_location
+        )
+
+    newEvent.save()
+
     return redirect('project_details', project_name=project_name)

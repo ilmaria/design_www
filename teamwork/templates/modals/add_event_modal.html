@@ -9,40 +9,32 @@ Add event
 {% endblock %}
 
 {% block body %}
-<form id="add-event-form" action="/add_event" method="post"
-  onsubmit="return validateNewEventName">
+<form id="add-event-form" action="/add_event" method="post"  onsubmit="return validateNewEventName">
   {% csrf_token %}
   <div class="form-group">
-    <label for="new-event-name">Event name</label>
     <input id="new-event-name" type="text" name="event_name"
       placeholder="New event name" class="form-control">
   </div>
-    <div class="form-group">
-    <form action="log_time" method="post" id="log-time-form"
-    class="form-inline" onsubmit="return validateNewTimelog()">
-    {% csrf_token %}
-    <div class="form-group">
-      <div class="input-group input-append date" id="datePicker">
-        <input id="logDate" type="text" class="form-control"
-        name="date" placeholder="dd/mm/yyyy">
+  <!-- DATEPICKER cant be in two places? + z-index below popup -->
+  <div class="input-group input-append date" id="datePicker">
+        <input id="eventDate" type="text" class="form-control"
+        name="eventDate" placeholder="dd/mm/yyyy">
         <span class="input-group-addon add-on">
           <span class="glyphicon glyphicon-calendar"></span>
         </span>
-      </div>
+  </div>
+  <div class="form-inline">
+    <div class="form-group">
+      <input id="eventHour" type"text" class="form-control  col-xs-2" name="eventHour" placeholder="HH">
     </div>
     <div class="form-group">
-      <input id="logHours" type="number" class="form-control bfh-number"
-      name="hours" placeholder="HH:MM">
+      <input id="eventMin" type"text" class="form-control" name="eventMin" placeholder="MM">
     </div>
-      <div class="form-group">
-    <label for="new-event-name"></label>
-    <input id="new-event-name" type="text" name="event_name"
+  </div>
+  <div class="form-group">
+    <input id="eventLocation" type="text" name="eventLocation"
       placeholder="Location" class="form-control">
   </div>
-
-  </form>
-</div>
-
 </form>
 {% endblock %}
 

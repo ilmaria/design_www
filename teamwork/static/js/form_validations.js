@@ -20,5 +20,6 @@ function validateNewProject() {
 
 function validateNewEventName() {
   // fail if trying to send an empty event name
-  return $('input#new-event-name').val() !== ''
+  return $('input#new-event-name').val() !== '' && 
+  ($('#eventHour').val() !== '' || $('#eventMin').val() !== '')
 }

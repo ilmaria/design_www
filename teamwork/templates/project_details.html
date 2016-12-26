@@ -101,6 +101,7 @@
 
       {% include 'modals/add_task.html' %}
       {% include 'modals/edit_task.html' %}
+    </div>
 
     <!-- Events -->
     <div class="col-md-6">
@@ -134,48 +135,43 @@
 
   </div> <!--/.row-->
 
-  <div class="row">
-    <div class="col-md-6">
 
-      <!-- Time Spent -->
-      <h5>Time Spent</h5>
+  <!-- Time Spent -->
+  <h5>Time Spent</h5>
+  <div class="form-group">
+    <form action="log_time" method="post" id="log-time-form"
+      class="form-inline" onsubmit="return validateNewTimelog()">
+      {% csrf_token %}
       <div class="form-group">
-        <form action="log_time" method="post" id="log-time-form"
-          class="form-inline" onsubmit="return validateNewTimelog()">
-          {% csrf_token %}
-          <div class="form-group">
-            <label for="log-date-input">Date</label>
-            <div class="input-group input-append date" id="datePicker"
-              style="max-width: 9em">
-              <input id="log-date-input" type="text" class="form-control"
-                name="date" placeholder="dd/mm/yyyy">
-              <span class="input-group-addon add-on">
-                <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="log-time-input">Time</label>
-            <input id="log-time-input" type="time" class="form-control bfh-number"
-              name="time" placeholder="00:00" style="max-width: 5em">
-          </div>
-          <div class="form-group">
-            <label for="log-time-task">Task</label>
-            <select class="form-control" name="log-time-task" id="log-time-task">
-              <option value="">-</option>
-              {% for task, x in tasks %}
-                <option value="{{ task.name }}">{{ task.name }}</option>
-              {% endfor %}
-            </select>
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary">Log time</button>
-          </div>
-        </form>
+        <label for="log-date-input">Date</label>
+        <div class="input-group input-append date" id="datePicker"
+          style="max-width: 9em">
+          <input id="log-date-input" type="text" class="form-control"
+            name="date" placeholder="dd/mm/yyyy">
+          <span class="input-group-addon add-on">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
       </div>
-      
-    </div>
-  </div> <!--/.row-->
+      <div class="form-group">
+        <label for="log-time-input">Time</label>
+        <input id="log-time-input" type="time" class="form-control bfh-number"
+          name="time" placeholder="00:00" style="max-width: 5em">
+      </div>
+      <div class="form-group">
+        <label for="log-time-task">Task</label>
+        <select class="form-control" name="log-time-task" id="log-time-task">
+          <option value="">-</option>
+          {% for task, x in tasks %}
+            <option value="{{ task.name }}">{{ task.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Log time</button>
+      </div>
+    </form>
+  </div>
 
   <div class="row">
 

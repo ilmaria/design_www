@@ -29,11 +29,9 @@ urlpatterns = [
 
     url(r'^$', RedirectView.as_view(pattern_name='login'), name='home'),
 
-    url(r'^dashboard/$',
-        views.dashboard, name='dashboard'),
+    url(r'^dashboard/$', views.dashboard, name='dashboard'),
 
-    url(r'^calendar/$',
-        views.calendar, name='calendar'),
+    url(r'^calendar/$', views.calendar, name='calendar'),
 
     url(r'^(?P<project_name>.+?)/$',
         views.project_details, name='project_details'),
@@ -41,12 +39,15 @@ urlpatterns = [
     url(r'^(?P<project_name>.+?)/edit_project_members/?$',
         api.edit_project_members, name='edit_project_members'),
 
-    url(r'^(?P<project_name>.+?)/log_time/?$',
-        api.log_time, name='log_time'),
+    url(r'^(?P<project_name>.+?)/log_time/?$', api.log_time, name='log_time'),
 
-    url(r'^search_users/?$',
-        api.search_users, name='search_users'),
+    url(r'^(?P<project_name>.+?)/add_task/?$', api.add_task, name='add_task'),
 
-    url(r'^add_project/?$',
-        api.add_project, name='add_project'),
+    url(r'^(?P<project_name>.+?)/edit_task/?$', api.edit_task, name='edit_task'),
+
+    url(r'^(?P<project_name>.+?)/delete_task/?$', api.delete_task, name='delete_task'),
+
+    url(r'^search_users/?$', api.search_users, name='search_users'),
+
+    url(r'^add_project/?$', api.add_project, name='add_project'),
 ]

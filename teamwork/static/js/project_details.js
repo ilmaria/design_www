@@ -2,12 +2,37 @@
  * Initialize search suggestions for searching users.
  */
 $('#user-search').typeahead({
-  source: searchUsers,
-  afterSelect: addToSelectedUsers
+  source: function(query, process) {
+    searchUsers(query, projectMembers, '', process)
+  },
+  afterSelect: function addUserToMembers(username) {
+    addUserToForm(username, '#add-user-form', '#member-user-list',
+      '#user-search', '#users-to-add')
+  }
+})
+
+$('#assignees-input').typeahead({
+  source: function(query, process) {
+    searchUsers(query, '', projectMembers, process)
+  },
+  afterSelect: function addUserToTask(username) {
+    addUserToForm(username, '#add-task-form', '#assignee-user-list',
+      '#assignees-input', '#assignees-hidden')
+  }
+})
+
+$('#edit-assignees').typeahead({
+  source: function(query, process) {
+    searchUsers(query, '', projectMembers, process)
+  },
+  afterSelect: function addUserToTask(username) {
+    addUserToForm(username, '#edit-task-form', '#edit-assignee-list',
+      '#edit-assignees', '#edit-assignees-hidden')
+  }
 })
 
 /**
- * Initialize date picker for logging times in project. 
+ * Initialize date picker for logging times in project.
  */
 $('#datePicker').datepicker({
   autoclose: true,
@@ -24,13 +49,15 @@ $('#datePicker').datepicker({
  * @param {Function} process - Callback function for processing returned
  * usernames. (Used by the typeahead plugin.)
  */
-function searchUsers(query, process) {
+function searchUsers(query, blacklist, whitelist, process) {
   $.ajax({
     url: '/search_users',
     method: 'post',
     data: {
       csrfmiddlewaretoken: CSRF_TOKEN,
-      query: query
+      query: query,
+      blacklist: blacklist,
+      whitelist: whitelist
     }
   })
   .done(function (result) {
@@ -52,10 +79,15 @@ function searchUsers(query, process) {
  * Adds `username` to the list of selected users that are to be added
  * to the project.
  * @param {string} username - Username to add to the project.
+ * @param {string} form - Css selector for the form where the
+ * usernames are added.
+ * @param {string} userList - Selector for list element to store users.
+ * @param {string} visibleInput - Selector for the visible input element.
+ * @param {string} hiddenInput - Selector for the hidden input element.
  */
-function addToSelectedUsers(username) {
-  var userForm = $('#add-user-form')
-  var userList = $('.user-list')
+function addUserToForm(username, form, userList, visibleInput, hiddenInput) {
+  var userForm = $(form)
+  var userList = $(userList)
 
   var userItem = userList.children().first().clone()
   userItem.find('.added-user').text(username)
@@ -67,7 +99,7 @@ function addToSelectedUsers(username) {
     return $(this).data('username')
   }).get()
 
-  var userListInput = userForm.find('input#users-to-add')
+  var userListInput = userForm.find(hiddenInput)
   userListInput.val(usernameList)
 
   // event listener for clicking 'x' to remove a username
@@ -85,14 +117,7 @@ function addToSelectedUsers(username) {
   })
 
   // empty search field
-  $('#user-search').val('')
-}
-
-/**
- * Submit form for adding new users.
- */
-function addMember() {
-  $('#add-user-form').submit()
+  $(visibleInput).val('')
 }
 
 /**
@@ -102,10 +127,15 @@ function addMember() {
 function removeMember(username) {
   var badge = $("[data-member='" + username + "']")
 
-  editMembers({
-    remove: [username],
-    error: function(error) {
-      badge.fadeIn('fast')
+  $.ajax({
+    url: 'edit_project_members',
+    method: 'post',
+    data: {
+      csrfmiddlewaretoken: CSRF_TOKEN,
+      'users-to-remove': username,
+    },
+    error: function(err) {
+      console.log(err)
     }
   })
 
@@ -113,19 +143,52 @@ function removeMember(username) {
 }
 
 /**
- * Ajax function for adding or removing users from the project.
- * @param {Object} options - An object with properties `remove` and `add`
- * that are arrays of usernames.
+ * Autofill selected task information to the edit task modal.
+ * @param {string} taskStr - Task to edit.
  */
-function editMembers(options) {
-  $.ajax({
-    url: 'edit_project_members',
-    method: 'post',
-    data: {
-      csrfmiddlewaretoken: CSRF_TOKEN,
-      remove: options.remove,
-      add: options.add,
-    },
-    error: options.error
+function editTaskModal(taskStr) {
+  var task = taskStr.split(';')
+  var name = task[0]
+
+  var assignees = task[1].split(',').filter(function(username) {
+    return username.length > 0
   })
+
+  var estimate = task[2].split(':')
+  estimate.pop()
+  estimate = estimate.join(':')
+
+  assignees.forEach(function(username) {
+    addUserToForm(username, '#edit-task-form', '#edit-assignee-list',
+      '#edit-assignees', '#edit-assignees-hidden')
+  })
+
+  $('#old-task-name').val(name)
+  $('#edit-task-name').val(name)
+  $('#remove-task-name').val(name)
+  $('#edit-time-estimate').val(estimate)
 }
+
+function taskDoneToggle(taskId, event) {
+  var progressBar = $('#task-progress-' + taskId)
+
+  if (event.target.checked) {
+    progressBar
+      .css('width', 100+'%')
+      .attr('aria-valuenow', 100)
+      .text('100%')
+  } else {
+    var original = progressBar.data('original-value')
+    progressBar
+      .css('width', original+'%')
+      .attr('aria-valuenow', original)
+      .text(original+'%')
+  }
+}
+
+$(function() {
+  // Trigger click twice to set the progress bar dynamically.
+  $('.task-done').each(function() {
+    $(this).trigger('click').trigger('click')
+  })
+})

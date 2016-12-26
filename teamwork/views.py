@@ -39,6 +39,24 @@ def project_details(request, project_name):
 
     total_times_json = [time for time in total_times_per_user]
 
+    task_list = Task.objects.filter(project=project)
+    tasks = []
+
+    for task in task_list:
+        logged_times = LoggedTime.objects.filter(task=task)
+        task_logged_time = timedelta()
+
+        for time in logged_times:
+            task_logged_time += time.hours
+
+        if task.estimated_hours.total_seconds() > 0:
+            task_progress = min(task_logged_time / task.estimated_hours, 1)
+            task_progress = int(round(task_progress, 2) * 100)
+        else:
+            task_progress = 100
+
+        tasks.append((task, task_progress))
+
     events = Event.objects.filter(project=project, date__gt=datetime.now())
 
     context = {
@@ -46,7 +64,8 @@ def project_details(request, project_name):
         'total_project_loggedtime': total_project_loggedtime,
         'total_times_per_user': total_times_per_user,
         'total_times_json': json.dumps(total_times_json, default=json_serialize),
-        'events': events,
+        'tasks': tasks,
+        'events': events
     }
 
     return render(request, 'project_details.html', context)
@@ -61,8 +80,30 @@ def dashboard(request):
     projects = Project.objects.filter(members__id=request.user.id)
     next_event = Event.objects.all()[:1]
 
+    project_list = []
+
+    for project in projects:
+        task_list = Task.objects.filter(project=project)
+        logged_times = LoggedTime.objects.filter(project=project)
+        estimate = timedelta()
+        logged_time = timedelta()
+
+        for task in task_list:
+            estimate += task.estimated_hours
+
+        for time in logged_times:
+            logged_time += time.hours
+
+        progress = 0
+
+        if estimate.total_seconds() > 0:
+            progress = min(logged_time / estimate, 1)
+            progress = int(round(progress, 2) * 100)
+
+        project_list.append((project, estimate, logged_time, progress))
+
     context = {
-        'projects': projects,
+        'project_list': project_list,
         'next_event': next_event
     }
 

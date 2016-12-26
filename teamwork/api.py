@@ -22,12 +22,120 @@ def add_project(request):
         owner=request.user,
         description=""
     )
-    # apparently we need to save the project before we can access it's
+    # apparently we need to save the model before we can access it's
     # many-to-many fields (members field is many-to-many)
     project.save()
 
     project.members.add(request.user)
-    project.save()
+
+    return redirect('project_details', project_name=project_name)
+
+
+@require_POST
+@login_required
+def add_task(request, project_name):
+    """Add new task."""
+
+    task_name = request.POST.get('task_name', '')
+
+    project_name = unquote_plus(project_name)
+    project = get_object_or_404(Project,
+        name=project_name,
+        members__id=request.user.id)
+
+    task_exists = Task.objects.filter(
+        name=task_name, project=project).exists()
+
+    if task_name == '' or task_exists:
+        return HttpResponse(status=400)
+
+    time_estimate = request.POST.get('time_estimate', '').split(':')
+    hours = int(time_estimate[0])
+    minutes = int(time_estimate[1]) if len(time_estimate) == 2 else 0
+    estimated_hours = timedelta(hours=hours, minutes=minutes)
+
+    task = Task(
+        name=task_name,
+        project=project,
+        estimated_hours=estimated_hours
+    )
+
+    # apparently we need to save the model before we can access it's
+    # many-to-many fields (members field is many-to-many)
+    task.save()
+
+    assignees = request.POST.get('assignees', '').split(',')
+
+    for username in assignees:
+        try:
+            user = User.objects.get(username=username)
+            task.assignees.add(user)
+        except:
+            pass
+
+    return redirect('project_details', project_name=project_name)
+
+
+@require_POST
+@login_required
+def edit_task(request, project_name):
+    """Edit task."""
+
+    project_name = unquote_plus(project_name)
+    project = get_object_or_404(Project,
+        name=project_name,
+        members__id=request.user.id)
+
+    old_name = request.POST.get('old-task-name', '')
+    new_name = request.POST.get('task-name', '')
+    assignees = request.POST.get('assignees', '').split(',')
+    time_estimate = request.POST.get('time-estimate', '').split(':')
+
+    if new_name == '':
+        return HttpResponse(status=400)
+
+    task = get_object_or_404(Task, name=old_name, project=project)
+
+    task.name = new_name
+
+    hours = int(time_estimate[0])
+    minutes = int(time_estimate[1]) if len(time_estimate) == 2 else 0
+    estimated_hours = timedelta(hours=hours, minutes=minutes)
+    task.estimated_hours = estimated_hours
+
+    for user in task.assignees.all():
+        task.assignees.remove(user)
+
+    for username in assignees:
+        try:
+            user = User.objects.get(username=username)
+            task.assignees.add(user)
+        except:
+            continue
+
+    task.save()
+
+    return redirect('project_details', project_name=project_name)
+
+
+@require_POST
+@login_required
+def delete_task(request, project_name):
+    """Delete task."""
+
+    task_name = request.POST.get('task-name', '')
+
+    if task_name == '':
+        return HttpResponse(status=400)
+
+    project_name = unquote_plus(project_name)
+    project = get_object_or_404(Project,
+        name=project_name,
+        members__id=request.user.id)
+
+    task = Task.objects.get(name=task_name, project=project)
+
+    task.delete()
 
     return redirect('project_details', project_name=project_name)
 
@@ -42,25 +150,27 @@ def edit_project_members(request, project_name):
         name=project_name,
         owner=request.user)
 
-    # POST['remove[]'] contains a list of usernames that
+    # POST['users-to-remove'] contains a list of usernames that
     # should be removed from the project
-    for member_name in request.POST.getlist('remove[]'):
+    users_to_remove = request.POST.get('users-to-remove', '').split(',')
+
+    for member_name in users_to_remove:
         try:
             member = User.objects.exclude(id=request.user.id).get(username=member_name)
             project.members.remove(member)
         except:
-            # bad request: user tried to remove a non-existing project member
-            return HttpResponse(status=400)
+            continue
 
-    # POST['add[]'] contains a list of usernames that
+    # POST['users-to-add'] contains a list of usernames that
     # should be added to the project
-    for member_name in request.POST.getlist('add[]'):
+    users_to_add = request.POST.get('users-to-add', '').split(',')
+
+    for member_name in users_to_add:
         try:
             member = User.objects.get(username=member_name)
             project.members.add(member)
         except:
-            # bad request: user tried to add a non-existing project member
-            return HttpResponse(status=400)
+            continue
 
     return redirect('project_details', project_name=project_name)
 
@@ -70,22 +180,26 @@ def edit_project_members(request, project_name):
 def search_users(request):
     """Return all usernames matching the search query."""
 
-    query = request.POST.get('query')
+    query = request.POST.get('query', '')
+    blacklist = request.POST.get('blacklist', '').split(',')
+    whitelist = request.POST.get('whitelist', '').split(',')
 
-    # check if the query is a string
-    if isinstance(query, str):
+    if query != '':
         # ok request
         status_code = 200
-        matching_users = User.objects\
-            .exclude(id=request.user.id)\
-            .filter(username__startswith=query)\
-            .values('username')
+        matching_users = User.objects.exclude(username__in=blacklist)
+
+        if len(whitelist) > 0 and whitelist[0] != '':
+            matching_users = matching_users.filter(
+                username__iregex=r'(' + '|'.join(whitelist) + ')')
+
+        matching_users.filter(username__startswith=query).values('username')
     else:
         # bad request: query isn't string
         status_code = 400
         matching_users = []
 
-    usernames = [user['username'] for user in matching_users]
+    usernames = [user.username for user in matching_users]
 
     response = JsonResponse(usernames, safe=False)
     response.status_code = status_code
@@ -107,26 +221,27 @@ def log_time(request, project_name):
     logged_date_cor = datetime.strptime(logged_date, '%d/%m/%Y').strftime("%Y-%m-%d")
 
     # convert input hours and minutes into logged hours
-    input_hours = request.POST.get('hours')
-    input_minutes = request.POST.get('minutes')
-    
-    if input_hours == '':
-        input_hours = '0'
-    if input_minutes == '':
-        input_minutes = '0'
+    time_input = request.POST.get('time')
 
-    logged_hours = timedelta(
-        hours=int(input_hours),
-        minutes=int(input_minutes)
-    )
+    time = time_input.split(':')
+    hours = int(time[0])
+    minutes = int(time[1]) if len(time) == 2 else 0
 
-    loggedTime = LoggedTime(
+    logged_hours = timedelta(hours=hours, minutes=minutes)
+
+    logged_time = LoggedTime(
         date=logged_date_cor,
         hours=logged_hours,
         user=request.user,
         project=project
     )
 
-    loggedTime.save()
+    task_name = request.POST.get('log-time-task', '')
+
+    if task_name != '':
+        task = Task.objects.get(name=task_name, project=project)
+        logged_time.task = task
+
+    logged_time.save()
 
     return redirect('project_details', project_name=project_name)

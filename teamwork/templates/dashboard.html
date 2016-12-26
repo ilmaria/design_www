@@ -6,17 +6,18 @@
 {% block content %}
 <!-- Next Event from all project -->
 <div class="container">
-  <h5>Next Event</h5>
+  <h6>Next Event</h6>
   <div class="row">
-    <div class="col-xs-2">
+    <div class="col-xs-2 hidden-xs">
       <img class="img-responsive" src="/static/img/calendar.png" width="80px" alt="cal-icon">
     </div>
     <div class="col-xs-10">
       {% for event in next_event %}
-      <strong>{{ event.name }}</strong>
-      <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}</p>
+      <strong style="font-size:21px">{{ event.name }}</strong>
+      <p style="font-size:21px;">{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}
       {% if event.location != "" %}
-      <small><i class="fui-location"></i> {{ event.location }}</small>
+      <br />
+      <i class="fui-location"></i> {{ event.location }}</p>
       {% endif %}
       {% endfor %}
     </div>

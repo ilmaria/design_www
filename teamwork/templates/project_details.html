@@ -102,8 +102,6 @@
       {% include 'modals/add_task.html' %}
       {% include 'modals/edit_task.html' %}
 
-    </div>
-
     <!-- Events -->
     <div class="col-md-6">
       <h5>Upcoming Events</h5>
@@ -175,7 +173,7 @@
           </div>
         </form>
       </div>
-
+      
     </div>
   </div> <!--/.row-->
 
@@ -192,21 +190,29 @@
         </div>
         <div class="panel-body">
           <ul class="list-group">
-            {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
-              <li class="list-group-item">
-                {{ loggedtime.date|date:"d/m/Y" }} -
-                {{ loggedtime.user.username }}
-                logged {{ loggedtime.hours }}
-              </li>
-            {% endfor %}
-          </ul>
+          {% for loggedtime in project.loggedtime_set.all|dictsortreversed:'date' %}
+            <li class="list-group-item borderless">
+              {{ loggedtime.date|date:"d/m/Y" }} -
+              {{ loggedtime.user.username }}
+              logged {{ loggedtime.hours|duration }}
+            </li>
+          {% endfor %}
+        </ul>
         </div>
       </div>
     </div>
 
+
     <!--  Time spent by each project's members -->
     <div class="col-md-6">
-      <div id="piechart"></div>
+      <div class="panel panel-borderless">
+        <div class="panel-body">
+          <p>Total time spent on project</p>
+            <h4>{{ total_project_loggedtime|duration }}</h4>
+          <p>Time spent per member</p>
+          <div id="piechart"></div>
+        </div>
+      </div>
     </div>
 
   </div> <!--/.row-->

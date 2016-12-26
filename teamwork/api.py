@@ -31,7 +31,6 @@ def add_project(request):
 
     return redirect('project_details', project_name=project_name)
 
-
 @require_POST
 @login_required
 def edit_project_members(request, project_name):
@@ -128,5 +127,19 @@ def log_time(request, project_name):
     )
 
     loggedTime.save()
+
+    return redirect('project_details', project_name=project_name)
+
+@require_POST
+@login_required
+def add_event(request, project_name):
+    """Add new event."""
+
+    if event_name is None or event_name == '':
+        return HttpResponse(status=400)
+
+    event_name = request.POST.get('event_name')
+    project = get_object_or_404(Project,
+        name=project_name)
 
     return redirect('project_details', project_name=project_name)

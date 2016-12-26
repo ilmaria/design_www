@@ -49,4 +49,7 @@ urlpatterns = [
 
     url(r'^add_project/?$',
         api.add_project, name='add_project'),
+
+   url(r'^(?P<project_name>.+?)/add_event/?$',
+        api.add_event, name='add_event'),
 ]

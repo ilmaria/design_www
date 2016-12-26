@@ -17,3 +17,8 @@ function validateNewProject() {
   // fail if trying to send an empty project name
   return $('input#new-project-name').val() !== ''
 }
+
+function validateNewEventName() {
+  // fail if trying to send an empty event name
+  return $('input#new-event-name').val() !== ''
+}

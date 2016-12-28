@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
-from django.contrib.auth import views as auth_views
+from django.contrib.auth import authenticate, views as auth_views, login as auth_login
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import *
@@ -138,3 +139,25 @@ def logout(request):
     """Logout view."""
 
     return auth_views.logout(request, template_name='logout.html')
+
+
+def register(request):
+    """Registration view."""
+
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            username = request.POST['username']
+            password = request.POST['password1']
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                auth_login(request, user)
+                return redirect('dashboard')
+
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'registration.html', {'form': form})

@@ -31,6 +31,8 @@ urlpatterns = [
 
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
 
+    url(r'^register/$', views.register, name='register'),
+
     url(r'^dashboard/(?P<project_id>.+?)/log_time/?$', api.dashboard_log_time,
         name='dashboard_log_time'),
 

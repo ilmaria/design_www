@@ -15,6 +15,12 @@ $('#datePicker').datepicker({
   todayBtn: 'linked'
 });
 
+$('#datePickerEvent').datepicker({
+  autoclose: true,
+  format: 'dd/mm/yyyy',
+  todayBtn: 'linked'
+});
+
 /**
  * This function is for searching new project members. It gets all
  * registered users that match the `query` from the server and then it

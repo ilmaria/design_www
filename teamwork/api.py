@@ -135,12 +135,12 @@ def log_time(request, project_name):
 def add_event(request, project_name):
     """Add new event."""
 
-    if event_name is None or event_name == '':
-        return HttpResponse(status=400)
-
     event_name = request.POST.get('event_name')
     project = get_object_or_404(Project,
         name=project_name)
+
+    if event_name is None or event_name == '':
+        return HttpResponse(status=400)
 
     # get input date and convert to yyyy-mm-dd format
     event_date = request.POST.get('eventDate')

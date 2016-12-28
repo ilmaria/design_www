@@ -9,20 +9,22 @@ Add event
 {% endblock %}
 
 {% block body %}
-<form id="add-event-form" action="/add_event" method="post"  onsubmit="return validateNewEventName">
+<form id="add-event-form" action="add_event" method="post"  onsubmit="return validateNewEventName()">
   {% csrf_token %}
   <div class="form-group">
+    <label for="new-event-name">Event name</label>
     <input id="new-event-name" type="text" name="event_name"
       placeholder="New event name" class="form-control">
   </div>
-  <!-- DATEPICKER cant be in two places? + z-index below popup -->
-  <div class="input-group input-append date" id="datePicker">
+  <label for="new-event-name">Event date</label>
+  <div class="input-group input-append date" id="datePickerEvent">
         <input id="eventDate" type="text" class="form-control"
         name="eventDate" placeholder="dd/mm/yyyy">
         <span class="input-group-addon add-on">
           <span class="glyphicon glyphicon-calendar"></span>
         </span>
   </div>
+  <label for="eventHour">Event time</label>
   <div class="form-inline">
     <div class="form-group">
       <input id="eventHour" type"text" class="form-control  col-xs-2" name="eventHour" placeholder="HH">
@@ -40,7 +42,7 @@ Add event
 
 {% block footer %}
 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-<button type="submit" class="btn btn-primary" form="LISÄÄÄ">
+<button type="submit" class="btn btn-primary" form="add-event-form">
   Add event
 </button>
 {% endblock %}

@@ -3,6 +3,10 @@
 {% load extra_tags %}
 {% load next_event %}
 
+{% block styles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
+{% endblock %}
+
 {% block content %}
 <!-- Next Event from all project -->
 <div class="container">
@@ -51,13 +55,13 @@
 
       <!-- Timelog -->
       <div class="form-group">
-        <form action="log_time" method="post" id="log-time-form"
-          class="form-inline" onsubmit="return validateNewTimelog()">
+        <form action="{{ project.id }}/log_time" method="post"
+          class="form-inline" onsubmit="return validatDashboardTimelog(event)">
           {% csrf_token %}
           <div class="form-group">
-            <label for="log-date-input">Date</label>
-            <div class="input-group input-append date" id="datePicker">
-              <input id="log-date-input" type="text" class="form-control"
+            <label for="log-date-input-{{ project.id }}">Date</label>
+            <div class="input-group input-append date">
+              <input id="log-date-input-{{ project.id }}" type="text" class="form-control"
                 name="date" placeholder="dd/mm/yyyy">
               <span class="input-group-addon add-on">
                 <span class="glyphicon glyphicon-calendar"></span>
@@ -65,13 +69,13 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="log-time-input">Time</label>
-            <input id="log-time-input" type="time" class="form-control bfh-number"
+            <label for="log-time-input-{{ project.id }}">Time</label>
+            <input id="log-time-input-{{ project.id }}" type="text" class="form-control bfh-number"
               name="time" placeholder="00:00">
           </div>
           <div class="form-group">
-            <label for="log-time-task">Task</label>
-            <select class="form-control" name="log-time-task" id="log-time-task">
+            <label for="log-time-task-{{ project.id }}">Task</label>
+            <select class="form-control" name="log-time-task" id="log-time-task-{{ project.id }}">
               <option value="">-</option>
               {% for task in project.task_set.all %}
                 <option value="{{ task.name }}">{{ task.name }}</option>
@@ -93,6 +97,18 @@
 
 {% block scripts %}
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 <script src="{% static 'js/form_validations.js' %}"></script>
+
+<script>
+  $('.date').each(function() {
+    $(this).datepicker({
+      autoclose: true,
+      format: 'dd/mm/yyyy',
+      todayBtn: 'linked'
+    })
+    $(this).datepicker('update', new Date())
+  })
+</script>
 
 {% endblock %}

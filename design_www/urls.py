@@ -31,6 +31,9 @@ urlpatterns = [
 
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
 
+    url(r'^dashboard/(?P<project_id>.+?)/log_time/?$', api.dashboard_log_time,
+        name='dashboard_log_time'),
+
     url(r'^calendar/$', views.calendar, name='calendar'),
 
     url(r'^(?P<project_name>.+?)/$',
@@ -44,6 +47,8 @@ urlpatterns = [
     url(r'^(?P<project_name>.+?)/add_task/?$', api.add_task, name='add_task'),
 
     url(r'^(?P<project_name>.+?)/edit_task/?$', api.edit_task, name='edit_task'),
+
+    url(r'^(?P<project_name>.+?)/toggle_task_done/?$', api.toggle_task_done, name='toggle_task_done'),
 
     url(r'^(?P<project_name>.+?)/delete_task/?$', api.delete_task, name='delete_task'),
 

@@ -9,6 +9,15 @@ function validateNewTimelog() {
       Number($('#log-time-input').val().split(':')[1]) > 0)
 }
 
+function validateDashboardTimelog(event) {
+  var form = $(event.target)
+
+  // check if: logDate AND (logHours OR logMinutes)
+  return form.find('input[name=date]').val() !== '' &&
+    (parseInt(form.find('input[name=time]').val()) > 0 ||
+      Number(form.find('input[name=time]').val().split(':')[1]) > 0)
+}
+
 function validateNewMembers() {
   // fail if trying to send an empty username
   return $('input#users-to-add').val() !== ''

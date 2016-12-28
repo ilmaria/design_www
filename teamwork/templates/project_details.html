@@ -4,7 +4,6 @@
 
 {% block styles %}
 <!-- Include Bootstrap Datepicker -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
 
 <link rel="stylesheet" href="{% static 'css/project_details.css' %}">
@@ -69,7 +68,7 @@
       </div>
       <div class="form-group">
         <label for="log-time-input">Time</label>
-        <input id="log-time-input" type="time" class="form-control bfh-number"
+        <input id="log-time-input" type="text" class="form-control bfh-number"
           name="time" placeholder="00:00">
       </div>
       <div class="form-group">
@@ -99,7 +98,8 @@
         </form>
         {% for task, task_progress in tasks %}
         <li class="list-group-item">
-          <input class="task-done" type="checkbox" onclick="taskDoneToggle('{{ task.id }}', event)"
+          <input id="task-toggle-{{ task.id }}" class="task-done" type="checkbox"
+            onclick="taskDoneToggle('{{ task.id }}', event)"
             {% if task.done %} checked {% endif %}>
           <span>{{ task.name }}</span>
 

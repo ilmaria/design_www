@@ -38,7 +38,8 @@ $('#datePicker').datepicker({
   autoclose: true,
   format: 'dd/mm/yyyy',
   todayBtn: 'linked'
-});
+})
+$('#datePicker').datepicker('update', new Date())
 
 /**
  * This function is for searching new project members. It gets all
@@ -133,9 +134,6 @@ function removeMember(username) {
     data: {
       csrfmiddlewaretoken: CSRF_TOKEN,
       'users-to-remove': username,
-    },
-    error: function(err) {
-      console.log(err)
     }
   })
 
@@ -171,8 +169,19 @@ function editTaskModal(taskStr) {
 
 function taskDoneToggle(taskId, event) {
   var progressBar = $('#task-progress-' + taskId)
+  var taskDone = event.target.checked ? 1 : 0
 
-  if (event.target.checked) {
+  $.ajax({
+    url: 'toggle_task_done',
+    method: 'post',
+    data: {
+      csrfmiddlewaretoken: CSRF_TOKEN,
+      'task-id': taskId,
+      'task-done': taskDone
+    }
+  })
+
+  if (taskDone) {
     progressBar
       .css('width', 100+'%')
       .attr('aria-valuenow', 100)

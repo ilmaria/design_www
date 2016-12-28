@@ -120,6 +120,27 @@ def edit_task(request, project_name):
 
 @require_POST
 @login_required
+def toggle_task_done(request, project_name):
+    """Change task done state."""
+
+    project_name = unquote_plus(project_name)
+    project = get_object_or_404(Project,
+        name=project_name,
+        members__id=request.user.id)
+
+    task_done = int(request.POST.get('task-done', '-1'))
+    task_id = int(request.POST.get('task-id', '-1'))
+
+    task = get_object_or_404(Task, id=task_id)
+
+    task.done = True if task_done == 1 else False
+
+    task.save()
+
+    return redirect('project_details', project_name=project_name)
+
+@require_POST
+@login_required
 def delete_task(request, project_name):
     """Delete task."""
 
@@ -245,3 +266,41 @@ def log_time(request, project_name):
     logged_time.save()
 
     return redirect('project_details', project_name=project_name)
+
+
+@require_POST
+@login_required
+def dashboard_log_time(request, project_id):
+    """Log date and time for current user in the project"""
+
+    project = get_object_or_404(Project, id=project_id)
+
+    # get input date and convert to yyyy-mm-dd format
+    logged_date = request.POST.get('date')
+    logged_date_cor = datetime.strptime(logged_date, '%d/%m/%Y').strftime("%Y-%m-%d")
+
+    # convert input hours and minutes into logged hours
+    time_input = request.POST.get('time')
+
+    time = time_input.split(':')
+    hours = int(time[0])
+    minutes = int(time[1]) if len(time) == 2 else 0
+
+    logged_hours = timedelta(hours=hours, minutes=minutes)
+
+    logged_time = LoggedTime(
+        date=logged_date_cor,
+        hours=logged_hours,
+        user=request.user,
+        project=project
+    )
+
+    task_name = request.POST.get('log-time-task', '')
+
+    if task_name != '':
+        task = Task.objects.get(name=task_name, project=project)
+        logged_time.task = task
+
+    logged_time.save()
+
+    return redirect('dashboard')

@@ -25,6 +25,13 @@ function validateNewEvent() {
     $('#event-name').val() !== ''
 }
 
+function validateEventEdit() {
+  // check if: logDate AND (logHours OR logMinutes)
+  return $('#edit-event-date').val() !== '' &&
+    $('#edit-event-time').val() !== '' &&
+    $('#edit-event-name').val() !== ''
+}
+
 function validateNewMembers() {
   // fail if trying to send an empty username
   return $('input#users-to-add').val() !== ''

@@ -75,6 +75,56 @@ def add_event(request, project_name):
 
 @require_POST
 @login_required
+def edit_event(request, project_name):
+    """Edit an event."""
+
+    event_id = request.POST.get('edit-event-id', '')
+    new_name = request.POST.get('edit-event-name', '')
+    event_date = request.POST.get('edit-event-date', '')
+    event_time = request.POST.get('edit-event-time', '')
+    event_type = request.POST.get('edit-event-type', 'event')
+    location = request.POST.get('edit-event-location', '')
+
+    event = get_object_or_404(Event, id=event_id)
+
+    if new_name == '':
+        return HttpResponse(status=400)
+
+    event_date = datetime.strptime(event_date, '%d/%m/%Y')
+
+    event_time = datetime.strptime(event_time, '%H:%M')
+    event_time = time(hour=event_time.hour, minute=event_time.minute)
+
+    date_time = datetime.combine(event_date, event_time)
+    date_time = timezone.make_aware(date_time,
+        timezone.get_current_timezone())
+
+    event.name = new_name
+    event.date = date_time
+    event.type = event_type
+    event.location = location
+
+    event.save()
+
+    return redirect('project_details', project_name=project_name)
+
+
+@require_POST
+@login_required
+def delete_event(request, project_name):
+    """Delete an event."""
+
+    event_id = request.POST.get('event-id', '')
+
+    event = get_object_or_404(Event, id=event_id)
+
+    event.delete()
+
+    return redirect('project_details', project_name=project_name)
+
+
+@require_POST
+@login_required
 def add_task(request, project_name):
     """Add new task."""
 

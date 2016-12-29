@@ -143,28 +143,39 @@
       <h5>Upcoming Events</h5>
       <ul class="list-group">
         {% for event in events|dictsort:'date' %}
-        <li class="list-group-item">
-          {% if event.type == "deadline" %}
-          <span class="timeUntil">{{ event.date|timeuntil }} left</span>
-          {% endif %}
-          <strong>{{ event.name }}</strong>
-          <p>{{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}
-            {% if event.location != "" %}
-            , <i class="fui-location"></i>
-            {{ event.location }}
-          </p>
-          {% endif %}
-        </li>
+          <li class="list-group-item">
+
+            {% if event.type == "deadline" %}
+              <span class="timeUntil">{{ event.date|timeuntil }} left</span>
+            {% endif %}
+
+            <strong>{{ event.name }}</strong>
+            <p>
+              {{ event.date|date:"D, d M Y" }}, {{ event.date|time:"H:i" }}
+
+              {% if event.location != "" %}
+                , <i class="fui-location"></i>
+                {{ event.location }}
+              {% endif %}
+
+              <span class="task-edit-btn">
+                <span class="glyphicon glyphicon-pencil" data-toggle="modal"
+                  onclick="editEventModal('{{ event.id }};{{ event.date|time:'H:i' }};{{ event.date|date:'c' }};{{ event.type }};{{ event.location }};{{ event.name }}')"
+                  data-target="#edit-event-modal"></span>
+            </span>
+            </p>
+          </li>
         {% empty %}
-        <li class="list-group-item">
-          <p>There are no upcoming events</p>
-        </li>
+          <li class="list-group-item">
+            <p>There are no upcoming events</p>
+          </li>
         {% endfor %}
       </ul>
       <button type="button" id="add-event-btn" class="btn btn-default"
         data-toggle="modal" data-target="#add-event-modal">Add event</button>
 
       {% include 'modals/add_event.html' %}
+      {% include 'modals/edit_event.html' %}
     </div>
     <!-- end Events -->
 

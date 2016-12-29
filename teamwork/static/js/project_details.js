@@ -48,6 +48,12 @@ $('#event-datepicker').datepicker({
 })
 $('#event-datepicker').datepicker('update', new Date())
 
+$('#edit-event-datepicker').datepicker({
+  autoclose: true,
+  format: 'dd/mm/yyyy',
+  todayBtn: 'linked'
+})
+
 /**
  * This function is for searching new project members. It gets all
  * registered users that match the `query` from the server and then it
@@ -170,8 +176,9 @@ function editTaskModal(taskStr) {
 
   $('#old-task-name').val(name)
   $('#edit-task-name').val(name)
-  $('#remove-task-name').val(name)
   $('#edit-time-estimate').val(estimate)
+
+  $('#remove-task-name').val(name)
 }
 
 function taskDoneToggle(taskId, event) {
@@ -208,3 +215,27 @@ $(function() {
     $(this).trigger('click').trigger('click')
   })
 })
+
+/**
+ * Autofill selected event information to the edit event modal.
+ * @param {string} eventStr - Event to edit.
+ */
+function editEventModal(eventStr) {
+  var event = eventStr.split(';')
+  var id = event[0]
+  var time = event[1]
+  var date = new Date(event[2])
+  var type = event[3]
+  var location = event[4]
+  var name = event[5]
+
+  $('#edit-event-datepicker').datepicker('update', date)
+
+  $('#edit-event-id').val(id)
+  $('#edit-event-name').val(name)
+  $('#edit-event-type').val(type)
+  $('#edit-event-time').val(time)
+  $('#edit-event-location').val(location)
+
+  $('#remove-event-id').val(id)
+}

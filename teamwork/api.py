@@ -5,7 +5,9 @@ from django.http import JsonResponse, HttpResponse
 from .models import *
 from urllib.parse import unquote_plus
 from datetime import datetime, timedelta
+from django.utils import timezone
 import json
+import math
 
 @require_POST
 @login_required
@@ -136,8 +138,11 @@ def add_event(request, project_name):
     """Add new event."""
 
     event_name = request.POST.get('event_name')
+
+    project_name = unquote_plus(project_name)
     project = get_object_or_404(Project,
-        name=project_name)
+    name=project_name,
+    members__id=request.user.id)
 
     if event_name is None or event_name == '':
         return HttpResponse(status=400)
@@ -145,17 +150,31 @@ def add_event(request, project_name):
     # get input date and convert to yyyy-mm-dd format
     event_date = request.POST.get('eventDate')
 
-    event_hour = request.POST.get('eventHour')
-    event_min = request.POST.get('eventMin')
+    event_time_input = request.POST.get('eventTime')
 
-    #HOW is this done?
-    event_date_cor = datetime.strptime(event_date, '%d/%m/%Y').strftime("%Y-%m-%d")
+    if len(event_time_input) != 4:
+        return HttpResponse(status=400)
 
+    event_hour = event_time_input[0] + event_time_input[1]
+    event_minute = event_time_input[2] + event_time_input[3]
+
+    hours = int(event_hour)
+    minutes = int(event_minute) if len(event_minute) == 2 else 0
+
+    if minutes > 60:
+        return HttpResponse(status=400)
+
+    event_time = timedelta(hours=hours, minutes=minutes)
+    
+    event_date_cor = datetime.strptime(event_date, '%d/%m/%Y')
+    
+    event_datetime = timezone.make_aware(event_date_cor + event_time, timezone.get_current_timezone())
+    
     event_location = request.POST.get('eventLocation')
 
     newEvent = Event(
         name=event_name,
-        date=event_date_cor,
+        date=event_datetime,
         project=project,
         location=event_location
         )

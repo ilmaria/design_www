@@ -41,6 +41,13 @@ $('#datePicker').datepicker({
 })
 $('#datePicker').datepicker('update', new Date())
 
+$('#event-datepicker').datepicker({
+  autoclose: true,
+  format: 'dd/mm/yyyy',
+  todayBtn: 'linked'
+})
+$('#event-datepicker').datepicker('update', new Date())
+
 /**
  * This function is for searching new project members. It gets all
  * registered users that match the `query` from the server and then it

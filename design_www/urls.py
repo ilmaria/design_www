@@ -46,6 +46,8 @@ urlpatterns = [
 
     url(r'^(?P<project_name>.+?)/log_time/?$', api.log_time, name='log_time'),
 
+    url(r'^(?P<project_name>.+?)/add_event/?$', api.add_event, name='add_event'),
+
     url(r'^(?P<project_name>.+?)/add_task/?$', api.add_task, name='add_task'),
 
     url(r'^(?P<project_name>.+?)/edit_task/?$', api.edit_task, name='edit_task'),

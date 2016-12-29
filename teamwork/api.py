@@ -2,9 +2,10 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
+from django.utils import timezone
 from .models import *
 from urllib.parse import unquote_plus
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 import json
 
 @require_POST
@@ -27,6 +28,47 @@ def add_project(request):
     project.save()
 
     project.members.add(request.user)
+
+    return redirect('project_details', project_name=project_name)
+
+
+@require_POST
+@login_required
+def add_event(request, project_name):
+    """Add new event."""
+
+    project_name = unquote_plus(project_name)
+    project = get_object_or_404(Project,
+        name=project_name,
+        members__id=request.user.id)
+
+    event_name = request.POST.get('event_name', '')
+    event_date = request.POST.get('date', '')
+    event_time = request.POST.get('time', '')
+    event_type = request.POST.get('type', 'event')
+    location = request.POST.get('location', '')
+
+    if event_name == '':
+        return HttpResponse(status=400)
+
+    event_date = datetime.strptime(event_date, '%d/%m/%Y')
+
+    event_time = datetime.strptime(event_time, '%H:%M')
+    event_time = time(hour=event_time.hour, minute=event_time.minute)
+
+    date_time = datetime.combine(event_date, event_time)
+    date_time = timezone.make_aware(date_time,
+        timezone.get_current_timezone())
+
+    event = Event(
+        name=event_name,
+        project=project,
+        date=date_time,
+        type=event_type,
+        location=location
+    )
+
+    event.save()
 
     return redirect('project_details', project_name=project_name)
 
@@ -239,7 +281,9 @@ def log_time(request, project_name):
 
     # get input date and convert to yyyy-mm-dd format
     logged_date = request.POST.get('date')
-    logged_date_cor = datetime.strptime(logged_date, '%d/%m/%Y').strftime("%Y-%m-%d")
+    logged_date = datetime.strptime(logged_date, '%d/%m/%Y')
+    logged_date = timezone.make_aware(logged_date,
+        timezone.get_current_timezone())
 
     # convert input hours and minutes into logged hours
     time_input = request.POST.get('time')
@@ -251,7 +295,7 @@ def log_time(request, project_name):
     logged_hours = timedelta(hours=hours, minutes=minutes)
 
     logged_time = LoggedTime(
-        date=logged_date_cor,
+        date=logged_date,
         hours=logged_hours,
         user=request.user,
         project=project
@@ -277,7 +321,9 @@ def dashboard_log_time(request, project_id):
 
     # get input date and convert to yyyy-mm-dd format
     logged_date = request.POST.get('date')
-    logged_date_cor = datetime.strptime(logged_date, '%d/%m/%Y').strftime("%Y-%m-%d")
+    logged_date = datetime.strptime(logged_date, '%d/%m/%Y')
+    logged_date = timezone.make_aware(logged_date,
+        timezone.get_current_timezone())
 
     # convert input hours and minutes into logged hours
     time_input = request.POST.get('time')
@@ -289,7 +335,7 @@ def dashboard_log_time(request, project_id):
     logged_hours = timedelta(hours=hours, minutes=minutes)
 
     logged_time = LoggedTime(
-        date=logged_date_cor,
+        date=logged_date,
         hours=logged_hours,
         user=request.user,
         project=project

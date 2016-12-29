@@ -6,7 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import *
 from urllib.parse import unquote_plus
-from datetime import timedelta, datetime
+from datetime import timedelta
+from django.utils import timezone
 from .utils import json_serialize
 import json
 
@@ -58,7 +59,7 @@ def project_details(request, project_name):
 
         tasks.append((task, task_progress))
 
-    events = Event.objects.filter(project=project, date__gt=datetime.now())
+    events = Event.objects.filter(project=project, date__gt=timezone.now())
 
     context = {
         'project': project,

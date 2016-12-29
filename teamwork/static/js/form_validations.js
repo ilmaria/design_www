@@ -18,6 +18,13 @@ function validateDashboardTimelog(event) {
       Number(form.find('input[name=time]').val().split(':')[1]) > 0)
 }
 
+function validateNewEvent() {
+  // check if: logDate AND (logHours OR logMinutes)
+  return $('#event-date').val() !== '' &&
+    $('#event-time').val() !== '' &&
+    $('#event-name').val() !== ''
+}
+
 function validateNewMembers() {
   // fail if trying to send an empty username
   return $('input#users-to-add').val() !== ''

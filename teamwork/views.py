@@ -80,7 +80,11 @@ def dashboard(request):
     """
 
     projects = Project.objects.filter(members__id=request.user.id)
-    next_event = Event.objects.all()[:1]
+
+    next_event = Event.objects\
+        .filter(project__in=projects)\
+        .filter(date__gt=timezone.now())\
+        .order_by('date').first()
 
     project_list = []
 

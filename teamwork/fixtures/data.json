@@ -99,33 +99,6 @@
   }
 },
 {
-  "model": "teamwork.task",
-  "pk": 1,
-  "fields": {
-    "name": "Create HTML layout",
-    "done": true,
-    "project": 1
-  }
-},
-{
-  "model": "teamwork.task",
-  "pk": 2,
-  "fields": {
-    "name": "Add project function",
-    "done": false,
-    "project": 1
-  }
-},
-{
-  "model": "teamwork.task",
-  "pk": 3,
-  "fields": {
-    "name": "Create permanent data in database",
-    "done": false,
-    "project": 1
-  }
-},
-{
   "model": "contenttypes.contenttype",
   "pk": 1,
   "fields": {
@@ -227,6 +200,14 @@
   "fields": {
     "session_data": "YWIwZDQ2MjUxYWU0MTRhYzQyYzU5MDQ3ZmMxMmIwYzcyMjY1Mzc1NTp7Il9hdXRoX3VzZXJfaGFzaCI6IjEwYmQ3OWRiNWEzNzEzZDFhMmNiZmYzNmYyZGUxNGNjMmU1Yjc3N2UiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=",
     "expire_date": "2016-10-21T17:44:42.195Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "pd6eg7mfrr124mti524knaepive1uugx",
+  "fields": {
+    "session_data": "OWEzZTQ0OTFjZDI3NGEyNTZhNTRjMDEwZjBlNGM0MTY0ZWI0YTljMDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiMzk4YmQyNjE0YmZlNThhODRlZWE0MjE3MDJkOWJjYWNjMGY1Yzg1MiIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=",
+    "expire_date": "2017-01-13T12:12:42.571Z"
   }
 },
 {
@@ -504,7 +485,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$30000$mhwtRG3rICaS$OVWE/2lmQmkG7lw72Vf/YPrBIYIajIWKQSo0cpDNwTM=",
-    "last_login": "2016-11-15T11:37:32.800Z",
+    "last_login": "2016-12-30T12:11:16.369Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -522,7 +503,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$30000$j6CL9FLdZUOa$aVUViLglbnAdo/3vrpeN0r0I2zk8T4obzKD+zO5gOXM=",
-    "last_login": "2016-11-15T11:39:08.070Z",
+    "last_login": "2016-12-30T12:12:42.558Z",
     "is_superuser": false,
     "username": "kristian",
     "first_name": "Kristian",
@@ -531,24 +512,6 @@
     "is_staff": false,
     "is_active": true,
     "date_joined": "2016-10-06T11:45:48.319Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 3,
-  "fields": {
-    "password": "pbkdf2_sha256$30000$3mb870jaVTgi$a1I6XqwTxApxft1fTKBKTCW3QvBd8p9FSXju5isdWLc=",
-    "last_login": "2016-11-15T10:32:53.608Z",
-    "is_superuser": false,
-    "username": "John",
-    "first_name": "John",
-    "last_name": "Smith",
-    "email": "john@example.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2016-10-06T11:46:50.041Z",
     "groups": [],
     "user_permissions": []
   }
@@ -585,24 +548,6 @@
     "is_staff": true,
     "is_active": true,
     "date_joined": "2016-10-06T11:56:48.008Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 6,
-  "fields": {
-    "password": "pbkdf2_sha256$30000$irtb1uk5W1kD$Rws6t3gBWcFX0Jo7tJmU6ceJAcCCK+UrRtDN0OOOMAs=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "teemu",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2016-11-15T11:06:11.082Z",
     "groups": [],
     "user_permissions": []
   }
@@ -675,24 +620,6 @@
     "is_staff": false,
     "is_active": true,
     "date_joined": "2016-11-15T11:08:15.831Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 11,
-  "fields": {
-    "password": "pbkdf2_sha256$30000$kVRo1ggrUt1d$6Ed78XoWtNuf2J2VMDerrKlINtlmTil3gqBWO32nQh8=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "timo",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2016-11-15T11:08:30.345Z",
     "groups": [],
     "user_permissions": []
   }
@@ -1699,6 +1626,58 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 78,
+  "fields": {
+    "action_time": "2016-12-25T17:34:40.827Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "6",
+    "object_repr": "Task: \"My task 1\" - False",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 79,
+  "fields": {
+    "action_time": "2016-12-25T17:38:17.062Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "7",
+    "object_repr": "Task: \"My task2\" - False",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 80,
+  "fields": {
+    "action_time": "2016-12-30T12:11:50.121Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "7",
+    "object_repr": "Task: \"My task2\" - False",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 81,
+  "fields": {
+    "action_time": "2016-12-30T12:11:50.129Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "5",
+    "object_repr": "Task: \"fakos\" - False",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
   "model": "teamwork.loggedtime",
   "pk": 1,
   "fields": {
@@ -1706,7 +1685,8 @@
     "hours": "02:30:00",
     "user": 2,
     "project": 2,
-    "event": 1
+    "event": 1,
+    "task": null
   }
 },
 {
@@ -1717,7 +1697,8 @@
     "hours": "04:00:00",
     "user": 2,
     "project": 1,
-    "event": null
+    "event": null,
+    "task": null
   }
 },
 {
@@ -1728,7 +1709,8 @@
     "hours": "02:00:00",
     "user": 4,
     "project": 1,
-    "event": null
+    "event": null,
+    "task": null
   }
 },
 {
@@ -1739,7 +1721,8 @@
     "hours": "00:45:00",
     "user": 4,
     "project": 1,
-    "event": null
+    "event": null,
+    "task": null
   }
 },
 {
@@ -1750,18 +1733,8 @@
     "hours": "03:00:00",
     "user": 2,
     "project": 2,
-    "event": null
-  }
-},
-{
-  "model": "teamwork.loggedtime",
-  "pk": 8,
-  "fields": {
-    "date": "2016-11-15",
-    "hours": "04:00:00",
-    "user": 6,
-    "project": 1,
-    "event": 3
+    "event": null,
+    "task": null
   }
 },
 {
@@ -1772,7 +1745,8 @@
     "hours": "00:50:00",
     "user": 7,
     "project": 2,
-    "event": 2
+    "event": 2,
+    "task": null
   }
 },
 {
@@ -1783,40 +1757,161 @@
     "hours": "01:00:00",
     "user": 10,
     "project": 2,
-    "event": 2
+    "event": 2,
+    "task": null
   }
 },
 {
   "model": "teamwork.loggedtime",
-  "pk": 11,
+  "pk": 14,
   "fields": {
-    "date": "2016-11-14",
+    "date": "2016-12-23",
+    "hours": "04:00:00",
+    "user": 2,
+    "project": 1,
+    "event": null,
+    "task": 2
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 15,
+  "fields": {
+    "date": "2016-12-13",
+    "hours": "02:00:00",
+    "user": 2,
+    "project": 1,
+    "event": null,
+    "task": 1
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 16,
+  "fields": {
+    "date": "2016-12-21",
+    "hours": "03:00:00",
+    "user": 2,
+    "project": 1,
+    "event": null,
+    "task": 2
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 17,
+  "fields": {
+    "date": "2016-12-06",
+    "hours": "02:00:00",
+    "user": 2,
+    "project": 1,
+    "event": null,
+    "task": null
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 18,
+  "fields": {
+    "date": "2016-12-22",
+    "hours": "03:21:00",
+    "user": 2,
+    "project": 1,
+    "event": null,
+    "task": null
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 19,
+  "fields": {
+    "date": "2017-01-04",
+    "hours": "00:21:00",
+    "user": 2,
+    "project": 1,
+    "event": null,
+    "task": null
+  }
+},
+{
+  "model": "teamwork.loggedtime",
+  "pk": 20,
+  "fields": {
+    "date": "2016-12-21",
     "hours": "01:00:00",
     "user": 2,
-    "project": 3,
-    "event": null
+    "project": 1,
+    "event": null,
+    "task": null
   }
 },
 {
   "model": "teamwork.loggedtime",
-  "pk": 12,
+  "pk": 21,
   "fields": {
-    "date": "2016-11-10",
-    "hours": "03:00:00",
-    "user": 9,
-    "project": 3,
-    "event": null
+    "date": "2016-12-28",
+    "hours": "10:00:00",
+    "user": 2,
+    "project": 2,
+    "event": null,
+    "task": null
   }
 },
 {
-  "model": "teamwork.loggedtime",
-  "pk": 13,
+  "model": "teamwork.task",
+  "pk": 1,
   "fields": {
-    "date": "2016-11-09",
-    "hours": "04:00:00",
-    "user": 6,
-    "project": 3,
-    "event": null
+    "name": "Create HTML layout",
+    "done": true,
+    "project": 1,
+    "estimated_hours": "05:00:00",
+    "assignees": []
+  }
+},
+{
+  "model": "teamwork.task",
+  "pk": 2,
+  "fields": {
+    "name": "Add project function",
+    "done": false,
+    "project": 1,
+    "estimated_hours": "00:00:00",
+    "assignees": []
+  }
+},
+{
+  "model": "teamwork.task",
+  "pk": 3,
+  "fields": {
+    "name": "Create permanent data in database",
+    "done": false,
+    "project": 1,
+    "estimated_hours": "00:00:00",
+    "assignees": []
+  }
+},
+{
+  "model": "teamwork.task",
+  "pk": 6,
+  "fields": {
+    "name": "My task 1",
+    "done": false,
+    "project": 2,
+    "estimated_hours": "05:00:00",
+    "assignees": [
+      7
+    ]
+  }
+},
+{
+  "model": "teamwork.task",
+  "pk": 8,
+  "fields": {
+    "name": "Better task name",
+    "done": false,
+    "project": 1,
+    "estimated_hours": "04:40:00",
+    "assignees": []
   }
 },
 {
@@ -1828,8 +1923,8 @@
     "description": "Awesome course",
     "members": [
       2,
-      4,
-      6
+      8,
+      9
     ]
   }
 },
@@ -1844,20 +1939,6 @@
       2,
       7,
       10
-    ]
-  }
-},
-{
-  "model": "teamwork.project",
-  "pk": 3,
-  "fields": {
-    "name": "Web services",
-    "owner": 6,
-    "description": "Awesome course",
-    "members": [
-      2,
-      6,
-      9
     ]
   }
 },
@@ -1883,7 +1964,6 @@
     "description": "Nice course",
     "members": [
       2,
-      3,
       4
     ]
   }
